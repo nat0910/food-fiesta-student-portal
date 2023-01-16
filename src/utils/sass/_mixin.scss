@@ -1,0 +1,30 @@
+/* ------ COMMON MIXIN ------ */
+
+@mixin centerWithMargin($width_value) {
+  width: calc(100% - $width_value);
+  margin-inline: auto;
+}
+
+@mixin gridCenter {
+  display: grid;
+  place-items: center;
+}
+
+@mixin flexCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin positionCenter {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@mixin flexRowCenter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-flow: row nowrap;
+}

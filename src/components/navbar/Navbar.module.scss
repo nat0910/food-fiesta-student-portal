@@ -1,0 +1,129 @@
+@import "../../utils/sass/mixin";
+
+header {
+  width: 100%;
+  background-color: rgba(var(--white), 1);
+  border-bottom: 1px solid rgba(var(--gray-border), 1);
+  position: fixed;
+  padding-block: 0.5rem;
+  top: 0;
+  z-index: 3;
+}
+
+.header_container {
+  @include centerWithMargin(32px);
+  @include flexRowCenter;
+
+  @media screen and (min-width: 480px) {
+    @include centerWithMargin(64px);
+  }
+  @media screen and (min-width: 1280px) {
+    @include centerWithMargin(200px);
+  }
+}
+
+.nav_link_toggle_button {
+  width: 27.5px;
+  height: 25px;
+  display: flex;
+  justify-content: space-between;
+  flex-flow: column nowrap;
+  cursor: pointer;
+
+  span {
+    display: block;
+    width: 100%;
+    height: 5px;
+    background-color: black;
+    border-radius: 1rem;
+  }
+}
+
+.nav_logo_wrapper {
+  width: 55px;
+  height: 55px;
+  object-fit: cover;
+}
+
+.nav_logout_wrapper {
+  color: rgba(var(--red), 1);
+  font-family: "Satoshi", sans-serif;
+  font-weight: 500;
+}
+
+.nav_links_container {
+  background-color: rgb(238, 245, 252);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 3;
+  right: -100%;
+
+  opacity: 0;
+  transition: right ease-in-out 400ms, opacity ease-in-out 400ms;
+}
+
+.nav_link_list_container {
+  @include centerWithMargin(40px);
+  padding-block: 1.25rem;
+  list-style: none;
+  height: 100%;
+
+  //mobile
+
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex: 1;
+
+  @media screen and (min-width: 480px) {
+    @include centerWithMargin(64px);
+  }
+  @media screen and (min-width: 1280px) {
+    @include centerWithMargin(200px);
+  }
+}
+
+.nav_link_list_container_li_wrapper_ {
+  text-transform: capitalize;
+  font-family: "Satoshi", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: rgba(var(--inactive-nav-link), 1);
+  cursor: pointer;
+  width: 100%;
+  a {
+    display: block;
+    width: 100%;
+  }
+
+  svg,
+  span {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+.nav_link_list_container_li_wrapper_:nth-of-type(1) {
+  margin-top: 0.5rem;
+}
+.nav_link_list_container_li_wrapper_:nth-of-type(2),
+.nav_link_list_container_li_wrapper_:nth-of-type(3) {
+  margin-top: 2rem;
+}
+
+.nav_link_list_container_li_wrapper_last_child {
+  margin-top: auto;
+  margin-bottom: 1rem;
+  font-size: 1.125rem;
+  width: 100%;
+  a {
+    width: 100%;
+    display: block;
+  }
+}
+
+.nav_link_list_container_li_wrapper_a_text_ {
+  margin-left: 2rem;
+}
