@@ -1,19 +1,29 @@
-import { getAuth } from "firebase/auth";
-import { useState } from "react";
+import { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
-import reactLogo from "./assets/react.svg";
-import SharedLayout from "./layout/SharedLayout";
-import Cart from "./pages/cart";
-import Error from "./pages/error";
-import Menu from "./pages/menu";
-import OrderHistory from "./pages/order_history";
-// import { auth } from "./utils/firebaseConfig";
+
+// import pages
+
+// import SharedLayout from "./layout/SharedLayout";
+
+function wait(params) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, params);
+  });
+}
+
+const SharedLayout = lazy(() =>
+  wait(500).then(() => import("./layout/SharedLayout"))
+);
+
+const Menu = lazy(() => wait(500).then(() => import("./pages/menu")));
+const Login = lazy(() => wait(500).then(() => import("./pages/login")));
+const Cart = lazy(() => wait(500).then(() => import("./pages/cart")));
+const Error = lazy(() => wait(500).then(() => import("./pages/error")));
+const OrderHistory = lazy(() =>
+  wait(500).then(() => import("./pages/order_history"))
+);
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  // console.log(auth);
-
   return (
     <Routes>
       <Route element={<SharedLayout />} path="/">
@@ -22,6 +32,8 @@ function App() {
         <Route element={<OrderHistory />} path="past-orders" />
         <Route element={<Error />} path="*" />
       </Route>
+
+      <Route element={<Login />} path="/login" />
     </Routes>
   );
 }

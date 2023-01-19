@@ -13,10 +13,13 @@ import {
   faClockRotateLeft,
   faArrowRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
+import { useAuth } from "../../context/AuthContext";
 
 export default function Navbar() {
   // const [windowWidth, setWindowWidth] = useState(false);
   const [toggleLinks, setToggleLinks] = useState(false);
+
+  const { handleSignOut } = useAuth();
 
   const navRef = useRef(null);
   const headerRef = useRef(null);
@@ -121,7 +124,7 @@ export default function Navbar() {
                 className={styles.nav_logout_wrapper}
                 onClick={() => {
                   setToggleLinks(!toggleLinks);
-                  console.log("logged out");
+                  handleSignOut();
                 }}
               >
                 <FontAwesomeIcon

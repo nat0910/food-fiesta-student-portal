@@ -1,0 +1,26 @@
+@import "../../utils/sass/mixin";
+
+.login_grid_ {
+  height: 100%;
+  width: 100%;
+  @include gridCenter;
+}
+
+.login_heading_wrapper_ {
+  font-weight: 800;
+  text-align: center;
+  font-size: 2rem;
+  span {
+    color: rgb(var(--accent-color));
+    letter-spacing: 1px;
+    font-weight: 900;
+    white-space: nowrap;
+  }
+}
+
+.login_google_button_ {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 2rem;
+}
