@@ -1,3 +1,23 @@
+ useLayoutEffect(() => {
+    function layoutSetter() {
+      const main = document.getElementById("main");
+      const navHeight = document.getElementById("navbar").offsetHeight;
+      // main.style.marginTop = `${navHeight}px`; //
+      main.style.paddingTop = `${navHeight}px`;
+    }
+
+    if (document.readyState === "complete") {
+      layoutSetter();
+      console.log("hello");
+    }
+
+    window.addEventListener("load", layoutSetter);
+
+    return () => {
+      window.removeEventListener("load", layoutSetter);
+    };
+  }, []);
+
 header {
 width: 100%;
 background-color: rgba(var(--white), 1);

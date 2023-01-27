@@ -1,0 +1,5 @@
+[
+  { "label": "home", "url": "/", "icon": "las la-home" },
+  { "label": "cart", "url": "/cart", "icon": "las la-shopping-cart" },
+  { "label": "your orders", "url": "/your-orders", "icon": "las la-history" }
+]

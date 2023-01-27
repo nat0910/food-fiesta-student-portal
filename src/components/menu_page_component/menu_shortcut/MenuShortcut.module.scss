@@ -1,0 +1,95 @@
+.menushortcut_container_layout_ {
+  position: fixed;
+  bottom: 6.25rem;
+  left: 50%;
+  translate: -50% 0 0;
+  z-index: 2;
+}
+
+.menushortcut_content_container_ {
+  width: fit-content;
+  font-family: "Satoshi", sans-serif;
+  position: relative;
+}
+
+.menushortcut_button_wrapper_ {
+  background-color: black;
+  border-radius: 1rem;
+  font-size: 1rem;
+  padding: 6px 16px;
+  color: gold;
+  text-transform: capitalize;
+  z-index: 5;
+  cursor: pointer;
+  border: none;
+
+  i,
+  span {
+    display: inline-block;
+    vertical-align: middle;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+  i {
+    font-size: 1.4rem;
+    margin-right: 5px;
+  }
+  span {
+    width: 46.5px;
+  }
+}
+
+.menushortcut_menu_list_container_,
+.menushortcut_menu_list_container_show {
+  position: absolute;
+  background-color: rgb(255, 255, 255);
+  bottom: 1rem;
+  left: 50%;
+  translate: -50% 0 0;
+  overflow: hidden;
+}
+
+.menushortcut_menu_list_container_ {
+  border-radius: 50%;
+  width: 0px;
+  height: 0px;
+  scale: 0;
+  transition: all 250ms ease-in-out;
+  padding: 0;
+  opacity: 0;
+}
+
+.menushortcut_menu_list_container_show {
+  border-radius: 1rem;
+  transform: translateY(-2rem) scale(1);
+  width: 250px;
+  height: 200px;
+  transform-origin: center;
+  padding: 0.2rem 1rem;
+  padding-right: 0.1rem;
+  z-index: 4;
+  opacity: 1;
+  transition: all 500ms ease-in-out;
+  h3 {
+    margin-block: 0.7rem 0.1rem;
+    font-weight: 800;
+  }
+}
+
+.menushortcut_menu_item_list_container_ {
+  overflow-y: scroll;
+  height: 100%;
+  padding-bottom: 2.75rem;
+}
+
+.menushortcut_menu_item_list_item_wrapper_ {
+  font-size: 1rem;
+  margin-block: 0.7rem;
+  text-transform: capitalize;
+  color: rgb(56, 56, 56);
+  font-weight: 500;
+  list-style: none;
+  width: 100%;
+  display: block;
+  cursor: pointer;
+}

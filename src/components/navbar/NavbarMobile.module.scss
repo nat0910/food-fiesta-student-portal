@@ -1,0 +1,67 @@
+@import "../../utils/sass/mixin";
+
+nav {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  border-top: 1px solid rgba(var(--gray-border), 1);
+  padding-block: 0.5rem;
+  z-index: 3;
+  background-color: rgba(var(--white), 1);
+  // box-shadow: 0px -5px 10px #ab2a2a;
+  overflow: hidden;
+}
+
+.nav_container_ {
+  @include centerWithMargin(32px);
+  @include flexRowCenter;
+  list-style: none;
+
+  @media screen and (min-width: 480px) {
+    @include centerWithMargin(64px);
+  }
+
+  @media screen and (min-width: 1280px) {
+    @include centerWithMargin(200px);
+  }
+}
+
+.nav_link_wrapper_ {
+  display: block;
+  text-align: center;
+  text-transform: capitalize;
+  flex-basis: 4.8rem;
+  font-family: "Satoshi", sans-serif;
+
+  i {
+    font-size: 1.8rem;
+    padding-block: 0.3rem;
+    border-radius: 2rem;
+    // background-color: #edaeae;
+    // color: #7e1f1f;
+    // background-color: hsl(0, 0%, 94%);
+    color: #000000;
+  }
+
+  span {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+}
+
+.nav_link_wrapper_active_ {
+  i {
+    // background-color: #edaeae;
+    // color: #7e1f1f;
+    background-color: hsl(0, 0%, 94%);
+    color: #000000;
+    width: 100%;
+  }
+
+  span {
+    display: block;
+    font-weight: 700;
+    font-size: 0.85rem;
+  }
+}

@@ -1,0 +1,123 @@
+@import "../../utils/sass/mixin";
+
+header {
+  width: 100%;
+  z-index: -1;
+}
+
+.header_container_ {
+  @include centerWithMargin(32px);
+  @include flexRowCenter;
+  padding-block: 0.5rem;
+
+  @media screen and (min-width: 480px) {
+    @include centerWithMargin(64px);
+  }
+  @media screen and (min-width: 1280px) {
+    @include centerWithMargin(200px);
+  }
+}
+
+// Logo Css
+
+.header_logo_wrapper_ {
+  width: 60px;
+  height: 60px;
+  background-color: white;
+  object-fit: contain;
+  border: 5px solid white;
+  border-radius: 50%;
+
+  img {
+    border-radius: inherit;
+  }
+}
+
+// Profile CSS
+
+.header_profile_container_ {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  box-shadow: 0px 0px 10px 20px #6e1b1ba1;
+
+  z-index: -1;
+  border-radius: 50%;
+
+  img {
+    border-radius: inherit;
+  }
+}
+.header_profile_container_content_ {
+  background-color: rgb(223, 238, 253);
+  border: 5px solid white;
+  border-radius: 1rem;
+  padding: 1rem 0.8rem;
+  position: absolute;
+  top: 3rem;
+  right: 0;
+
+  min-width: 275px;
+
+  @media screen and (max-width: 320px) {
+    width: 10%;
+    top: 3.75rem;
+  }
+}
+
+.header_profile_details_container_ {
+  width: auto;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+.header_profile_details_container_img_wrapper {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: contain;
+}
+
+.header_profile_details_container_content_wrapper {
+  margin-left: 1rem;
+  p {
+    &:nth-of-type(1) {
+      text-transform: capitalize;
+      font-weight: 600;
+      width: 100%;
+    }
+    &:nth-of-type(2) {
+      margin-top: 1px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: rgb(97, 97, 97);
+      @media screen and (max-width: 320px) {
+        font-size: 0.7rem;
+      }
+    }
+  }
+}
+
+.header_profile_logout {
+  background-color: white;
+  border: none;
+  margin-top: 1rem;
+  position: relative;
+  left: 50%;
+  translate: -50% 0 0;
+  padding: 8px 16px;
+  border-radius: 5px;
+  border: 1px solid #dce6ef;
+  cursor: pointer;
+
+  span {
+    margin-left: 10px;
+    font-weight: 500;
+  }
+
+  &:active,
+  &:hover {
+    color: red;
+  }
+}

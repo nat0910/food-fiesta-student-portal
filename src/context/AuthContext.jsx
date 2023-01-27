@@ -60,7 +60,7 @@ function AuthProvider({ children }) {
         navigate("/login");
       }
 
-      if (location.pathname === "/login") {
+      if (location.pathname.toLowerCase() === "/login") {
         navigate("/");
       }
       setUser(user);
