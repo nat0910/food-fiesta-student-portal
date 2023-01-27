@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import MenuCard from "../../components/menu_page_component/menu_card";
 import MenuShortcut from "../../components/menu_page_component/menu_shortcut";
+import { useMenu } from "../../context/MenuContext";
 
 const dataDB = {
   stall2: {
@@ -45,9 +46,7 @@ export default function Menu() {
     console.log(toggle);
   }
 
-  useEffect(() => {
-    return () => {};
-  }, []);
+  const { menuList } = useMenu();
 
   return (
     <>
@@ -68,6 +67,7 @@ export default function Menu() {
           );
         })}
       </div>
+
       <MenuShortcut data={data} />
     </>
   );

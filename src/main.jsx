@@ -3,17 +3,18 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import LoadingScreen from "./components/loading_screen";
-import AuthProvider from "./context/AuthContext";
+
 import "./global.scss";
+import Provider from "./utils/provider";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
-      <AuthProvider>
+      <Provider>
         <Suspense fallback={<LoadingScreen />}>
           <App />
         </Suspense>
-      </AuthProvider>
+      </Provider>
     </BrowserRouter>
   </React.StrictMode>
 );

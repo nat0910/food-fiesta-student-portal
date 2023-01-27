@@ -30,3 +30,59 @@
 .menu_card_container_lsit_toggle_active {
   transform: rotate(90deg);
 }
+
+.menu_card_item_wrapper_ {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: 0.5rem;
+  padding-inline: 0.7rem 1.25rem;
+}
+
+.menu_card_item_wrapper_cart_ {
+  background-color: #7e1f1f;
+  width: fit-content;
+  // height: 30px;
+  border-radius: 10px;
+
+  button,
+  input {
+    border: none;
+    text-align: center;
+    display: inline-block;
+    background-color: inherit;
+    height: 100%;
+    font-weight: 600;
+    color: white;
+  }
+
+  button {
+    font-size: 1.2rem;
+    padding: 2px 10px;
+
+    &:nth-of-type(even) {
+      border-top-right-radius: 7.5px;
+      border-bottom-right-radius: 7.5px;
+    }
+    &:nth-of-type(odd) {
+      border-top-left-radius: 7.5px;
+      border-bottom-left-radius: 7.5px;
+    }
+  }
+
+  input[type="number"] {
+    width: 37.5px;
+    height: 30px;
+    -moz-appearance: textfield;
+    appearance: textfield;
+
+    &:focus {
+      outline: none;
+    }
+  }
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
