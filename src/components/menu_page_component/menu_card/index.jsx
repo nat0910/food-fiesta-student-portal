@@ -1,16 +1,16 @@
 import React from "react";
 import { collection, doc, getDoc, getDocs } from "firebase/firestore";
-import { db } from "../../../utils/firebaseConfig";
 import { useState } from "react";
+import { getFirebase } from "../../../utils/firebaseConfig";
 
 import styles from "./MenuCard.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
-export default function MenuCard({ index, showhideList }) {
+export default function MenuCard({ stallItems, index, showhideList }) {
   const [docsData, setDocsData] = useState(null);
-
-  const menuDocRef = doc(db, "menu", "menu_items");
+  const { firestore } = getFirebase();
+  const menuDocRef = doc(firestore, "menu", "menu_items");
 
   async function handleMenu() {
     const result = await getDoc(menuDocRef);
@@ -19,7 +19,7 @@ export default function MenuCard({ index, showhideList }) {
   // getDocs()
 
   async function handleMenuCollection() {
-    const result = await getDocs(collection(db, "menu"));
+    const result = await getDocs(collection(firestore, "menu"));
     console.log(result);
   }
 
@@ -37,11 +37,16 @@ export default function MenuCard({ index, showhideList }) {
       </div>
       <div id="stall-menu-list" className={styles.menu_card_container_body}>
         <ul>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
+          {Object.keys(stallItems).map((item_id, index) => {
+            console.log("items", stallItems[item_id], index);
+            return (
+              <>
+              <li>Price: {stallItems[item_id]['price']}</li>
+              <li>Name: {stallItems[item_id]['name']}</li>
+              <li>Availability: {stallItems[item_id]['availability'] ? <>True</>:<>False</>}</li>
+              </>
+            )
+          })}
         </ul>
       </div>
     </section>

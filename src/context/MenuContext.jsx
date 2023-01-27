@@ -1,7 +1,7 @@
 import { collection, doc, onSnapshot } from "firebase/firestore";
 
 import { useState, createContext, useEffect, useContext } from "react";
-import { db } from "../utils/firebaseConfig";
+import { getFirebase } from "../utils/firebaseConfig";
 
 const MenuContext = createContext();
 
@@ -9,9 +9,10 @@ function MenuProvider({ children }) {
   const [menuList, setMenuList] = useState({});
 
   useEffect(() => {
+    const { firestore } = getFirebase();
     const MENU_DOC_ID = "menu_items";
     const MENU_COLLECTION_ID = "menu";
-    const menuCol = collection(db, MENU_COLLECTION_ID);
+    const menuCol = collection(firestore, MENU_COLLECTION_ID);
     const menuDoc = doc(menuCol, MENU_DOC_ID);
 
     // const unsubscribe = onSnapshot(menuDoc, (document) => {

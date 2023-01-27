@@ -9,7 +9,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { auth } from "../utils/firebaseConfig";
+import { getFirebase } from "../utils/firebaseConfig";
 
 const providers = new GoogleAuthProvider();
 
@@ -22,6 +22,7 @@ function AuthProvider({ children }) {
   const location = useLocation();
 
   function handleGoogleLogin() {
+    const { auth } = getFirebase();
     signInWithPopup(auth, providers)
       .then((result) => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -42,6 +43,7 @@ function AuthProvider({ children }) {
   }
 
   function handleSignOut() {
+    const { auth } = getFirebase();
     signOut(auth)
       .then(() => {
         // Sign-out successful.
@@ -54,6 +56,7 @@ function AuthProvider({ children }) {
   }
 
   useEffect(() => {
+    const { auth } = getFirebase();
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (!user) {
         console.log("Please Sign In again!!");

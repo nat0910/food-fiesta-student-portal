@@ -1,53 +1,50 @@
 import React from "react";
+import { useState } from "react";
 import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import MenuCard from "../../components/menu_page_component/menu_card";
 import MenuShortcut from "../../components/menu_page_component/menu_shortcut";
-import { useMenu } from "../../context/MenuContext";
-
-const dataDB = {
-  stall2: {
-    stall_name: "Mysore cafe",
-    45: {
-      name: "plain dosa",
-      price: 35,
-      availability: true,
-    },
-    67: {
-      availability: true,
-      price: 30,
-      name: "wada sambar",
-    },
-  },
-  stall1: {
-    stall_name: "Shiv wada pav",
-    stall_menu: [
-      {
-        availability: true,
-        price: 15,
-        name: "vada pav",
-      },
-      {
-        name: "kanda bhaji",
-        price: 20,
-        availability: true,
-      },
-    ],
-  },
-};
-
-const data = new Array({}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {});
+import { getFirebase } from "../../utils/firebaseConfig";
+import {
+  getFirestore,
+  connectFirestoreEmulator,
+  collection,
+  query,
+  orderBy,
+  onSnapshot,
+  doc,
+  addDoc,
+  serverTimestamp,
+  setDoc,
+} from "firebase/firestore";
 
 export default function Menu() {
+  const [menu, setMenu] = useState({});
+
+  useEffect(() => {
+    const MENU_DOC_ID = "menu_items";
+    const MENU_COLLECTION_ID = "menu";
+    const { firestore } = getFirebase();
+    const menuCol = collection(firestore, MENU_COLLECTION_ID);
+    const menuDoc = doc(menuCol, MENU_DOC_ID);
+    const unsub = onSnapshot(menuDoc, (document) => {
+      setMenu(document.data());
+      console.log("Current data: ", document.data());
+      console.log("Current data: ", Object.keys(menu));
+    });
+
+    return () => {
+      unsub();
+    };
+  }, []);
+
   function showhideList() {
     console.log("hello");
     const toggle = document.getElementById("menu_list_toggle");
     toggle.classList.add("menu_card_container_lsit_toggle_active");
     console.log(toggle);
   }
-
-  const { menuList } = useMenu();
-
+  
   return (
     <>
       <div
@@ -56,10 +53,11 @@ export default function Menu() {
           borderRadius: ".5rem",
         }}
       >
-        {data.map((item, index) => {
+        {Object.keys(menu).map((stall_key, index) => {
+          console.log("stalls", menu[stall_key] , index);
           return (
             <MenuCard
-              {...item}
+              stallItems={menu[stall_key]}
               index={index}
               key={index}
               showhideList={showhideList}
@@ -68,7 +66,7 @@ export default function Menu() {
         })}
       </div>
 
-      <MenuShortcut data={data} />
+      <MenuShortcut data={menu} />
     </>
   );
 }

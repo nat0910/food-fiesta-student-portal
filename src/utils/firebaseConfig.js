@@ -1,16 +1,36 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
 
-import { getAuth } from "firebase/auth";
-import { getDatabase } from "firebase/database";
-import { getFirestore } from "firebase/firestore";
-import { getFunctions } from "firebase/functions";
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { initializeApp, getApps } from "firebase/app";
+import {
+  getFirestore,
+  connectFirestoreEmulator,
+  collection,
+  query,
+  orderBy,
+  onSnapshot,
+  doc,
+  addDoc,
+  serverTimestamp,
+  setDoc
+} from "firebase/firestore";
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+import {
+  connectFunctionsEmulator,
+  getFunctions,
+  httpsCallable
+} from "firebase/functions";
+
+import {
+  getAuth,
+  updateProfile,
+  connectAuthEmulator,
+  signInWithPhoneNumber,
+  onAuthStateChanged,
+  reauthenticateWithRedirect,
+  RecaptchaVerifier
+} from "firebase/auth";
+
+
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -28,11 +48,36 @@ const firebaseConfig = {
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENTID,
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-const functions = getFunctions(app);
+function initializeServices() {
+  const isConfigured = getApps().length > 0;
+  const firebaseApp = initializeApp(firebaseConfig);
+  const firestore = getFirestore(firebaseApp);
+  const auth = getAuth(firebaseApp);
+  const functions = getFunctions(firebaseApp)
+  return { firebaseApp, firestore, auth, isConfigured, functions };
+}
 
-export { auth, db, functions };
-export default app;
+function connectToEmulators({ auth, firestore, functions }) {
+  if (location.hostname === "localhost") {
+    connectFirestoreEmulator(firestore, "localhost", 8080);
+    connectAuthEmulator(auth, "http://localhost:9099");
+    connectFunctionsEmulator(functions, "localhost", 5001);
+    console.log("auth emulators");
+  }
+}
+
+export function getFirebase() {
+  const services = initializeServices();
+  if (!services.isConfigured) {
+    connectToEmulators(services);
+    console.log("connected to emulators");
+  }
+  return services;
+}
+
+export function newOrder(data) {
+  const { functions } = getFirebase();
+  const newOrder = httpsCallable(functions, 'newOrder');
+  return newOrder(data)
+}
+

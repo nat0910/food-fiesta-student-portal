@@ -63,7 +63,7 @@ export default function MenuShortcut({ data }) {
             className={styles.menushortcut_menu_item_list_container_}
             role={"menu"}
           >
-            {data.map((item, index) => {
+            {Object.keys(data).map((item, index) => {
               return (
                 <li
                   role={"menuitem"}
