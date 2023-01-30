@@ -48,7 +48,7 @@ export default function LogoAndProfile() {
         </div>
         <div className={styles.header_profile_container_}>
           <img
-            src={user?.photoURL || DefaultImage}
+            src={user.photoURL || DefaultImage}
             alt={user?.displayName}
             ref={detailsRef}
             onClick={() => setDetails(!details)}
@@ -61,7 +61,10 @@ export default function LogoAndProfile() {
                     styles.header_profile_details_container_img_wrapper
                   }
                 >
-                  <img src={user?.photoURL} alt={user?.displayName} />
+                  <img
+                    src={user.photoURL || DefaultImage}
+                    alt={user?.displayName}
+                  />
                 </div>
                 <div
                   className={

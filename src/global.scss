@@ -33,7 +33,7 @@
 :root {
   // --accent-color: 128, 0, 0;
   --danger-red: 255, 0, 0;
-  --white-bg: 250, 250, 250;
+  --white-bg: 248, 248, 248;
   --gray-border: 228, 232, 235;
   --inactive-nav-link: 139, 139, 139;
   --white: 255, 255, 255;
@@ -68,25 +68,15 @@ html {
 body {
   overflow-x: hidden;
   width: 100%;
-  // background-color: rgba(var(--white-bg), 1);
-  background-color: #7e1f1f; // logo color
-  // background-color: #F90303; // logo color
-
-  //   min-height: 100vh;
+  background-color: rgba(var(--white-bg), 1);
+  // background-color: #7e1f1f; // logo color
 }
 
 /* Scrollbar Reset */
 main {
-  @include centerWithMargin(32px);
   padding-top: 0.5rem;
   padding-bottom: 10rem;
-
-  @media screen and (min-width: 480px) {
-    @include centerWithMargin(64px);
-  }
-  @media screen and (min-width: 1280px) {
-    @include centerWithMargin(200px);
-  }
+  
 }
 
 #bodyVeil {

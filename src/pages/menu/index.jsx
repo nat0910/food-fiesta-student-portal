@@ -17,56 +17,61 @@ import {
   serverTimestamp,
   setDoc,
 } from "firebase/firestore";
+import { useMenu } from "../../context/MenuContext";
 
 export default function Menu() {
-  const [menu, setMenu] = useState({});
+  // const [menu, setMenu] = useState({});
 
-  useEffect(() => {
-    const MENU_DOC_ID = "menu_items";
-    const MENU_COLLECTION_ID = "menu";
-    const { firestore } = getFirebase();
-    const menuCol = collection(firestore, MENU_COLLECTION_ID);
-    const menuDoc = doc(menuCol, MENU_DOC_ID);
-    const unsub = onSnapshot(menuDoc, (document) => {
-      setMenu(document.data());
-      console.log("Current data: ", document.data());
-      console.log("Current data: ", Object.keys(menu));
-    });
+  // useEffect(() => {
+  //   const MENU_DOC_ID = "menu_items";
+  //   const MENU_COLLECTION_ID = "menu";
+  //   const { firestore } = getFirebase();
+  //   const menuCol = collection(firestore, MENU_COLLECTION_ID);
+  //   const menuDoc = doc(menuCol, MENU_DOC_ID);
+  //   const unsub = onSnapshot(menuDoc, (document) => {
+  //     setMenu(document.data());
+  //   });
 
-    return () => {
-      unsub();
-    };
-  }, []);
+  //   return () => {
+  //     unsub();
+  //   };
+  // }, []);
+
+  const { menuList } = useMenu();
 
   function showhideList() {
     console.log("hello");
     const toggle = document.getElementById("menu_list_toggle");
-    toggle.classList.add("menu_card_container_lsit_toggle_active");
-    console.log(toggle);
+    toggle.classList.remove(toggle.classList[0]);
+    toggle.classList.toggle(menu_card_container_lsit_toggle_active);
   }
-  
+
   return (
     <>
       <div
         style={{
-          backgroundColor: "white",
-          borderRadius: ".5rem",
+          position: "relative",
         }}
       >
-        {Object.keys(menu).map((stall_key, index) => {
-          console.log("stalls", menu[stall_key] , index);
-          return (
-            <MenuCard
-              stallItems={menu[stall_key]}
-              index={index}
-              key={index}
-              showhideList={showhideList}
-            />
-          );
-        })}
+        {Object.keys(menuList)
+          .sort(menuList.sortStable)
+          .map((stall_key, index) => {
+            // console.log("stalls", menuList[stall_key], index);
+            // console.log(stall_key);
+
+            return (
+              <MenuCard
+                key={index}
+                stallItems={menuList[stall_key]}
+                index={stall_key}
+                stall={`stall${index + 1}`}
+                showhideList={showhideList}
+              />
+            );
+          })}
       </div>
 
-      <MenuShortcut data={menu} />
+      <MenuShortcut data={menuList} />
     </>
   );
 }

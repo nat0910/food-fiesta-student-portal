@@ -63,18 +63,20 @@ export default function MenuShortcut({ data }) {
             className={styles.menushortcut_menu_item_list_container_}
             role={"menu"}
           >
-            {Object.keys(data).map((item, index) => {
-              return (
-                <li
-                  role={"menuitem"}
-                  key={index}
-                  className={styles.menushortcut_menu_item_list_item_wrapper_}
-                  onClick={() => handleMenuShortcut(`stall${index + 1}`)}
-                >
-                  {`stall ${index + 1}`}
-                </li>
-              );
-            })}
+            {Object.keys(data)
+              .sort(data.sortStable)
+              .map((item, index) => {
+                return (
+                  <li
+                    role={"menuitem"}
+                    key={index}
+                    className={styles.menushortcut_menu_item_list_item_wrapper_}
+                    onClick={() => handleMenuShortcut(item)}
+                  >
+                    {item}
+                  </li>
+                );
+              })}
           </ul>
         </div>
       </div>

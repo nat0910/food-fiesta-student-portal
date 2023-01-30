@@ -3,6 +3,22 @@
   width: 100%;
   background-color: white;
   border-radius: 0.5rem;
+  position: relative;
+
+  margin-bottom: 1.75rem;
+
+  &::before {
+    content: "";
+    display: inline-block;
+    height: 2rem;
+    width: 5px;
+    background-color: rgba(var(--accent-color), 1);
+    position: absolute;
+    top: 0;
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    margin-top: 1rem;
+  }
 }
 
 .menu_card_container_header_ {
@@ -10,25 +26,37 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.5rem 0;
+  padding: 1rem 0;
   border-radius: 0.5rem;
-  border: 1px solid rgb(228, 228, 228);
+  // border: 1px solid rgb(228, 228, 228);
+  cursor: pointer;
 
   h2 {
-    margin-left: 0.7rem;
+    // margin-left: 0.5rem;
+    text-transform: capitalize;
+    font-weight: 800;
+    font-size: 1.35rem;
+    font-family: "Satoshi", sans-serif;
+  }
+
+  @include centerWithMargin(32px);
+  @media screen and (min-width: 480px) {
+    @include centerWithMargin(64px);
+  }
+  @media screen and (min-width: 1280px) {
+    @include centerWithMargin(200px);
   }
 }
 
 .menu_card_container_lsit_toggle_,
 .menu_card_container_lsit_toggle_active {
   display: block;
-  margin-right: 1rem;
   font-size: 1.25rem;
-  transition: transform 250ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  // transition: transform 250ms cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .menu_card_container_lsit_toggle_active {
-  transform: rotate(90deg);
+  rotate: 180deg;
 }
 
 .menu_card_item_wrapper_ {
@@ -40,49 +68,109 @@
   padding-inline: 0.7rem 1.25rem;
 }
 
-.menu_card_item_wrapper_cart_ {
-  background-color: #7e1f1f;
-  width: fit-content;
-  // height: 30px;
-  border-radius: 10px;
+.menu_card_container_body {
+  // display: none;
+}
 
-  button,
-  input {
+.menu_item_details_container_ {
+  list-style: none;
+  font-weight: 500;
+  font-size: 1rem;
+  min-height: 75px;
+
+  &:last-child {
+    .menu_item_details_content_ {
+      border-bottom: none;
+      padding-bottom: 2rem;
+    }
+  }
+}
+.menu_item_details_content_ {
+  border-bottom: 1px dashed rgb(196, 196, 196);
+  padding-block: 0.9rem 1rem;
+  @include flexRowCenter;
+
+  @include centerWithMargin(32px);
+  @media screen and (min-width: 480px) {
+    @include centerWithMargin(64px);
+  }
+  @media screen and (min-width: 1280px) {
+    @include centerWithMargin(200px);
+  }
+}
+
+.menu_item_details_content_header_ {
+  width: 100%;
+  font-size: 0.9rem;
+  color: rgb(110, 110, 110);
+  font-weight: 600;
+
+  p[role="heading"] {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: black;
+  }
+}
+
+.menu_item_details_content_button_add_,
+.menu_item_details_content_button_add_disable_ {
+  background-color: #f4e2e2;
+  color: #d53232;
+  border: 1.5px solid #fa8282;
+  border-radius: 5px;
+  padding: 6px 18px;
+  text-transform: uppercase;
+  font-weight: 700;
+  min-width: 103px;
+  cursor: pointer;
+}
+
+.menu_item_details_content_button_add_disable_ {
+  background-color: rgb(215, 215, 215);
+  color: rgb(113, 113, 113);
+  font-size: 0.75rem;
+  border-color: #bbbbbb;
+  padding-inline: 10px;
+  padding-block: 8px;
+  min-width: 125px;
+}
+
+.menu_item_details_content_button_group_ {
+  background-color: #7e1f1f;
+  color: white;
+  border-radius: 10px;
+  display: block;
+  min-width: fit-content;
+
+  p,
+  button {
+    display: inline-block;
+    vertical-align: middle;
+    color: inherit;
+    background-color: inherit;
+    font-weight: 600;
     border: none;
     text-align: center;
-    display: inline-block;
-    background-color: inherit;
-    height: 100%;
-    font-weight: 600;
-    color: white;
   }
 
   button {
     font-size: 1.2rem;
-    padding: 2px 10px;
-
+    padding: 5px 10px;
+    cursor: pointer;
     &:nth-of-type(even) {
       border-top-right-radius: 7.5px;
       border-bottom-right-radius: 7.5px;
+      padding-left: 1rem;
     }
     &:nth-of-type(odd) {
       border-top-left-radius: 7.5px;
       border-bottom-left-radius: 7.5px;
+      padding-right: 1rem;
     }
   }
 
-  input[type="number"] {
-    width: 37.5px;
-    height: 30px;
-    -moz-appearance: textfield;
-    appearance: textfield;
-
-    &:focus {
-      outline: none;
-    }
-  }
-  input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+  p {
+    width: 25px;
+    height: 100%;
   }
 }

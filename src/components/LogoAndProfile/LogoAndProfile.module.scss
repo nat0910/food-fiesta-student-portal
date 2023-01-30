@@ -21,11 +21,11 @@ header {
 // Logo Css
 
 .header_logo_wrapper_ {
-  width: 60px;
-  height: 60px;
-  background-color: white;
+  width: 55px;
+  height: 55px;
+  // background-color: white;
+  outline: 5px solid rgb(255, 255, 255);
   object-fit: contain;
-  border: 5px solid white;
   border-radius: 50%;
 
   img {
@@ -36,23 +36,23 @@ header {
 // Profile CSS
 
 .header_profile_container_ {
-  width: 40px;
-  height: 40px;
   position: relative;
-  box-shadow: 0px 0px 10px 20px #6e1b1ba1;
+  box-shadow: 0px 0px 10px 20px #edededa1;
 
-  z-index: -1;
+  z-index: 1;
   border-radius: 50%;
 
   img {
+    width: 40px;
+    height: 40px;
     border-radius: inherit;
   }
 }
 .header_profile_container_content_ {
   background-color: rgb(223, 238, 253);
-  border: 5px solid white;
+  border: 5px solid rgb(246, 248, 255);
   border-radius: 1rem;
-  padding: 1rem 0.8rem;
+  padding: 1.2rem 0.8rem;
   position: absolute;
   top: 3rem;
   right: 0;
