@@ -1,11 +1,10 @@
 import { useState } from "react";
 import styles from "./MenuShortcut.module.scss";
 
-export default function MenuShortcut({ data }) {
+export default function MenuShortcut({ data, hideStallMenu }) {
   const [shortcutShow, setShortcutShow] = useState(false);
 
   function handleMenuShortcut(e) {
-    document.getElementById(e).scrollIntoView();
     if (
       document
         .getElementById("root")
@@ -16,6 +15,15 @@ export default function MenuShortcut({ data }) {
         .removeChild(document.getElementById("bodyVeil"));
       document.body.style.overflowY = "auto";
     }
+
+    hideStallMenu();
+    const listheight = document
+      ?.getElementById(`${e}-list`)
+      .getBoundingClientRect().height;
+    document.getElementById(e).childNodes[1].style.height = `${listheight}px`;
+
+    document.getElementById(e).scrollIntoView();
+
     setShortcutShow(!shortcutShow);
   }
 

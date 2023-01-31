@@ -1,14 +1,16 @@
-import { useState, useEffect, useRef } from "react";
+import { useRef } from "react";
 
 import styles from "./MenuCard.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { useMenu } from "../../../context/MenuContext";
 
-export default function MenuCard({ stallItems, index, showhideList, stall }) {
+export default function MenuCard({ stallItems, index, stall, hideStallMenu }) {
   const { cart, setCart } = useMenu();
 
   const itemRef = useRef(null);
+  const itemContRef = useRef(null);
+  const itemListRef = useRef(null);
 
   function addtocart(e) {
     // if object related to the stall is not intialized intializes it
@@ -80,6 +82,18 @@ export default function MenuCard({ stallItems, index, showhideList, stall }) {
     });
   }
 
+  function showhideList() {
+    const cont = itemContRef.current;
+    const listHeight = itemListRef?.current?.getBoundingClientRect().height;
+
+    if (cont.style.height === "0px") {
+      hideStallMenu();
+      cont.style.height = `${listHeight}px`;
+    } else {
+      cont.style.height = "0px";
+    }
+  }
+
   return (
     <section id={index} className={styles.menu_card_container_}>
       <div
@@ -94,8 +108,16 @@ export default function MenuCard({ stallItems, index, showhideList, stall }) {
           <FontAwesomeIcon icon={faCaretDown} />
         </div>
       </div>
-      <div id="stall-menu-list" className={styles.menu_card_container_body}>
-        <ul>
+      <div
+        id={`stall-menu-list`}
+        className={styles.menu_card_container_body}
+        ref={itemContRef}
+        style={{
+          height: 0,
+        }}
+        title={`${stall}-list`}
+      >
+        <ul id={`${stall}-list`} ref={itemListRef}>
           {Object.keys(stallItems).map((item_id, index) => {
             return (
               <li
@@ -105,6 +127,7 @@ export default function MenuCard({ stallItems, index, showhideList, stall }) {
                   backgroundColor: stallItems[item_id]["availability"]
                     ? "transparent"
                     : "rgb(196, 196, 196,.25)",
+                  textTransform: "capitalize",
                 }}
               >
                 <div className={styles.menu_item_details_content_}>
@@ -113,6 +136,7 @@ export default function MenuCard({ stallItems, index, showhideList, stall }) {
                     <p
                       style={{
                         marginTop: ".5rem",
+                        letterSpacing: ".5px",
                       }}
                     >
                       {new Intl.NumberFormat("en-IN", {

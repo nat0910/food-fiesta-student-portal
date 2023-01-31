@@ -10,6 +10,15 @@ function MenuProvider({ children }) {
 
   const [cart, setCart] = useState({});
 
+  function hideStallMenu() {
+    document?.querySelectorAll("#stall-menu-list").forEach((e) => {
+      const open = e.style.height != "0px";
+      if (open) {
+        e.style.height = "0px";
+      }
+    });
+  }
+
   useEffect(() => {
     const { firestore } = getFirebase();
     const MENU_DOC_ID = "menu_items";
@@ -22,42 +31,13 @@ function MenuProvider({ children }) {
       setMenuList(document.data());
     });
 
-    // const unsubscribe = () => {
-    //   setMenuList({
-    //     stall1: {
-    //       23: {
-    //         availability: false,
-    //         name: "vada pav",
-    //         price: 15,
-    //       },
-    //       24: {
-    //         availability: true,
-    //         name: "kanda bhaji",
-    //         price: 35,
-    //       },
-    //     },
-    //     stall2: {
-    //       45: {
-    //         name: "plain dosa",
-    //         price: 35,
-    //         availability: true,
-    //       },
-    //       67: {
-    //         name: "wada sambar",
-    //         availability: true,
-    //         price: 30,
-    //       },
-    //     },
-    //   });
-    // };
-
     return () => {
       unsubscribe();
     };
   }, []);
 
   return (
-    <MenuContext.Provider value={{ menuList, cart, setCart }}>
+    <MenuContext.Provider value={{ menuList, cart, setCart, hideStallMenu }}>
       {children}
     </MenuContext.Provider>
   );

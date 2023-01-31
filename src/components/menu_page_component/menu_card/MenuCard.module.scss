@@ -5,7 +5,8 @@
   border-radius: 0.5rem;
   position: relative;
 
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
 
   &::before {
     content: "";
@@ -70,6 +71,8 @@
 
 .menu_card_container_body {
   // display: none;
+  height: 0px;
+  transition: height 250ms ease-in-out;
 }
 
 .menu_item_details_container_ {
