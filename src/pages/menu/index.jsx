@@ -5,7 +5,7 @@ import MenuShortcut from "../../components/menu_page_component/menu_shortcut";
 import { useMenu } from "../../context/MenuContext";
 
 export default function Menu() {
-  const { menuList, hideStallMenu } = useMenu();
+  const { menuList, hideStallMenu , cart, setCart ,handleCart } = useMenu();
 
   return (
     <>
@@ -27,6 +27,9 @@ export default function Menu() {
                 index={stall_key}
                 stall={`stall${index + 1}`}
                 hideStallMenu={hideStallMenu}
+                cart={cart}
+                setCart={setCart}                
+                handleCart={handleCart}
               />
             );
           })}

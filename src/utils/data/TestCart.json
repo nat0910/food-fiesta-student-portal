@@ -1,0 +1,18 @@
+{
+  "stall1": {
+    "items_ordered": {
+      "24": 2
+    }
+  },
+  "stall2": {
+    "items_ordered": {
+      "45": 1,
+      "67": 2
+    }
+  },
+  "stall3": {
+    "items_ordered": {
+      "11": 1
+    }
+  }
+}

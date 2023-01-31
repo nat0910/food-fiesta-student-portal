@@ -1,0 +1,45 @@
+@import "../../utils/sass/mixin";
+
+.cart_items_added_underline {
+  height: 1.5px;
+  background-color: #d1d1d7;
+  position: relative;
+  margin-top: 1.15rem;
+  &::before {
+    content: attr(data-heading-title);
+    font-family: "Cabinet-Grotesk", sans-serif;
+    font-weight: 600;
+    color: #d1d1d7;
+    text-transform: uppercase;
+    background-color: rgba(var(--white-bg), 1);
+    letter-spacing: 2px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding-inline: 0.8rem;
+  }
+
+  @include centerWithMargin(32px);
+  @media screen and (min-width: 480px) {
+    @include centerWithMargin(64px);
+  }
+  @media screen and (min-width: 1280px) {
+    @include centerWithMargin(200px);
+  }
+}
+
+.cart_items_list_container {
+  background-color: #fff;
+  padding-inline: 1rem;
+  margin-top: 2rem;
+  border-radius: 1rem;
+  padding-block: 0.75rem 0.5rem;
+  @include centerWithMargin(32px);
+  @media screen and (min-width: 480px) {
+    @include centerWithMargin(64px);
+  }
+  @media screen and (min-width: 1280px) {
+    @include centerWithMargin(200px);
+  }
+}

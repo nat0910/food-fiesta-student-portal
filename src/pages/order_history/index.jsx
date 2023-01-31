@@ -11,10 +11,13 @@ import {
 } from "firebase/firestore";
 import { useEffect } from "react";
 import { useState } from "react";
+import { useMenu } from "../../context/MenuContext";
 
 export default function OrderHistory() {
   const [orderHistory, setOrderHistory] = useState([]);
   const { user } = useAuth();
+
+  const { cart } = useMenu();
 
   function submitOrder(params) {
     newOrder({
@@ -51,7 +54,7 @@ export default function OrderHistory() {
         {orderHistory.docs?.map((doc) => {
           console.log(doc.data());
           return (
-            <li>
+            <li key={doc.data().order_id}>
               <div>{doc.data().order_id}</div>
               <div>{doc.data().order_placed_timestamp.seconds}</div>
               <div>{doc.data().user_info.name}</div>

@@ -1,0 +1,28 @@
+@import "../../../utils/sass/mixin";
+
+.cart_empty_grid_ {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  h1 {
+    text-align: center;
+    font-weight: 800;
+    min-width: 250px;
+    font-size: 2.1rem;
+    color: #c3c3c8;
+  }
+  p {
+    text-align: center;
+    margin-top: 0.5rem;
+    color: #9f9fa2;
+    font-weight: 500;
+  }
+  @media screen and (max-width: 765px) {
+    @include centerWithMargin(64px);
+  }
+  @media screen and (max-width: 350px) {
+    @include centerWithMargin(32px);
+  }
+}
