@@ -20,15 +20,7 @@ export default function OrderHistory() {
   const { cart } = useMenu();
 
   function submitOrder(params) {
-    newOrder({
-      stall1: {
-        23: 3,
-        24: 3,
-      },
-      stall2: {
-        45: 1,
-      },
-    }).then(console.log("successfully added new order"));
+    newOrder(cart).then(console.log("successfully added new order"));
   }
 
   useEffect(() => {

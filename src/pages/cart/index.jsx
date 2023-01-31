@@ -3,17 +3,19 @@ import CartEmptyScreen from "../../components/cart_page_component/cart_empty_scr
 import { useMenu } from "../../context/MenuContext";
 import styles from "./Cart.module.scss";
 
-import TestCart from "../../utils/data/TestCart.json";
-import { useState } from "react";
-
 export default function Cart() {
-  const { cart, setCart ,menuList , handleCart} = useMenu();
+  const { cart, setCart, menuList, handleCart } = useMenu();
 
-  // const {menuList} = useMenu()
-
-  // console.log(cart);
-
-  // const [cart, setCart] = useState(TestCart);
+  let total = function () {
+    let i = 0;
+    Object.keys(cart).forEach((stall_key) => {
+      const key = cart[stall_key]["items_ordered"];
+      Object.keys(key).forEach((item_id) => {
+        i = i + menuList[stall_key][item_id]["price"] * key[item_id];
+      });
+    });
+    return i;
+  };
 
   return (
     <>
@@ -54,6 +56,18 @@ export default function Cart() {
               marginTop: "2rem",
             }}
           />
+          <div className={styles.cart_items_list_container}>
+            <div className={styles.cart_items_list_container_grand_total}>
+              <p>Grand Total</p>
+              <p>
+                {new Intl.NumberFormat("en-IN", {
+                  currency: "INR",
+                  style: "currency",
+                }).format(total())}
+              </p>
+            </div>
+          </div>
+          <div className={styles.cart_item_payment_container}></div>
         </>
       )}
     </>

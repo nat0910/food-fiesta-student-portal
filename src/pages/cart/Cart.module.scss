@@ -43,3 +43,12 @@
     @include centerWithMargin(200px);
   }
 }
+
+.cart_items_list_container_grand_total {
+  @include flexRowCenter;
+  padding-block: 0.5rem;
+  font-weight: 600;
+  p {
+    display: inline-block;
+  }
+}
