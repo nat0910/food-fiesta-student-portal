@@ -16,20 +16,11 @@ export default function LogoAndProfile() {
   const detailsRef = useRef(null);
 
   function handleOutsideClick(e) {
-    console.log();
-
     if (e.target.innerText !== "Sign out") {
       if (detailsRef.current && !detailsRef.current.contains(e.target)) {
         setDetails(false);
       }
     }
-  }
-
-  function showHideDetails() {
-    if (details) {
-      setDetails(false);
-    }
-    setDetails(true);
   }
 
   useEffect(() => {

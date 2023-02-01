@@ -5,75 +5,33 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { useMenu } from "../../../context/MenuContext";
 
-export default function MenuCard({ stallItems, index, stall, hideStallMenu,cart, setCart , handleCart }) {
-
-
+export default function MenuCard({
+  stallItems,
+  index,
+  stall,
+  hideStallMenu,
+  cart,
+  setCart,
+  handleCart,
+}) {
   const itemRef = useRef(null);
   const itemContRef = useRef(null);
   const itemListRef = useRef(null);
 
   function addtocart(e) {
     // if object related to the stall is not intialized intializes it
+
     if (cart[e.stall] === undefined) {
       Object.assign(cart, {
         [e.stall]: {
-          items_ordered: {
-            [e.item_id]: 1,
-          },
+          [e.item_id]: 1,
         },
       });
     }
     // Handles addition of items to intialized stall object
 
-    const { items_ordered } = cart[e.stall];
-    const cartadd = {
-      ...items_ordered,
-      [e.item_id]: 1,
-    };
-
-
-    setCart({
-      ...cart,
-      [stall]: {
-        items_ordered: cartadd,
-      },
-    });
+    setCart({ ...cart, [e.stall]: { ...cart[e.stall], [e.item_id]: 1 } });
   }
-
-  // function handleCart(e, val, stall, item_id) {
-  //   const { items_ordered } = cart[stall];
-
-    
-  //   // // checks if the button pressed is for increment or decrement
-  //   const bool = e.target.id === "increment-button";
-  //   val = bool ? val + 1 : val - 1;
-    
-  //   // // Item Quantity is less than zero it deletes the item from cart
-  //   if (val === 0) {
-  //     delete items_ordered[item_id];
-  //     setCart({
-  //       ...cart,
-  //       [stall]: {
-  //         items_ordered: items_ordered,
-  //       },
-  //     });
-  //     return 0;
-  //   }
-    
-  
-  //   const cartChange = {
-  //     ...items_ordered,[item_id] : val
-  //   }
-
-  //   setCart({
-  //     ...cart,
-  //     [stall]: {
-  //       items_ordered: cartChange,
-  //     },
-  //   });
-  // }
-
-  
 
   function showhideList() {
     const cont = itemContRef.current;
@@ -139,8 +97,8 @@ export default function MenuCard({ stallItems, index, stall, hideStallMenu,cart,
                     </p>
                   </div>
 
-                  {cart[stall]?.items_ordered[item_id] === undefined ||
-                  cart[stall]?.items_ordered[item_id] === 0 ? (
+                  {cart[stall]?.[item_id] === undefined ||
+                  cart[stall]?.[item_id] === 0 ? (
                     <button
                       type={"button"}
                       id={"add-to-cart-button"}
@@ -153,8 +111,6 @@ export default function MenuCard({ stallItems, index, stall, hideStallMenu,cart,
                         addtocart({
                           stall,
                           item_id: item_id,
-                          name: stallItems[item_id]["name"],
-                          price: stallItems[item_id]["price"],
                         })
                       }
                       disabled={!stallItems[item_id]["availability"]}
@@ -171,27 +127,17 @@ export default function MenuCard({ stallItems, index, stall, hideStallMenu,cart,
                         type={"button"}
                         id="decrement-button"
                         onClick={(e) => {
-                          handleCart(
-                            e,
-                            cart[stall]?.items_ordered[item_id],
-                            stall,
-                            item_id
-                          );
+                          handleCart(e, cart[stall]?.[item_id], stall, item_id);
                         }}
                       >
                         &#8722;
                       </button>
-                      <p>{cart[stall]?.items_ordered[item_id]}</p>
+                      <p>{cart[stall]?.[item_id]}</p>
                       <button
                         type={"button"}
                         id="increment-button"
                         onClick={(e) => {
-                          handleCart(
-                            e,
-                            cart[stall]?.items_ordered[item_id],
-                            stall,
-                            item_id
-                          );
+                          handleCart(e, cart[stall]?.[item_id], stall, item_id);
                         }}
                       >
                         &#43;

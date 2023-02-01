@@ -9,7 +9,7 @@ export default function Cart() {
   let total = function () {
     let i = 0;
     Object.keys(cart).forEach((stall_key) => {
-      const key = cart[stall_key]["items_ordered"];
+      const key = cart[stall_key];
       Object.keys(key).forEach((item_id) => {
         i = i + menuList[stall_key][item_id]["price"] * key[item_id];
       });
@@ -36,7 +36,7 @@ export default function Cart() {
                   return (
                     <CartCard
                       key={index}
-                      stallItems={cart[stall_key]["items_ordered"]}
+                      stallItems={cart[stall_key]}
                       index={stall_key}
                       menuList={menuList[stall_key]}
                       stall={stall_key}

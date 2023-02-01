@@ -7,10 +7,8 @@ export default function CartCard({
   menuList,
   cart,
   setCart,
-  handleCart
+  handleCart,
 }) {
-
-
   return (
     <ul key={index}>
       {Object.keys(stallItems).map((item_id, index) => {
@@ -63,7 +61,5 @@ export default function CartCard({
         );
       })}
     </ul>
-    //       <li key={index} className={styles.cart_item_details_container_}>
-    // </li>
   );
 }

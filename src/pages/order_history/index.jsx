@@ -19,6 +19,8 @@ export default function OrderHistory() {
 
   const { cart } = useMenu();
 
+  console.log(cart);
+
   function submitOrder(params) {
     newOrder(cart).then(console.log("successfully added new order"));
   }
