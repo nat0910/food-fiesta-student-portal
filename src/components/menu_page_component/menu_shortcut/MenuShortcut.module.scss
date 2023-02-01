@@ -93,4 +93,15 @@
   width: 100%;
   display: block;
   cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+
+  p {
+    &:last-child {
+      padding-right: 0.5rem;
+    }
+  }
 }

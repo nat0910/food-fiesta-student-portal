@@ -37,7 +37,8 @@
     text-transform: capitalize;
     font-weight: 800;
     font-size: 1.35rem;
-    font-family: "Satoshi", sans-serif;
+    letter-spacing: 1px;
+    // font-family: "Satoshi", sans-serif;
   }
 
   @include centerWithMargin(32px);
@@ -104,12 +105,12 @@
 
 .menu_item_details_content_header_ {
   width: 100%;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: rgb(110, 110, 110);
   font-weight: 600;
 
   p[role="heading"] {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 600;
     color: black;
   }

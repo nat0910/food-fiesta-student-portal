@@ -3,7 +3,6 @@ import { useRef } from "react";
 import styles from "./MenuCard.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
-import { useMenu } from "../../../context/MenuContext";
 
 export default function MenuCard({
   stallItems,
@@ -97,16 +96,21 @@ export default function MenuCard({
                     </p>
                   </div>
 
-                  {cart[stall]?.[item_id] === undefined ||
-                  cart[stall]?.[item_id] === 0 ? (
+                  {!stallItems[item_id]["availability"] ? (
+                    <button
+                      className={
+                        styles.menu_item_details_content_button_add_disable_
+                      }
+                      disabled="disabled"
+                    >
+                      out of stock
+                    </button>
+                  ) : cart[stall]?.[item_id] === undefined ||
+                    cart[stall]?.[item_id] === 0 ? (
                     <button
                       type={"button"}
                       id={"add-to-cart-button"}
-                      className={
-                        stallItems[item_id]["availability"]
-                          ? styles.menu_item_details_content_button_add_
-                          : styles.menu_item_details_content_button_add_disable_
-                      }
+                      className={styles.menu_item_details_content_button_add_}
                       onClick={() =>
                         addtocart({
                           stall,
@@ -115,9 +119,7 @@ export default function MenuCard({
                       }
                       disabled={!stallItems[item_id]["availability"]}
                     >
-                      {stallItems[item_id]["availability"]
-                        ? "add"
-                        : "out of stock"}
+                      add
                     </button>
                   ) : (
                     <div

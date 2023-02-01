@@ -19,44 +19,6 @@ function MenuProvider({ children }) {
     });
   }
 
-  // function handleCart(e, val, stall, item_id) {
-  //   const { items_ordered } = cart[stall];
-
-  //   const bool = e.target.id === "increment-button";
-  //   val = bool ? val + 1 : val - 1;
-
-  //   if (val === 0) {
-  //     delete items_ordered[item_id];
-
-  //     setCart({
-  //       ...cart,
-  //       [stall]: {
-  //         items_ordered: items_ordered,
-  //       },
-  //     });
-
-  //     const bool = Object.keys(cart[stall]["items_ordered"]).length === 0;
-
-  //     if (bool) {
-  //       delete cart[stall];
-  //       setCart({ ...cart });
-  //     }
-
-  //     return 0;
-  //   }
-  //   const cartChange = {
-  //     ...items_ordered,
-  //     [item_id]: val,
-  //   };
-
-  //   setCart({
-  //     ...cart,
-  //     [stall]: {
-  //       items_ordered: cartChange,
-  //     },
-  //   });
-  // }
-
   function handleCart(e, val, stall, item_id) {
     const bool = e.target.id === "increment-button";
     val = bool ? val + 1 : val - 1;

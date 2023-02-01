@@ -64,7 +64,6 @@ export default function MenuShortcut({ data, hideStallMenu }) {
               ? styles.menushortcut_menu_list_container_show
               : styles.menushortcut_menu_list_container_
           }
-          // hidden={!shortcutShow}
         >
           <h3>Menu</h3>
           <ul
@@ -74,6 +73,18 @@ export default function MenuShortcut({ data, hideStallMenu }) {
             {Object.keys(data)
               .sort(data.sortStable)
               .map((item, index) => {
+                // Loop  for getting total number of items sold by stall
+                const totalItems = () => {
+                  let i = 0;
+                  for (const key in data[item]) {
+                    if (Object.hasOwnProperty.call(data[item], key)) {
+                      const element = [data[item][key]].length;
+                      i = i + element;
+                    }
+                  }
+                  return i;
+                };
+
                 return (
                   <li
                     role={"menuitem"}
@@ -81,7 +92,8 @@ export default function MenuShortcut({ data, hideStallMenu }) {
                     className={styles.menushortcut_menu_item_list_item_wrapper_}
                     onClick={() => handleMenuShortcut(item)}
                   >
-                    {item}
+                    <p>{item}</p>
+                    <p>{totalItems()}</p>
                   </li>
                 );
               })}
