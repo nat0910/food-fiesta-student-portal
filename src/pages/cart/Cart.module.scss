@@ -18,6 +18,8 @@
     left: 50%;
     transform: translate(-50%, -50%);
     padding-inline: 0.8rem;
+    min-width: 200px;
+    text-align: center;
   }
 
   @include centerWithMargin(32px);
@@ -35,6 +37,7 @@
   margin-top: 2rem;
   border-radius: 1rem;
   padding-block: 0.75rem 0.5rem;
+
   @include centerWithMargin(32px);
   @media screen and (min-width: 480px) {
     @include centerWithMargin(64px);

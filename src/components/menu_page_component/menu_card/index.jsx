@@ -45,7 +45,7 @@ export default function MenuCard({
   }
 
   return (
-    <section id={index} className={styles.menu_card_container_}>
+    <section id={index} className={styles.menu_card_container_} title={stall}>
       <div
         className={styles.menu_card_container_header_}
         onClick={() => showhideList()}
@@ -65,7 +65,6 @@ export default function MenuCard({
         style={{
           height: 0,
         }}
-        title={`${stall}-list`}
       >
         <ul id={`${stall}-list`} ref={itemListRef}>
           {Object.keys(stallItems).map((item_id, index) => {
@@ -79,6 +78,7 @@ export default function MenuCard({
                     : "rgb(196, 196, 196,.25)",
                   textTransform: "capitalize",
                 }}
+                title={stallItems[item_id]["name"]}
               >
                 <div className={styles.menu_item_details_content_}>
                   <div className={styles.menu_item_details_content_header_}>

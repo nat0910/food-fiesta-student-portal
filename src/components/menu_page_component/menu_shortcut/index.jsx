@@ -22,7 +22,7 @@ export default function MenuShortcut({ data, hideStallMenu }) {
       .getBoundingClientRect().height;
     document.getElementById(e).childNodes[1].style.height = `${listheight}px`;
 
-    document.getElementById(e).scrollIntoView();
+    document.getElementById(e).scrollIntoView(true);
 
     setShortcutShow(!shortcutShow);
   }
@@ -91,6 +91,7 @@ export default function MenuShortcut({ data, hideStallMenu }) {
                     key={index}
                     className={styles.menushortcut_menu_item_list_item_wrapper_}
                     onClick={() => handleMenuShortcut(item)}
+                    id={`${item}-shortcut`}
                   >
                     <p>{item}</p>
                     <p>{totalItems()}</p>
