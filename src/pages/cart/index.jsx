@@ -1,10 +1,14 @@
+import { useState } from "react";
 import CartCard from "../../components/cart_page_component/cart_card";
 import CartEmptyScreen from "../../components/cart_page_component/cart_empty_screen";
 import { useMenu } from "../../context/MenuContext";
+import { newOrder } from "../../utils/firebaseConfig";
 import styles from "./Cart.module.scss";
 
 export default function Cart() {
   const { cart, setCart, menuList, handleCart } = useMenu();
+
+  const [loader, setLoader] = useState(false);
 
   let total = function () {
     let i = 0;
@@ -17,17 +21,19 @@ export default function Cart() {
     return i;
   };
 
+  function submitOrder() {
+    newOrder(cart).then(console.log("successfully added new order"));
+  }
+
   return (
     <>
       {Object.keys(cart).length === 0 ? (
         <CartEmptyScreen />
       ) : (
         <>
-          <div
-            role={"heading"}
-            className={styles.cart_items_added_underline}
-            data-heading-title={"ITEM(S) ADDED"}
-          />
+          <div role={"heading"} className={styles.cart_items_added_underline}>
+            <p>ITEM(S) ADDED</p>
+          </div>
           <div className={styles.cart_items_list_container}>
             <ul>
               {Object.keys({ ...cart })
@@ -51,12 +57,18 @@ export default function Cart() {
           <div
             role={"heading"}
             className={styles.cart_items_added_underline}
-            data-heading-title={"billing summary"}
             style={{
               marginTop: "2rem",
             }}
-          />
-          <div className={styles.cart_items_list_container}>
+          >
+            <p>Bill summary</p>
+          </div>
+          <div
+            className={styles.cart_items_list_container}
+            style={{
+              paddingBlock: ".15rem",
+            }}
+          >
             <div className={styles.cart_items_list_container_grand_total}>
               <p>Grand Total</p>
               <p>
@@ -67,7 +79,58 @@ export default function Cart() {
               </p>
             </div>
           </div>
-          <div className={styles.cart_item_payment_container}></div>
+
+          <div
+            role={"heading"}
+            className={styles.cart_items_added_underline}
+            style={{
+              marginTop: "2rem",
+            }}
+          >
+            <p>Cancellation policy</p>
+          </div>
+
+          <div
+            className={styles.cart_items_list_container}
+            style={{
+              paddingBlock: ".75rem",
+            }}
+          >
+            <p>
+              Please verify your order before placing it once order place it
+              cannot be edited.
+            </p>
+          </div>
+
+          {/* Total and Place Order button */}
+
+          <div
+            className={styles.cart_item_payment_position}
+            style={{
+              bottom: document
+                .getElementById("primary-navigation")
+                .getBoundingClientRect().height,
+            }}
+          >
+            <div className={styles.cart_item_payment_container}>
+              <div className={styles.cart_item_payment_container_content}>
+                <h3>
+                  {new Intl.NumberFormat("en-IN", {
+                    currency: "INR",
+                    style: "currency",
+                  }).format(total())}
+                </h3>
+                <p>total</p>
+              </div>
+              <button
+                className={styles.cart_item_payment_container_button}
+                onClick={() => submitOrder()}
+              >
+                place order
+                <span>&#9654;</span>
+              </button>
+            </div>
+          </div>
         </>
       )}
     </>

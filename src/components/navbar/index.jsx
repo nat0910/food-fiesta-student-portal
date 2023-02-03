@@ -5,11 +5,15 @@ import NavData from "../../utils/data/NavbarData.json";
 
 export default function Navbar() {
   return (
-    <nav>
+    <nav id="primary-navigation">
       <ul className={styles.nav_container_}>
         {NavData.map((item, index) => {
           return (
-            <li key={index} className={styles.nav_link_wrapper_}>
+            <li
+              key={index}
+              className={styles.nav_link_wrapper_}
+              name={item.label}
+            >
               <NavLink
                 to={item.url}
                 className={({ isActive }) => {

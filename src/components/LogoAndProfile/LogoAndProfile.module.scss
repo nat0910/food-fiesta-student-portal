@@ -6,10 +6,10 @@ header {
 }
 
 .header_container_ {
-  @include centerWithMargin(32px);
   @include flexRowCenter;
   padding-block: 0.5rem;
 
+  @include centerWithMargin(32px);
   @media screen and (min-width: 480px) {
     @include centerWithMargin(64px);
   }
@@ -41,6 +41,7 @@ header {
 
   z-index: 1;
   border-radius: 50%;
+  cursor: pointer;
 
   img {
     width: 40px;
@@ -50,13 +51,13 @@ header {
 }
 .header_profile_container_content_ {
   background-color: rgb(223, 238, 253);
-  border: 5px solid rgb(246, 248, 255);
+  border: 5px solid rgb(255, 255, 255);
   border-radius: 1rem;
   padding: 1.2rem 0.8rem;
   position: absolute;
   top: 3rem;
   right: 0;
-
+  filter: drop-shadow(0 0 5px #e1e1e1);
   min-width: 275px;
 
   @media screen and (max-width: 320px) {

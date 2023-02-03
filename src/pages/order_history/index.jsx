@@ -12,6 +12,7 @@ import {
 import { useEffect } from "react";
 import { useState } from "react";
 import { useMenu } from "../../context/MenuContext";
+import { Link, NavLink } from "react-router-dom";
 
 export default function OrderHistory() {
   const [orderHistory, setOrderHistory] = useState([]);
@@ -19,11 +20,11 @@ export default function OrderHistory() {
 
   const { cart } = useMenu();
 
-  console.log(cart);
-
-  function submitOrder(params) {
+  function submitOrder() {
     newOrder(cart).then(console.log("successfully added new order"));
   }
+
+  function getOrderDetails() {}
 
   useEffect(() => {
     const { firestore } = getFirebase();
@@ -46,17 +47,39 @@ export default function OrderHistory() {
       OrderHistory
       <ul>
         {orderHistory.docs?.map((doc) => {
-          console.log(doc.data());
           return (
-            <li key={doc.data().order_id}>
+            <li
+              key={doc.data().order_id}
+              style={{
+                marginBottom: "2rem",
+              }}
+            >
               <div>{doc.data().order_id}</div>
               <div>{doc.data().order_placed_timestamp.seconds}</div>
-              <div>{doc.data().user_info.name}</div>
+              <div
+                style={{
+                  marginBottom: "1rem",
+                }}
+              >
+                {doc.data().user_info.name}
+              </div>
+
+              <Link
+                style={{
+                  padding: "1rem",
+                  backgroundColor: "red",
+                  color: "white",
+                }}
+                to={`/your-orders/order-details/${doc.data().order_id}`}
+                state={doc.data()}
+              >
+                Press To Reveal : {doc.data().order_id}
+              </Link>
             </li>
           );
         })}
       </ul>
-      <button onClick={submitOrder}>NEW ORDER</button>
+      <button onClick={() => submitOrder}>NEW ORDER</button>
     </div>
   );
 }

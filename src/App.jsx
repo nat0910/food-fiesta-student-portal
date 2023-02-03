@@ -18,6 +18,7 @@ const SharedLayout = lazy(() =>
 const Menu = lazy(() => wait(500).then(() => import("./pages/menu")));
 const Cart = lazy(() => wait(500).then(() => import("./pages/cart")));
 const Error = lazy(() => wait(500).then(() => import("./pages/error")));
+const Order = lazy(() => wait(500).then(() => import("./pages/order")));
 const OrderHistory = lazy(() =>
   wait(500).then(() => import("./pages/order_history"))
 );
@@ -34,6 +35,7 @@ function App() {
         <Route element={<Error />} path="*" />
       </Route>
 
+      <Route element={<Order />} path="/your-orders/order-details/:id" />
       <Route element={<Login />} path="/login" />
     </Routes>
   );
