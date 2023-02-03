@@ -67,12 +67,16 @@ article {
 
 .order_body_qr_code_container {
   margin-top: 2rem;
-
   width: 100%;
+
   img {
+    min-height: 232px;
+    min-width: 232px;
     @include positionCenter;
     border-radius: 1rem;
-    border: 10px solid #fff;
+    border: 1rem solid #fff;
+
+    box-shadow: 0 0 7.5px #e2e2e2;
   }
   p {
     margin-top: 1rem;

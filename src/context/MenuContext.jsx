@@ -10,6 +10,7 @@ function MenuProvider({ children }) {
 
   const [cart, setCart] = useState({});
 
+  
   function hideStallMenu() {
     document?.querySelectorAll("#stall-menu-list").forEach((e) => {
       const open = e.style.height != "0px";
@@ -22,9 +23,6 @@ function MenuProvider({ children }) {
   function handleCart(e, val, stall, item_id) {
     const bool = e.target.id === "increment-button";
     val = bool ? val + 1 : val - 1;
-
-    // console.log(cart[stall][item_id]);
-    //     const bool = Object.keys(cart[stall]["items_ordered"]).length === 0;
 
     if (val === 0) {
       delete cart[stall][item_id];
@@ -63,10 +61,6 @@ function MenuProvider({ children }) {
     return () => {
       unsubscribe();
     };
-  }, []);
-
-  useEffect(() => {
-    console.count("handleCart invoke");
   }, []);
 
   return (

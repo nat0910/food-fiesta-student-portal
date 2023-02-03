@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useAuth } from "./context/AuthContext";
@@ -24,7 +25,9 @@ const OrderHistory = lazy(() =>
 );
 
 function App() {
-  const { user } = useAuth();
+  useEffect(() => {
+    document.querySelector(".firebase-emulator-warning").style.display = "none";
+  }, []);
 
   return (
     <Routes>

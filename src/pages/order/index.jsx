@@ -1,20 +1,40 @@
 import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import { useState } from "react";
 import { useLayoutEffect } from "react";
 import { useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
+import { collection, doc, onSnapshot } from "firebase/firestore";
+
 import styles from "./Order.module.scss";
+import { getFirebase } from "../../utils/firebaseConfig";
 
 export default function OrderPage() {
   const navigate = useNavigate();
 
-  const { id } = useParams();
+  const [orderDetails, setOrderDetails] = useState({});
 
+  const { id } = useParams();
   const { state } = useLocation();
 
-  console.log(state);
+  useEffect(() => {
+    const { firestore } = getFirebase();
+    const MENU_COLLECTION_ID = "orders";
+    const MENU_DOC_ID = state.id;
+    const menuCol = collection(firestore, MENU_COLLECTION_ID);
+    const menuDoc = doc(menuCol, MENU_DOC_ID);
+
+    const unsubscribe = onSnapshot(menuDoc, (document) => {
+      console.log("Current data: ", document.data());
+      setOrderDetails(document.data());
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   useLayoutEffect(() => {
     function layoutSetter() {
@@ -36,8 +56,6 @@ export default function OrderPage() {
       window.removeEventListener("load", layoutSetter);
     };
   }, []);
-
-  console.log(document.body.scrollTop);
 
   return (
     <>
@@ -68,12 +86,12 @@ export default function OrderPage() {
               Payment Status :{" "}
               <span
                 className={
-                  state.payment_status === "paid"
+                  orderDetails.payment_status === "paid"
                     ? styles.payment_success_status
                     : styles.payment_failure_status
                 }
               >
-                {state.payment_status}
+                {orderDetails.payment_status}
               </span>
             </p>
           </div>

@@ -1,6 +1,6 @@
 import { Suspense, useLayoutEffect } from "react";
 import { Outlet } from "react-router-dom";
-import LoadingScreen from "../components/loading_screen";
+import LoadingScreenFrenchFries from "../components/loading_screen_french_fries";
 import LogoAndProfile from "../components/LogoAndProfile";
 
 import Navbar from "../components/navbar";
@@ -10,7 +10,7 @@ export default function SharedLayout() {
     <>
       <LogoAndProfile />
       <main id="main">
-        <Suspense fallback={<LoadingScreen />}>
+        <Suspense fallback={<LoadingScreenFrenchFries />}>
           <Outlet />
         </Suspense>
       </main>

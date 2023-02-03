@@ -22,7 +22,11 @@ export default function Cart() {
   };
 
   function submitOrder() {
-    newOrder(cart).then(console.log("successfully added new order"));
+    newOrder(cart).then(async (data) => {
+      const result = await data.data._path;
+      console.log(result);
+      console.log("successfully added new order");
+    });
   }
 
   return (

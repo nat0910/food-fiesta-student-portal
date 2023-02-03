@@ -1,67 +1,44 @@
 import React from "react";
-import { getFirebase, newOrder } from "../../utils/firebaseConfig";
+import { getFirebase } from "../../utils/firebaseConfig";
 import { useAuth } from "../../context/AuthContext";
 import {
   collection,
   query,
   where,
-  getDocs,
   orderBy,
-  Query,
+  onSnapshot,
 } from "firebase/firestore";
 import { useEffect } from "react";
 import { useState } from "react";
-import { useMenu } from "../../context/MenuContext";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useOrder } from "../../context/OrderContext";
 
 export default function OrderHistory() {
   const [orderHistory, setOrderHistory] = useState([]);
   const { user } = useAuth();
 
-  const { cart } = useMenu();
-
-  function submitOrder() {
-    newOrder(cart).then(console.log("successfully added new order"));
-  }
-
-  function getOrderDetails() {}
-
-  useEffect(() => {
-    const { firestore } = getFirebase();
-    const ordersColRef = collection(firestore, "orders");
-    // Create a query against the collection.
-    const q = query(
-      ordersColRef,
-      where("user_info.uid", "==", user?.uid),
-      orderBy("order_placed_timestamp", "desc")
-    );
-    getDocs(q).then((querySnapshot) => {
-      setOrderHistory(querySnapshot);
-    });
-
-    return () => {};
-  }, []);
+  const { orderHistoryData } = useOrder();
 
   return (
     <div>
       OrderHistory
       <ul>
-        {orderHistory.docs?.map((doc) => {
+        {orderHistoryData.map((doc, index) => {
           return (
             <li
-              key={doc.data().order_id}
+              key={doc.order_id}
               style={{
                 marginBottom: "2rem",
               }}
             >
-              <div>{doc.data().order_id}</div>
-              <div>{doc.data().order_placed_timestamp.seconds}</div>
+              <div>{doc.order_id}</div>
+              <div>{doc.order_placed_timestamp.seconds}</div>
               <div
                 style={{
                   marginBottom: "1rem",
                 }}
               >
-                {doc.data().user_info.name}
+                {doc.user_info.name}
               </div>
 
               <Link
@@ -70,16 +47,15 @@ export default function OrderHistory() {
                   backgroundColor: "red",
                   color: "white",
                 }}
-                to={`/your-orders/order-details/${doc.data().order_id}`}
-                state={doc.data()}
+                to={`/your-orders/order-details/${doc.order_id}`}
+                state={{ id: doc?.id }}
               >
-                Press To Reveal : {doc.data().order_id}
+                Press To Reveal : {doc.order_id}
               </Link>
             </li>
           );
         })}
       </ul>
-      <button onClick={() => submitOrder}>NEW ORDER</button>
     </div>
   );
 }
