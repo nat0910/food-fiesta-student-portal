@@ -15,7 +15,7 @@ export default function CartCard({
         return (
           <li key={index} className={styles.cart_item_details_container_}>
             <div className={styles.cart_item_details_container_header}>
-              <p>{menuList[item_id]["name"]}</p>
+              <p role={"heading"}>{menuList[item_id]["name"]}</p>
               <p>
                 {new Intl.NumberFormat("en-IN", {
                   currency: "INR",

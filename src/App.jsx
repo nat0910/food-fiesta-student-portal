@@ -25,10 +25,6 @@ const OrderHistory = lazy(() =>
 );
 
 function App() {
-  useEffect(() => {
-    document.querySelector(".firebase-emulator-warning").style.display = "none";
-  }, []);
-
   return (
     <Routes>
       <Route element={<SharedLayout />} path="/">

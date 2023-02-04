@@ -1,0 +1,56 @@
+.order_status_container {
+  padding-top: 0.6rem;
+  overflow: hidden;
+  p {
+    letter-spacing: 1px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+}
+
+.order_status_container_header {
+  h3 {
+    font-size: 0.9rem;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    font-weight: 600;
+    font-family: "Satoshi", sans-serif;
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+.order_status_container_header_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-flow: row nowrap;
+  margin-bottom: 0.5rem;
+}
+
+.order_status_container_body {
+  text-transform: capitalize;
+  font-family: "Satoshi", sans-serif;
+}
+
+.order_status_container_body {
+  span {
+    padding: 0.25rem 1rem;
+    letter-spacing: 1px;
+    font-weight: 500;
+    border-radius: 1rem;
+    font-size: 0.85rem;
+  }
+}
+
+.payment_success_status {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+}
+
+.payment_failure_status {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}

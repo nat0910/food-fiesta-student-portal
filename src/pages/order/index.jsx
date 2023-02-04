@@ -1,23 +1,62 @@
 import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
-import { useState } from "react";
-import { useLayoutEffect } from "react";
-import { useEffect } from "react";
+import { useState, useLayoutEffect, useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 import { collection, doc, onSnapshot } from "firebase/firestore";
+import { getFirebase } from "../../utils/firebaseConfig";
 
 import styles from "./Order.module.scss";
-import { getFirebase } from "../../utils/firebaseConfig";
+import OrderCardUnpaid from "../../components/order_page_component/order_page_card_unpaid";
+import OrderCardStatus from "../../components/order_page_component/order_page_card_status";
 
 export default function OrderPage() {
   const navigate = useNavigate();
 
-  const [orderDetails, setOrderDetails] = useState({});
+  const [orderDetails, setOrderDetails] = useState({
+    stall_order: {},
+  });
 
   const { id } = useParams();
   const { state } = useLocation();
+
+  function grand_total() {
+    let grand_total = 0;
+    for (const stall_key in orderDetails?.["stall_order"]) {
+      const stall_key_obj =
+        orderDetails["stall_order"][stall_key]["items_ordered"];
+      for (const item_key in stall_key_obj) {
+        if (Object.hasOwnProperty.call(stall_key_obj, item_key)) {
+          const element = stall_key_obj[item_key];
+          grand_total = grand_total + element["price"] * element["qty"];
+        }
+      }
+    }
+    return grand_total;
+  }
+  function getOrderDate(val) {
+    const date = new Date(val);
+    const year = date.getFullYear();
+    const month = date.toLocaleDateString("default", {
+      month: "long",
+    });
+    const day = date.getDate();
+    const time = date.toLocaleTimeString();
+
+    return `${month} ${day}, ${year} at ${time}`;
+    // console.log(returnString);
+  }
+
+  function censorEmail() {
+    function censorFunc(str) {
+      return str?.[0] + "*".repeat(str?.length - 2) + str?.slice(-1);
+    }
+    const splitdata = orderDetails?.user_info?.email?.split("@");
+    const name = splitdata?.[0];
+    const domain = splitdata?.[1];
+
+    return censorFunc(name) + "@" + domain;
+  }
 
   useEffect(() => {
     const { firestore } = getFirebase();
@@ -27,7 +66,7 @@ export default function OrderPage() {
     const menuDoc = doc(menuCol, MENU_DOC_ID);
 
     const unsubscribe = onSnapshot(menuDoc, (document) => {
-      console.log("Current data: ", document.data());
+      // console.log("Current data: ", document.data());
       setOrderDetails(document.data());
     });
 
@@ -77,7 +116,14 @@ export default function OrderPage() {
           </div>
         </div>
 
-        <article id="order-body" role={"main"}>
+        <article
+          id="order-body"
+          role={"main"}
+          style={{
+            paddingBottom: "5rem",
+          }}
+        >
+          {/* Payment Status */}
           <div
             role={"status"}
             className={styles.order_body_payment_status_container}
@@ -95,7 +141,6 @@ export default function OrderPage() {
               </span>
             </p>
           </div>
-
           <div
             id="Qr-code-container"
             title="Qr code"
@@ -108,10 +153,148 @@ export default function OrderPage() {
             />
             <p>{`Order id : ${id}`}</p>
           </div>
-
-          <div className={styles.order_body_directing_text_container}>
-            <h3>Proceed to the Payment Counter</h3>
-          </div>
+          {/* Qr Code */}
+          {orderDetails.payment_status !== "paid" && (
+            <div className={styles.order_body_directing_text_container}>
+              <h3>Proceed to the Payment Counter</h3>
+            </div>
+          )}
+          {/* Order Status  */}
+          {orderDetails.payment_status === "paid" && (
+            <section className={styles.order_body_order_summary_container}>
+              <h1>Order Status</h1>
+              <div className={styles.order_body_order_summary_list_container}>
+                <ul>
+                  {Object?.keys(orderDetails?.stall_order)
+                    ?.sort(orderDetails?.stall_order.sortStable)
+                    ?.map((stall_key, index) => {
+                      return (
+                        <OrderCardStatus
+                          index={index}
+                          key={stall_key}
+                          stall={stall_key}
+                          stallStatus={
+                            orderDetails?.stall_order[stall_key]["status"]
+                          }
+                          stallItems={
+                            orderDetails?.stall_order[stall_key][
+                              "items_ordered"
+                            ]
+                          }
+                        />
+                      );
+                    })}
+                </ul>
+              </div>
+            </section>
+          )}
+          {/* Order Summary */}
+          <section className={styles.order_body_order_summary_container}>
+            <h1>Order Summary</h1>
+            <div className={styles.order_body_order_summary_list_container}>
+              <ul>
+                {Object?.keys(orderDetails?.stall_order)
+                  ?.sort(orderDetails?.stall_order.sortStable)
+                  ?.map((stall_key, index) => {
+                    return (
+                      <OrderCardUnpaid
+                        index={index}
+                        key={stall_key}
+                        stall={stall_key}
+                        stallItems={
+                          orderDetails?.stall_order[stall_key]["items_ordered"]
+                        }
+                      />
+                    );
+                  })}
+                <li
+                  className={
+                    styles.order_body_order_summary_list_container_grand_total
+                  }
+                >
+                  <p role={"heading"}>Grand Total</p>
+                  <p>
+                    {new Intl.NumberFormat("en-IN", {
+                      currency: "INR",
+                      style: "currency",
+                    }).format(grand_total())}
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </section>
+          {/* Order Details */}
+          <section className={styles.order_body_order_details_container}>
+            <h1>Order Details</h1>
+            <div className={styles.order_body_order_details_list_container}>
+              <ul>
+                {/* Name */}
+                <li
+                  className={
+                    styles.order_body_order_details_list_container_data
+                  }
+                >
+                  <h3 role={"heading"}>Name</h3>
+                  <p
+                    style={{
+                      textTransform: "capitalize",
+                    }}
+                  >
+                    {orderDetails?.user_info?.name}
+                  </p>
+                </li>
+                {/* Email */}
+                <li
+                  className={
+                    styles.order_body_order_details_list_container_data
+                  }
+                >
+                  <h3 role={"heading"}>Email</h3>
+                  <p>{censorEmail()}</p>
+                </li>
+                {/* Order Id */}
+                <li
+                  className={
+                    styles.order_body_order_details_list_container_data
+                  }
+                >
+                  <h3 role={"heading"}>Order Id</h3>
+                  <p>{orderDetails?.order_id}</p>
+                </li>
+                {/* Order Date */}
+                <li
+                  className={
+                    styles.order_body_order_details_list_container_data
+                  }
+                >
+                  <h3 role={"heading"}>Order Date</h3>
+                  <p>
+                    {getOrderDate(
+                      orderDetails?.order_placed_timestamp?.toDate()
+                    )}
+                  </p>
+                </li>
+                {/* Order Total */}
+                <li
+                  className={
+                    styles.order_body_order_details_list_container_data
+                  }
+                >
+                  <h3 role={"heading"}>Order Total</h3>
+                  <p
+                    style={{
+                      letterSpacing: "1px",
+                    }}
+                  >
+                    {new Intl.NumberFormat("en-IN", {
+                      currency: "INR",
+                      style: "currency",
+                    }).format(grand_total())}
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </section>
         </article>
       </article>
     </>

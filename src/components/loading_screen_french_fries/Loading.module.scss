@@ -1,21 +1,3 @@
-@keyframes clockwise {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes anti-clockwise {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(-360deg);
-  }
-}
-
 .loading_grid_ {
   width: 100%;
   height: 100%;
@@ -26,31 +8,7 @@
   left: 0;
 }
 
-.loader_ {
-  width: 50px;
-  height: 50px;
-  border-radius: 100%;
-  display: inline-block;
-  position: relative;
-  border: 4px solid;
-  border-color: rgba(var(--accent-color), 1) rgba(var(--accent-color), 1)
-    transparent transparent;
-  scale: 1.5;
-  animation: anti-clockwise 1s linear infinite;
-
-  &::after,
-  &::before {
-    content: "";
-    display: block;
-    width: 40px;
-    height: 40px;
-    border: 4px solid;
-    border-radius: 100%;
-    position: absolute;
-    inset: 0;
-    margin: auto;
-    animation: clockwise 0.5s linear infinite;
-    border-color: transparent transparent #af5f5f #af5f5f;
-    scale: 0.9;
-  }
+.lottie {
+  height: 175px;
+  width: 175px;
 }

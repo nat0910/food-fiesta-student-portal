@@ -19,7 +19,7 @@ export default function LoadingScreenFrenchFries() {
 
   return (
     <div className={styles.loading_grid_}>
-      <div id="lottie"></div>
+      <div id="lottie" className={styles.lottie}></div>
     </div>
   );
 }

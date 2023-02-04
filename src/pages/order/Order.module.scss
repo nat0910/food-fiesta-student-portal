@@ -3,6 +3,7 @@
 article {
   height: 100%;
   width: 100%;
+  overflow-y: auto;
 }
 
 .order_header_container {
@@ -116,4 +117,76 @@ article {
   text-align: center;
   margin-top: 1rem;
   font-size: 1.25rem;
+}
+
+.order_body_order_summary_container,
+.order_body_order_details_container {
+  margin-top: 1rem;
+  background-color: white;
+  padding: 0.75rem 0.85rem;
+  border-radius: 0.5rem;
+  padding-right: 0.65rem;
+  h1 {
+    padding-bottom: 0.35rem;
+    border-bottom: 1px dashed rgb(196, 196, 196);
+  }
+
+  @include centerWithMargin(32px);
+  @media screen and (min-width: 480px) {
+    @include centerWithMargin(64px);
+  }
+  @media screen and (min-width: 1280px) {
+    @include centerWithMargin(200px);
+  }
+}
+.order_body_order_summary_list_container,
+.order_body_order_details_list_container {
+  margin-top: 0.35rem;
+  li {
+    list-style: none;
+  }
+}
+.order_body_order_summary_list_container_grand_total {
+  margin-top: 0.75rem;
+  border-top: 1px dashed rgb(196, 196, 196);
+  padding-top: 0.35rem;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+  letter-spacing: 1px;
+  font-size: 0.95rem;
+
+  p[role="heading"] {
+    font-weight: 500;
+  }
+  p {
+    font-weight: 600;
+  }
+}
+.order_body_order_details_list_container {
+  margin-top: 0.5rem;
+}
+
+.order_body_order_details_list_container_data {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  width: 100%;
+
+  h3 {
+    text-transform: capitalize;
+    font-size: 0.9rem;
+    width: 110px !important;
+    color: #9b9ca0;
+    font-family: "Satoshi", sans-serif;
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+  p {
+    width: 75%;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
 }

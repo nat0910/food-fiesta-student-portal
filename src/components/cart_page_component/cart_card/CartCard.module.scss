@@ -13,6 +13,14 @@
   text-transform: capitalize;
   font-size: 0.95rem;
 
+  p[role="heading"] {
+    max-width: 175px;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
   p {
     &:nth-of-type(even) {
       color: #717175;
