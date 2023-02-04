@@ -18,7 +18,6 @@ export default function OrderPage() {
   });
 
   const { id } = useParams();
-  const { state } = useLocation();
 
   function grand_total() {
     let grand_total = 0;
@@ -61,7 +60,7 @@ export default function OrderPage() {
   useEffect(() => {
     const { firestore } = getFirebase();
     const MENU_COLLECTION_ID = "orders";
-    const MENU_DOC_ID = state.id;
+    const MENU_DOC_ID = id;
     const menuCol = collection(firestore, MENU_COLLECTION_ID);
     const menuDoc = doc(menuCol, MENU_DOC_ID);
 
@@ -112,7 +111,7 @@ export default function OrderPage() {
           </div>
           <div className={styles.order_header_content}>
             <h3>your order</h3>
-            <p>{`Order id ${id}`}</p>
+            <p>{`Order id ${orderDetails?.order_id}`}</p>
           </div>
         </div>
 
@@ -141,6 +140,7 @@ export default function OrderPage() {
               </span>
             </p>
           </div>
+          {/* Qr Code */}
           <div
             id="Qr-code-container"
             title="Qr code"
@@ -151,9 +151,9 @@ export default function OrderPage() {
               src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${id}`}
               alt=""
             />
-            <p>{`Order id : ${id}`}</p>
+            <p>{`Order id : ${orderDetails?.order_id}`}</p>
           </div>
-          {/* Qr Code */}
+          {/* Procced to payement counter */}
           {orderDetails.payment_status !== "paid" && (
             <div className={styles.order_body_directing_text_container}>
               <h3>Proceed to the Payment Counter</h3>

@@ -47,7 +47,7 @@ export default function OrderHistory() {
                   backgroundColor: "red",
                   color: "white",
                 }}
-                to={`/your-orders/order-details/${doc.order_id}`}
+                to={`/your-orders/order-details/${doc?.id}`}
                 state={{ id: doc?.id }}
               >
                 Press To Reveal : {doc.order_id}
