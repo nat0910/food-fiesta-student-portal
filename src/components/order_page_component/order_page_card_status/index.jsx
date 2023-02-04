@@ -19,9 +19,13 @@ export default function OrderCardStatus({
         <div className={styles.order_status_container_body}>
           <span
             className={
-              stallStatus === "paid"
-                ? styles.payment_success_status
-                : styles.payment_failure_status
+              stallStatus === "unpaid" || stallStatus === "refund"
+                ? styles.payment_failure_status
+                : stallStatus === "served"
+                ? styles.payment_completed_status
+                : stallStatus === "in progress"
+                ? styles.payment_inprogress_status
+                : styles.payment_success_status
             }
           >
             {stallStatus}

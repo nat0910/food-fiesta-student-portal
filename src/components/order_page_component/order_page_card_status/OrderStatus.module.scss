@@ -35,11 +35,13 @@
 
 .order_status_container_body {
   span {
+    width: 82.5px;
     padding: 0.25rem 1rem;
     letter-spacing: 1px;
     font-weight: 500;
     border-radius: 1rem;
     font-size: 0.85rem;
+    text-align: center;
   }
 }
 
@@ -49,8 +51,20 @@
   border-color: #c3e6cb;
 }
 
+.payment_inprogress_status {
+  color: #856404;
+  background-color: #fff3cd;
+  border-color: #ffeeba;
+}
+
 .payment_failure_status {
   color: #721c24;
   background-color: #f8d7da;
   border-color: #f5c6cb;
+}
+
+.payment_completed_status {
+  color: #004085;
+  background-color: #cce5ff;
+  border-color: #b8daff;
 }
