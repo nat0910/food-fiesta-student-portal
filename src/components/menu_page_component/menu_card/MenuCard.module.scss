@@ -93,6 +93,7 @@
   border-bottom: 1px dashed rgb(196, 196, 196);
   padding-block: 0.9rem 1rem;
   @include flexRowCenter;
+  gap: 1.2rem;
 
   @include centerWithMargin(32px);
   @media screen and (min-width: 480px) {

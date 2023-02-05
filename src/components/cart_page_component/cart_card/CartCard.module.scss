@@ -6,6 +6,10 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 1rem;
+  gap: 1.2rem;
+  @media screen and (max-width: 300px){
+    gap:10px
+  }
 }
 
 .cart_item_details_container_header {
@@ -19,6 +23,14 @@
     overflow: hidden;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+
+    @media screen and (max-width: 320px) {
+      max-width: 110px;
+      -webkit-line-clamp: 3;
+    }
+    @media screen and (max-width: 300px){
+      max-width: 105px;
+    }
   }
 
   p {

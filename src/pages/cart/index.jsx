@@ -30,6 +30,7 @@ export default function Cart() {
   function submitOrder() {
     newOrder(cart).then(async (data) => {
       const { segments } = await data.data._path;
+      setCart({});
       navigate(`/your-orders/order-details/${segments?.[1]}`);
     });
   }

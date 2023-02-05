@@ -1,0 +1,206 @@
+@import "../../../utils/sass/mixin";
+
+.order_history_cart_ {
+  background-color: white;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  height: fit-content;
+  padding-block: 1rem;
+  position: relative;
+
+  box-shadow: 0 0 10px rgba(233, 233, 233, 0.5);
+}
+
+.order_history_cart_container_header {
+  @include flexRowCenter;
+  align-items: self-start;
+  padding-bottom: 0.5rem;
+
+  @include centerWithMargin(32px);
+  @media screen and (min-width: 480px) {
+    @include centerWithMargin(64px);
+  }
+  @media screen and (min-width: 1280px) {
+    @include centerWithMargin(200px);
+  }
+}
+
+.order_history_cart_container_header_content {
+  h2 {
+    font-size: 0.99rem;
+    margin-bottom: 0.25rem;
+    color: #313131;
+    span {
+      color: #5f5f5f;
+    }
+  }
+  p {
+    color: #838383;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+}
+
+.order_history_cart_container_footer_view_details {
+  position: relative;
+
+  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
+  background-color: rgba(var(--accent-color), 1);
+  width: fit-content;
+  color: white;
+  border-radius: 0.5rem;
+  font-family: "Satoshi", sans-serif;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+
+.order_history_cart_container_header_content_status {
+  font-family: "Satoshi", sans-serif;
+  text-transform: capitalize;
+  span {
+    display: block;
+    padding: 0.35rem 1rem;
+    letter-spacing: 1px;
+    font-weight: 500;
+    border-radius: 1rem;
+    font-size: 0.85rem;
+    text-align: center;
+  }
+}
+
+.payment_failure_status {
+  color: #721c24;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+}
+
+.payment_inprogress_status {
+  color: #856404;
+  background-color: #fff3cd;
+  border: 1px solid #f9df8e;
+}
+
+.payment_completed_status {
+  color: #004085;
+  background-color: #cce5ff;
+  border: 1px solid #b8daff;
+}
+
+.order_history_cart_containe_footer {
+  margin-top: 1rem;
+  @include flexRowCenter;
+  @include centerWithMargin(32px);
+  @media screen and (min-width: 480px) {
+    @include centerWithMargin(64px);
+  }
+  @media screen and (min-width: 1280px) {
+    @include centerWithMargin(200px);
+  }
+}
+
+.order_history_cart_containe_footer_content {
+  letter-spacing: 1px;
+  p {
+    text-transform: uppercase;
+    font-weight: 500;
+    color: #9ca0a2;
+    font-size: 0.85rem;
+  }
+}
+
+.order_history_cart_containe_body {
+  background-color: #f3f4f9;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.35rem;
+  margin-top: 0.5rem;
+
+  @include centerWithMargin(32px);
+  @media screen and (min-width: 480px) {
+    @include centerWithMargin(64px);
+  }
+  @media screen and (min-width: 1280px) {
+    @include centerWithMargin(200px);
+  }
+  li {
+    list-style: none;
+    padding-block: 0 0.5rem;
+  }
+}
+
+.order_history_cart_containe_body_header {
+  letter-spacing: 1px;
+  margin-top: 0.2rem;
+
+  p[role="heading"] {
+    width: 175px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    word-break: normal;
+    color: #3d3e3f;
+
+    @media screen and (max-width: 350px) {
+      max-width: 115px;
+    }
+  }
+  p {
+    font-size: 0.75rem;
+    color: #9fa0a3;
+    font-weight: 400;
+    margin-top: 0.1rem;
+  }
+}
+.order_history_cart_containe_body_stall_key {
+  border-bottom: 1px dashed rgb(196, 196, 196);
+  padding-bottom: 0.25rem;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  color: #7d7d7d;
+}
+
+.order_history_cart_containe_body_container {
+  @include flexRowCenter;
+  gap: 10px;
+}
+
+.order_history_cart_containe_body_items_number {
+  color: #b0b0b8;
+  font-family: "Cabinet-Grotesk", sans-serif;
+  font-weight: 600;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-inline: auto;
+
+  p {
+    background-color: #f5f6fb;
+    width: fit-content;
+    text-align: center;
+    z-index: 1;
+    padding-inline: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.8rem;
+  }
+
+  &::after {
+    content: "";
+    width: 100%;
+    background-color: #d1d1d7;
+    height: 1px;
+    display: block;
+    position: absolute;
+    z-index: 0 !important;
+  }
+}

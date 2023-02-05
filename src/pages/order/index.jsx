@@ -42,7 +42,7 @@ export default function OrderPage() {
     const day = date.getDate();
     const time = date.toLocaleTimeString();
 
-    return `${month} ${day}, ${year} at ${time}`;
+    return `${month} ${day}, ${year} @ ${time}`;
     // console.log(returnString);
   }
 
@@ -66,6 +66,9 @@ export default function OrderPage() {
 
     const unsubscribe = onSnapshot(menuDoc, (document) => {
       // console.log("Current data: ", document.data());
+      if (!document.exists()) {
+        navigate("/error");
+      }
       setOrderDetails(document.data());
     });
 
@@ -131,7 +134,7 @@ export default function OrderPage() {
               Payment Status :{" "}
               <span
                 className={
-                  orderDetails.payment_status === "paid"
+                  orderDetails?.payment_status === "paid"
                     ? styles.payment_success_status
                     : styles.payment_failure_status
                 }
@@ -154,11 +157,12 @@ export default function OrderPage() {
             <p>{`Order id : ${orderDetails?.order_id}`}</p>
           </div>
           {/* Procced to payement counter */}
-          {orderDetails.payment_status !== "paid" && (
+          {orderDetails.payment_status === "unpaid" && (
             <div className={styles.order_body_directing_text_container}>
               <h3>Proceed to the Payment Counter</h3>
             </div>
           )}
+
           {/* Order Status  */}
           {orderDetails.payment_status === "paid" && (
             <section className={styles.order_body_order_summary_container}>
