@@ -1,13 +1,15 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import CartCard from "../../components/cart_page_component/cart_card";
 import CartEmptyScreen from "../../components/cart_page_component/cart_empty_screen";
+import CartModalScreen from "../../components/cart_page_component/cart_modal_screen";
 import { useMenu } from "../../context/MenuContext";
 import { newOrder } from "../../utils/firebaseConfig";
 import styles from "./Cart.module.scss";
 
 export default function Cart() {
-  const { cart, setCart, menuList, handleCart } = useMenu();
-
+  const { cart, setCart, menuList, handleCart, modalOpen, setModalOpen } =
+    useMenu();
 
   const navigate = useNavigate();
 
@@ -23,16 +25,60 @@ export default function Cart() {
   };
 
   function submitOrder() {
-    newOrder(cart).then(async (data) => {
-      const { segments } = await data.data._path;
-      setCart({});
-      navigate(`/your-orders/order-details/${segments?.[1]}`);
-    });
+    let text =
+      "Order once placed cannot be edited . Are you sure don't change in any item in your cart ";
+
+    let bool = confirm(text);
+
+    if (bool) {
+      newOrder(cart).then(async (data) => {
+        const { segments } = await data.data._path;
+        setCart({});
+        navigate(`/your-orders/order-details/${segments?.[1]}`);
+      });
+    }
   }
+
+  useEffect(() => {
+    function removeUnavail() {
+      for (const stall_key in cart) {
+        const element = cart[stall_key];
+        const menuItem = menuList[stall_key];
+        for (const item_key in element) {
+          const result = menuItem?.[item_key]?.availability;
+
+          if (!result) {
+            setModalOpen({
+              open: !result,
+              msg: "A item was removed from your cart, since it went out of stock!",
+            });
+
+            delete cart[stall_key][item_key];
+            setCart({
+              ...cart,
+              [stall_key]: {
+                ...cart[stall_key],
+              },
+            });
+
+            const boolDel = Object.keys(cart[stall_key]).length === 0;
+            if (boolDel) {
+              delete cart[stall_key];
+              setCart({ ...cart });
+            }
+          }
+        }
+      }
+    }
+    removeUnavail();
+    return () => {};
+  }, [menuList]);
 
   return (
     <>
-      {Object.keys(cart).length === 0 ? (
+      {modalOpen.open ? (
+        <CartModalScreen msg={modalOpen.msg} setModalOpen={setModalOpen} />
+      ) : Object.keys(cart).length === 0 ? (
         <CartEmptyScreen />
       ) : (
         <>

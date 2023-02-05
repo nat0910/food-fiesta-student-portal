@@ -1,0 +1,58 @@
+@import "../../../utils/sass/mixin";
+
+.cart_modal_grid_ {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  @media screen and (max-width: 765px) {
+    @include centerWithMargin(64px);
+  }
+  @media screen and (max-width: 350px) {
+    @include centerWithMargin(32px);
+  }
+}
+
+.cart_modal_container {
+  background-color: #fff;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  text-align: justify;
+  font-size: 0.95rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 15px #dbdbdb93;
+
+  p {
+    margin-top: 0.5rem;
+    color: #4e4e50;
+    font-weight: 500;
+  }
+}
+
+.cart_modal_container_button_group {
+  @include flexRowCenter;
+  margin-top: 1rem;
+  gap: 10px;
+  button {
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    text-transform: capitalize;
+  }
+}
+
+.cart_modal_container_button_group_add_another {
+  background-color: transparent;
+  color: rgba(var(--accent-color), 1);
+  font-weight: 600;
+  padding: 0rem;
+  font-size: 0.85rem;
+}
+
+.cart_modal_container_button_group_continue_ {
+  //   border: none;
+  background-color: rgba(var(--accent-color), 1);
+  color: white;
+  font-size: 0.85rem;
+}

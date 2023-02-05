@@ -8,9 +8,13 @@ const MenuContext = createContext();
 function MenuProvider({ children }) {
   const [menuList, setMenuList] = useState({});
 
+  const [modalOpen, setModalOpen] = useState({
+    open: false,
+    msg: "",
+  });
+
   const [cart, setCart] = useState({});
 
-  
   function hideStallMenu() {
     document?.querySelectorAll("#stall-menu-list").forEach((e) => {
       const open = e.style.height != "0px";
@@ -54,7 +58,6 @@ function MenuProvider({ children }) {
     const menuDoc = doc(menuCol, MENU_DOC_ID);
 
     const unsubscribe = onSnapshot(menuDoc, (document) => {
-      // console.log("Current data: ", document.data());
       setMenuList(document.data());
     });
 
@@ -65,7 +68,15 @@ function MenuProvider({ children }) {
 
   return (
     <MenuContext.Provider
-      value={{ menuList, cart, setCart, hideStallMenu, handleCart }}
+      value={{
+        menuList,
+        cart,
+        setCart,
+        hideStallMenu,
+        handleCart,
+        modalOpen,
+        setModalOpen,
+      }}
     >
       {children}
     </MenuContext.Provider>

@@ -65,3 +65,22 @@ nav {
     font-size: 0.85rem;
   }
 }
+
+#cart_icon_ {
+  position: relative;
+  &::after {
+    content: attr(data-cart_total);
+    width: 25px;
+    height: 25px;
+    background-color: red;
+    border-radius: 50%;
+    color: white;
+    position: absolute;
+    top: -5px;
+    // left: 50%;
+    font-family: "Satoshi", sans-serif;
+    font-size: 0.75rem;
+    text-align: center;
+    padding: 0.45rem 0.25rem;
+  }
+}

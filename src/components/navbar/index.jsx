@@ -2,8 +2,24 @@ import { NavLink } from "react-router-dom";
 import styles from "./NavbarMobile.module.scss";
 
 import NavData from "../../utils/data/NavbarData.json";
+import { useMenu } from "../../context/MenuContext";
 
 export default function Navbar() {
+  const { cart } = useMenu();
+
+  let total = function () {
+    let i = 0;
+    Object.keys(cart).forEach((stall_key) => {
+      const key = cart[stall_key];
+      Object.keys(key).forEach((item_id) => {
+        i = i + key[item_id];
+      });
+    });
+    return i;
+  };
+
+  console.log(total() === 0);
+
   return (
     <nav id="primary-navigation">
       <ul className={styles.nav_container_}>
@@ -20,7 +36,17 @@ export default function Navbar() {
                   return isActive ? styles.nav_link_wrapper_active_ : "";
                 }}
               >
-                <i className={item.icon}></i>
+                <i
+                  id={
+                    item.label === "cart"
+                      ? total() === 0
+                        ? ""
+                        : styles.cart_icon_
+                      : ""
+                  }
+                  className={item.icon}
+                  data-cart_total={item.label === "cart" ? total() : null}
+                />
                 <span>{item.label}</span>
               </NavLink>
             </li>

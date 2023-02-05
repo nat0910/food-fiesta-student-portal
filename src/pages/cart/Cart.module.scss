@@ -156,3 +156,20 @@
     margin-left: 5px;
   }
 }
+
+.loader {
+  height: 1.5625rem;
+  width: 1.5625rem;
+  border-radius: 50%;
+  border: 0.19rem solid #ffffff;
+  border-top: 0.19rem solid #1f5b83;
+  animation: spin 1.25s linear infinite;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

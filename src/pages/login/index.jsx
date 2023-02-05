@@ -11,7 +11,7 @@ export default function Login() {
     <div className={styles.login_grid_}>
       <div className={styles.login_container_}>
         <h1 className={styles.login_heading_wrapper_}>
-          Welcome to <span>Food&nbsp;Fiesta&nbsp;2023!</span>
+          Welcome to <span>Zaika!</span>
         </h1>
         <GoogleButton
           onClick={() => handleGoogleLogin()}
