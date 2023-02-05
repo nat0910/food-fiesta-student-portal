@@ -18,7 +18,6 @@ export default function Navbar() {
     return i;
   };
 
-  console.log(total() === 0);
 
   return (
     <nav id="primary-navigation">

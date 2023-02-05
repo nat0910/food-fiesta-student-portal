@@ -10,8 +10,12 @@ import styles from "./Order.module.scss";
 import OrderCardUnpaid from "../../components/order_page_component/order_page_card_unpaid";
 import OrderCardStatus from "../../components/order_page_component/order_page_card_status";
 
+import QRCode from 'qrcode';
+
 export default function OrderPage() {
   const navigate = useNavigate();
+
+
 
   const [orderDetails, setOrderDetails] = useState({
     stall_order: {},
@@ -76,6 +80,28 @@ export default function OrderPage() {
       unsubscribe();
     };
   }, []);
+  const [imageUrl, setImageUrl] = useState('');
+
+
+  useEffect(() => {
+
+    const generateQrCode = async () => {
+
+      if (!orderDetails.order_id) {
+        return
+      } else {
+        try {
+          const response = await QRCode.toDataURL(orderDetails?.order_id.toString(), { width: 232, margin: 0 });
+          setImageUrl(response);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    }
+
+    generateQrCode()
+
+  }, [orderDetails])
 
   useLayoutEffect(() => {
     function layoutSetter() {
@@ -151,7 +177,7 @@ export default function OrderPage() {
             className={styles.order_body_qr_code_container}
           >
             <img
-              src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${orderDetails?.order_id}`}
+              src={imageUrl}
               alt=""
             />
             <p>{`Order id : ${orderDetails?.order_id}`}</p>
@@ -182,7 +208,7 @@ export default function OrderPage() {
                           }
                           stallItems={
                             orderDetails?.stall_order[stall_key][
-                              "items_ordered"
+                            "items_ordered"
                             ]
                           }
                         />
