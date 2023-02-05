@@ -1,4 +1,3 @@
-import { useState } from "react";
 import MenuCard from "../../components/menu_page_component/menu_card";
 import MenuShortcut from "../../components/menu_page_component/menu_shortcut";
 

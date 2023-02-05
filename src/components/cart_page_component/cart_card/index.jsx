@@ -5,8 +5,6 @@ export default function CartCard({
   index,
   stall,
   menuList,
-  cart,
-  setCart,
   handleCart,
 }) {
   return (

@@ -1,18 +1,13 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CartCard from "../../components/cart_page_component/cart_card";
 import CartEmptyScreen from "../../components/cart_page_component/cart_empty_screen";
 import { useMenu } from "../../context/MenuContext";
-import { useOrder } from "../../context/OrderContext";
 import { newOrder } from "../../utils/firebaseConfig";
 import styles from "./Cart.module.scss";
 
 export default function Cart() {
   const { cart, setCart, menuList, handleCart } = useMenu();
 
-  const [loader, setLoader] = useState(false);
-
-  const { orderHistoryData } = useOrder();
 
   const navigate = useNavigate();
 
