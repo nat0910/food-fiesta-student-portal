@@ -23,7 +23,7 @@ export default function OrderCardStatus({
                 ? styles.payment_failure_status
                 : stallStatus === "served"
                 ? styles.payment_completed_status
-                : stallStatus === "in progress"
+                : stallStatus === "inprogress"
                 ? styles.payment_inprogress_status
                 : styles.payment_success_status
             }
