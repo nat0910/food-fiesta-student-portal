@@ -110,8 +110,6 @@
 }
 
 .order_history_cart_containe_body {
-  background-color: #f3f4f9;
-  padding: 0.5rem 0.75rem;
   border-radius: 0.35rem;
   margin-top: 0.5rem;
 
@@ -184,14 +182,14 @@
   margin-inline: auto;
 
   p {
-    background-color: #f5f6fb;
+    background-color: #ffffff;
     width: fit-content;
     text-align: center;
     z-index: 1;
     padding-inline: 0.5rem;
     text-transform: uppercase;
     letter-spacing: 2px;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
   }
 
   &::after {
