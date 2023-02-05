@@ -151,7 +151,7 @@ export default function OrderPage() {
             className={styles.order_body_qr_code_container}
           >
             <img
-              src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${id}`}
+              src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${orderDetails?.order_id}`}
               alt=""
             />
             <p>{`Order id : ${orderDetails?.order_id}`}</p>
