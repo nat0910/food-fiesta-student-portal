@@ -162,7 +162,7 @@
   width: 1.5625rem;
   border-radius: 50%;
   border: 0.19rem solid #ffffff;
-  border-top: 0.19rem solid #1f5b83;
+  border-top: 0.19rem solid rgba(var(--accent-color), 1);
   animation: spin 1.25s linear infinite;
 }
 @keyframes spin {

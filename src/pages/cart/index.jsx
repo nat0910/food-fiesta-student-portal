@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CartCard from "../../components/cart_page_component/cart_card";
 import CartEmptyScreen from "../../components/cart_page_component/cart_empty_screen";
@@ -12,6 +12,8 @@ export default function Cart() {
     useMenu();
 
   const navigate = useNavigate();
+
+  const [loader, setLoader] = useState(false);
 
   let total = function () {
     let i = 0;
@@ -34,6 +36,7 @@ export default function Cart() {
       newOrder(cart).then(async (data) => {
         const { segments } = await data.data._path;
         setCart({});
+        setLoader(false);
         navigate(`/your-orders/order-details/${segments?.[1]}`);
       });
     }
@@ -145,6 +148,7 @@ export default function Cart() {
             className={styles.cart_items_list_container}
             style={{
               paddingBlock: ".75rem",
+              fontSize: ".85rem",
             }}
           >
             <p>
@@ -175,10 +179,19 @@ export default function Cart() {
               </div>
               <button
                 className={styles.cart_item_payment_container_button}
-                onClick={() => submitOrder()}
+                onClick={() => {
+                  submitOrder();
+                  setLoader(true);
+                }}
               >
-                place order
-                <span>&#9654;</span>
+                {loader ? (
+                  <div className={styles.loader}></div>
+                ) : (
+                  <>
+                    place order
+                    <span>&#9654;</span>
+                  </>
+                )}
               </button>
             </div>
           </div>
