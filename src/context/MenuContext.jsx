@@ -2,10 +2,13 @@ import { collection, doc, onSnapshot } from "firebase/firestore";
 
 import { useState, createContext, useEffect, useContext } from "react";
 import { getFirebase } from "../utils/firebaseConfig";
+import { useAuth } from "./AuthContext";
 
 const MenuContext = createContext();
 
 function MenuProvider({ children }) {
+
+  const { user, handleSignOut } = useAuth();
   const [menuList, setMenuList] = useState({});
 
   const [modalOpen, setModalOpen] = useState({
@@ -51,6 +54,11 @@ function MenuProvider({ children }) {
   }
 
   useEffect(() => {
+    if (!user) {
+      return () => {
+        console.log("no user , menu context");
+      }
+    }
     const { firestore } = getFirebase();
     const MENU_DOC_ID = "menu_items";
     const MENU_COLLECTION_ID = "menu";
@@ -64,7 +72,7 @@ function MenuProvider({ children }) {
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [user]);
 
   return (
     <MenuContext.Provider

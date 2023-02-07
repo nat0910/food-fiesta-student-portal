@@ -59,13 +59,14 @@ function AuthProvider({ children }) {
     const { auth } = getFirebase();
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (!user) {
+        console.log(user);
         console.log("Please Sign In again!!");
         navigate("/login");
       }
 
-      if (location.pathname.toLowerCase() === "/login") {
-        navigate("/");
-      }
+      // if (location.pathname.toLowerCase() === "/login") {
+      //   navigate("/");
+      // }
       setUser(user);
     });
     return () => unsubscribe();
