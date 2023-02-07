@@ -47,6 +47,7 @@ export default function MenuCard({
   return (
     <section id={index} className={styles.menu_card_container_} title={stall}>
       <div
+        id={`${index}-header`}
         className={styles.menu_card_container_header_}
         onClick={() => showhideList()}
       >

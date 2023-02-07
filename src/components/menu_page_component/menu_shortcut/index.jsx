@@ -4,7 +4,7 @@ import styles from "./MenuShortcut.module.scss";
 export default function MenuShortcut({ data, hideStallMenu }) {
   const [shortcutShow, setShortcutShow] = useState(false);
 
-  function handleMenuShortcut(e) {
+  function handleMenuShortcut(e, val) {
     if (
       document
         .getElementById("root")
@@ -22,7 +22,14 @@ export default function MenuShortcut({ data, hideStallMenu }) {
       .getBoundingClientRect().height;
     document.getElementById(e).childNodes[1].style.height = `${listheight}px`;
 
-    document.getElementById(e).scrollIntoView(true);
+    if (val > 5) {
+      document.getElementById(`${e}-header`).scrollIntoView(false);
+      setShortcutShow(!shortcutShow);
+
+      return 0;
+    }
+
+    document.getElementById(`${e}-header`).scrollIntoView(true);
 
     setShortcutShow(!shortcutShow);
   }
@@ -90,7 +97,7 @@ export default function MenuShortcut({ data, hideStallMenu }) {
                     role={"menuitem"}
                     key={index}
                     className={styles.menushortcut_menu_item_list_item_wrapper_}
-                    onClick={() => handleMenuShortcut(item)}
+                    onClick={() => handleMenuShortcut(item, totalItems())}
                     id={`${item}-shortcut`}
                   >
                     <p>{item}</p>

@@ -1,10 +1,15 @@
 import { useOrder } from "../../context/OrderContext";
 import OrderHistoryCard from "../../components/order_history_page_component/order_history_card";
+import OrderEmptyScreen from "../../components/order_history_page_component/order_history_empty_screen";
 
 export default function OrderHistory() {
   const { orderHistoryData } = useOrder();
 
-  return (
+  console.log(orderHistoryData.length);
+
+  return orderHistoryData.length === 0 ? (
+    <OrderEmptyScreen />
+  ) : (
     <div
       style={{
         marginTop: ".75rem",
