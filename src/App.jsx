@@ -1,7 +1,5 @@
-import { useEffect } from "react";
 import { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
-import { useAuth } from "./context/AuthContext";
 
 // import pages
 

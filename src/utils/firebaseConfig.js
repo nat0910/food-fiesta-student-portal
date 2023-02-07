@@ -3,16 +3,7 @@
 import { initializeApp, getApps } from "firebase/app";
 import {
   getFirestore,
-  connectFirestoreEmulator,
-  collection,
-  query,
-  orderBy,
-  onSnapshot,
-  doc,
-  addDoc,
-  serverTimestamp,
-  setDoc
-} from "firebase/firestore";
+  connectFirestoreEmulator} from "firebase/firestore";
 
 import {
   connectFunctionsEmulator,
@@ -22,13 +13,7 @@ import {
 
 import {
   getAuth,
-  updateProfile,
-  connectAuthEmulator,
-  signInWithPhoneNumber,
-  onAuthStateChanged,
-  reauthenticateWithRedirect,
-  RecaptchaVerifier
-} from "firebase/auth";
+  connectAuthEmulator} from "firebase/auth";
 
 
 

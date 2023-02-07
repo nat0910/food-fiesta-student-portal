@@ -5,7 +5,7 @@ import { useAuth } from "../../context/AuthContext";
 import styles from "./Login.module.scss";
 
 export default function Login() {
-  const { handleGoogleLogin, user } = useAuth();
+  const { handleGoogleLogin } = useAuth();
 
   return (
     <div className={styles.login_grid_}>
