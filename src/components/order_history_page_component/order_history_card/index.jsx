@@ -88,8 +88,7 @@ export default function OrderHistoryCard({ data }) {
               styles.order_history_cart_container_header_content_status
             }
           >
-            {data?.payment_status === "unpaid" ||
-            data?.payment_status === "cancelled" ? (
+            {data?.payment_status === "unpaid" ? (
               <span
                 className={
                   (data?.payment_status === "unpaid" ||
@@ -97,7 +96,9 @@ export default function OrderHistoryCard({ data }) {
                   styles.payment_failure_status
                 }
               >
-                {data?.payment_status}
+                {data?.payment_status === "cancelled"
+                  ? "Partial Cancelled"
+                  : data?.payment_status}
               </span>
             ) : servedStatus() ? (
               <span className={styles.payment_completed_status}>Served</span>
@@ -205,22 +206,4 @@ export default function OrderHistoryCard({ data }) {
       </div>
     </section>
   );
-}
-
-{
-  /* <div>{data.order_id}</div>
-<div>{data.order_placed_timestamp.seconds}</div>
-<div>{data.user_info.name}</div>
-
-<Link
-  style={{
-    padding: "1rem",
-    backgroundColor: "red",
-    color: "white",
-  }}
-  to={`/your-orders/order-details/${data?.id}`}
-  state={{ id: data?.id }}
->
-  Press To Reveal : {data.order_id}
-</Link> */
 }

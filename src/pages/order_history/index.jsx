@@ -5,8 +5,6 @@ import OrderEmptyScreen from "../../components/order_history_page_component/orde
 export default function OrderHistory() {
   const { orderHistoryData } = useOrder();
 
-  console.log(orderHistoryData.length);
-
   return orderHistoryData.length === 0 ? (
     <OrderEmptyScreen />
   ) : (

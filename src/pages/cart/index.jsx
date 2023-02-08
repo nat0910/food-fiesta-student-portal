@@ -112,7 +112,7 @@ export default function Cart() {
             role={"heading"}
             className={styles.cart_items_added_underline}
             style={{
-              marginTop: "2rem",
+              marginTop: "1.5rem",
             }}
           >
             <p>Bill summary</p>
@@ -138,7 +138,7 @@ export default function Cart() {
             role={"heading"}
             className={styles.cart_items_added_underline}
             style={{
-              marginTop: "2rem",
+              marginTop: "1.5rem",
             }}
           >
             <p>Cancellation policy</p>
@@ -151,9 +151,17 @@ export default function Cart() {
               fontSize: ".85rem",
             }}
           >
-            <p>
-              Please verify your order before placing it once order place it
-              cannot be edited.
+            <p
+              style={{
+                textAlign: "justify",
+              }}
+            >
+              Cancellation will only be applicable at the discretion of the
+              E-Cell Team. Following which, a refund will be initiated at the
+              Refund Counter. The value for said refund will be calculated
+              against the item(s) ordered from the one/more stalls. The user can
+              neither initiate an order cancellation nor request a refund once
+              the order has been paid for.
             </p>
           </div>
 

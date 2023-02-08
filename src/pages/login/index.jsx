@@ -13,6 +13,14 @@ export default function Login() {
         <h1 className={styles.login_heading_wrapper_}>
           Welcome to <span>Zaika!</span>
         </h1>
+        <p
+          style={{
+            textAlign: "center",
+          }}
+        >
+          Food ordering app for Food Fiesta 2023. No more waiting in line to
+          order your food.
+        </p>
         <GoogleButton
           onClick={() => handleGoogleLogin()}
           className={styles.login_google_button_}
