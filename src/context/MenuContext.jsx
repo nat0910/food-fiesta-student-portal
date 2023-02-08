@@ -7,7 +7,6 @@ import { useAuth } from "./AuthContext";
 const MenuContext = createContext();
 
 function MenuProvider({ children }) {
-
   const { user, handleSignOut } = useAuth();
   const [menuList, setMenuList] = useState({});
 
@@ -54,11 +53,6 @@ function MenuProvider({ children }) {
   }
 
   useEffect(() => {
-    if (!user) {
-      return () => {
-        console.log("no user , menu context");
-      }
-    }
     const { firestore } = getFirebase();
     const MENU_DOC_ID = "menu_items";
     const MENU_COLLECTION_ID = "menu";

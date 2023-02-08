@@ -10,12 +10,10 @@ import styles from "./Order.module.scss";
 import OrderCardUnpaid from "../../components/order_page_component/order_page_card_unpaid";
 import OrderCardStatus from "../../components/order_page_component/order_page_card_status";
 
-import QRCode from 'qrcode';
+import QRCode from "qrcode";
 
 export default function OrderPage() {
   const navigate = useNavigate();
-
-
 
   const [orderDetails, setOrderDetails] = useState({
     stall_order: {},
@@ -80,28 +78,27 @@ export default function OrderPage() {
       unsubscribe();
     };
   }, []);
-  const [imageUrl, setImageUrl] = useState('');
-
+  const [imageUrl, setImageUrl] = useState("");
 
   useEffect(() => {
-
     const generateQrCode = async () => {
-
       if (!orderDetails.order_id) {
-        return
+        return;
       } else {
         try {
-          const response = await QRCode.toDataURL(orderDetails?.order_id.toString(), { width: 232, margin: 0 });
+          const response = await QRCode.toDataURL(
+            orderDetails?.order_id?.toString(),
+            { width: 232, margin: 0 }
+          );
           setImageUrl(response);
         } catch (error) {
           console.log(error);
         }
       }
-    }
+    };
 
-    generateQrCode()
-
-  }, [orderDetails])
+    generateQrCode();
+  }, [orderDetails]);
 
   useLayoutEffect(() => {
     function layoutSetter() {
@@ -176,10 +173,7 @@ export default function OrderPage() {
             role={""}
             className={styles.order_body_qr_code_container}
           >
-            <img
-              src={imageUrl}
-              alt=""
-            />
+            <img src={imageUrl} alt="" />
             <p>{`Order id : ${orderDetails?.order_id}`}</p>
           </div>
           {/* Procced to payement counter */}
@@ -208,7 +202,7 @@ export default function OrderPage() {
                           }
                           stallItems={
                             orderDetails?.stall_order[stall_key][
-                            "items_ordered"
+                              "items_ordered"
                             ]
                           }
                         />
@@ -232,7 +226,9 @@ export default function OrderPage() {
                         key={stall_key}
                         stall={stall_key}
                         stallItems={
-                          orderDetails?.stall_order[stall_key]["items_ordered"]
+                          orderDetails?.stall_order?.[stall_key]?.[
+                            "items_ordered"
+                          ]
                         }
                       />
                     );
