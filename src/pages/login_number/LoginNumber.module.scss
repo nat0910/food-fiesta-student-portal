@@ -1,0 +1,85 @@
+@import "../../utils/sass/mixin";
+
+.login_number_grid {
+  height: 100%;
+  display: grid;
+  place-items: center;
+
+  @include centerWithMargin(32px);
+  @media screen and (min-width: 480px) {
+    @include centerWithMargin(64px);
+  }
+  @media screen and (min-width: 1280px) {
+    @include centerWithMargin(200px);
+  }
+}
+
+.login_number_input_header {
+  margin-bottom: 2rem;
+  h1 {
+    font-weight: 800;
+  }
+  p {
+    text-align: justify;
+  }
+}
+
+.login_number_input_ {
+  width: 100%;
+  border: 2px solid rgb(139, 139, 139);
+  font: inherit;
+  letter-spacing: 1px;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  outline: none;
+}
+
+.login_number_input_button {
+  border: none;
+  margin-top: 2rem;
+  width: 55px;
+  height: 55px;
+  padding-inline: 1rem 0.85rem;
+  float: right;
+  background-color: rgba(var(--accent-color), 1);
+  color: white;
+  border-radius: 50%;
+  font-size: 1.75rem;
+
+  cursor: pointer;
+
+  &:active {
+    background-color: rgba(var(--accent-color), 0.75);
+  }
+}
+
+.login_number_input_group {
+  font-size: 1.5rem;
+  font-family: "Satoshi", sans-serif;
+  font-weight: 600;
+  position: relative;
+}
+
+.login_number_input_label {
+  position: absolute;
+  left: 0.5rem;
+  top: 0.65rem;
+  font-size: 1.35rem;
+  text-align: center;
+  width: 125px;
+  color: rgba(var(--inactive-nav-link), 1);
+  text-transform: capitalize;
+  transform-origin: left;
+  transition: transform 0.35s, background-color 0.35s;
+  background-color: #fff;
+}
+
+.login_number_input_:is(:focus, :valid) {
+  border: 2px solid rgba(var(--accent-color), 1);
+}
+
+.login_number_input_:is(:focus, :valid) ~ .login_number_input_label {
+  background: linear-gradient(#f5f6fb, #fff);
+  color: rgba(var(--accent-color), 1);
+  transform: translate(0.5rem, -1.5rem) scale(0.75);
+}

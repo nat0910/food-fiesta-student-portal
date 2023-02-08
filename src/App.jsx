@@ -10,6 +10,7 @@ function wait(params) {
 }
 
 import Login from "./pages/login";
+import LoginNumber from "./pages/login_number";
 
 const SharedLayout = lazy(() =>
   wait(500).then(() => import("./layout/SharedLayout"))
@@ -34,6 +35,7 @@ function App() {
 
       <Route element={<Order />} path="/your-orders/order-details/:id" />
       <Route element={<Login />} path="/login" />
+      <Route element={<LoginNumber />} path="/login/number" />
     </Routes>
   );
 }
