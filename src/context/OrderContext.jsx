@@ -18,11 +18,11 @@ function OrderProvider({ children }) {
 
   useEffect(() => {
 
-    if (!user) {
-      return () => {
-        console.log("no user , menu context");
-      }
-    }
+    // if (!user) {
+    //   return () => {
+    //     console.log("no user , menu context");
+    //   }
+    // }
     const { firestore } = getFirebase();
     const ordersColRef = collection(firestore, "orders");
 

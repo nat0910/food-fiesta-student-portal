@@ -5,17 +5,6 @@ export default function MenuShortcut({ data, hideStallMenu }) {
   const [shortcutShow, setShortcutShow] = useState(false);
 
   function handleMenuShortcut(e, val) {
-    if (
-      document
-        .getElementById("root")
-        .contains(document.getElementById("bodyVeil"))
-    ) {
-      document
-        .getElementById("root")
-        .removeChild(document.getElementById("bodyVeil"));
-      document.body.style.overflowY = "auto";
-    }
-
     hideStallMenu();
     const listheight = document
       ?.getElementById(`${e}-list`)
@@ -24,31 +13,20 @@ export default function MenuShortcut({ data, hideStallMenu }) {
 
     if (val > 5) {
       document.getElementById(`${e}-header`).scrollIntoView(false);
-      setShortcutShow(!shortcutShow);
-
+      MenuShowHide();
       return 0;
     }
-
+    MenuShowHide();
     document.getElementById(`${e}-header`).scrollIntoView(true);
-
-    setShortcutShow(!shortcutShow);
   }
 
   function MenuShowHide() {
-    if (
-      document
-        .getElementById("root")
-        .contains(document.getElementById("bodyVeil"))
-    ) {
-      document
-        .getElementById("root")
-        .removeChild(document.getElementById("bodyVeil"));
-      document.body.style.overflowY = "auto";
+    const element = document.getElementById("bodyVeil");
+
+    if (element.style.display === "none") {
+      element.style.display = "block";
     } else {
-      const bodyHider = document.createElement("div");
-      bodyHider.id = "bodyVeil";
-      document.getElementById("root").appendChild(bodyHider);
-      document.body.style.overflowY = "hidden";
+      element.style.display = "none";
     }
     setShortcutShow(!shortcutShow);
   }

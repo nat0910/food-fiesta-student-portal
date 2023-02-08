@@ -144,7 +144,7 @@
   font-size: 1.1rem;
   font-weight: 600;
   color: white;
-  background-color: #7e1f1f;
+  background-color: rgba(var(--accent-color), 1);
   border-radius: 0.5rem;
   height: 100%;
   cursor: pointer;
@@ -154,6 +154,10 @@
     font-size: 0.8rem;
 
     margin-left: 5px;
+  }
+
+  &:active {
+    background-color: rgba(var(--accent-color), 0.75);
   }
 }
 

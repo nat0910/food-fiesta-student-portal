@@ -4,7 +4,7 @@ import MenuShortcut from "../../components/menu_page_component/menu_shortcut";
 import { useMenu } from "../../context/MenuContext";
 
 export default function Menu() {
-  const { menuList, hideStallMenu , cart, setCart ,handleCart } = useMenu();
+  const { menuList, hideStallMenu, cart, setCart, handleCart } = useMenu();
 
   return (
     <>
@@ -27,13 +27,18 @@ export default function Menu() {
                 stall={`stall${index + 1}`}
                 hideStallMenu={hideStallMenu}
                 cart={cart}
-                setCart={setCart}                
+                setCart={setCart}
                 handleCart={handleCart}
               />
             );
           })}
       </div>
-
+      <div
+        id="bodyVeil"
+        style={{
+          display: "none",
+        }}
+      ></div>
       <MenuShortcut data={menuList} hideStallMenu={hideStallMenu} />
     </>
   );
