@@ -59,7 +59,6 @@ function AuthProvider({ children }) {
     const { auth } = getFirebase();
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (!user) {
-        console.log(user);
         console.log("Please Sign In again!!");
         navigate("/login");
       }

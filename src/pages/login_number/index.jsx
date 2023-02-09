@@ -9,6 +9,11 @@ export default function LoginNumber() {
 
   function handlePhoneNumber(e) {
     e.preventDefault();
+
+    const val = TelRef?.current?.value;
+    // "val" is the value from the input element
+    console.log(val);
+    //code for updating number goes here
   }
 
   return (
