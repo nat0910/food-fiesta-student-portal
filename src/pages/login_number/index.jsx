@@ -3,17 +3,24 @@ import styles from "./LoginNumber.module.scss";
 
 import { faArrowRightLong } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { getFirebase } from "../../utils/firebaseConfig";
 
 export default function LoginNumber() {
   const TelRef = useRef(null);
+
+  function updatePhone(phone_number) {
+    const { functions } = getFirebase()
+
+    const updatePhone = httpsCallable(functions, "updatePhone");
+    updatePhone({ phone_number: phone_number });
+  }
 
   function handlePhoneNumber(e) {
     e.preventDefault();
 
     const val = TelRef?.current?.value;
     // "val" is the value from the input element
-    console.log(val);
-    //code for updating number goes here
+    updatePhone(val);
   }
 
   return (

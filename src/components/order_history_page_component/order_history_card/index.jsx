@@ -39,8 +39,28 @@ export default function OrderHistoryCard({ data }) {
     }
 
     const allEqual = (arr) => arr.every((val) => val === "served");
+
     return allEqual(array);
   }
+
+  function refundedStatus() {
+    const array = new Array();
+    for (const stall_key in data?.stall_order) {
+      const element = data?.stall_order[stall_key]?.status;
+      array.push(element);
+    }
+
+    if (array.includes("refunded")) {
+      const filArray = array.filter((status) => status !== "refunded");
+      const allEqual = (arr) => arr.every((val) => val === "served");
+      return filArray.length !== 0 ? allEqual(filArray) && true : true;
+    }
+    const allEqual = (arr) => arr.every((val) => val === "served");
+
+    return allEqual(array);
+  }
+
+  console.log(data?.order_id, refundedStatus());
 
   function refundInitiated() {
     const array = [];
@@ -110,12 +130,29 @@ export default function OrderHistoryCard({ data }) {
               <span
                 className={
                   data?.payment_status === "cancelled"
-                    ? styles.payment_refunded_status
+                    ? refundedStatus()
+                      ? styles.payment_completed_status
+                      : styles.payment_refunded_status
                     : data?.payment_status === "unpaid" &&
                       styles.payment_failure_status
                 }
               >
-                {refundInitiated() ? "refund initiated" : data?.payment_status}
+                {refundInitiated() ? (
+                  "refund initiated"
+                ) : refundedStatus() ? (
+                  <>
+                    Completed
+                    <FontAwesomeIcon
+                      icon={faCircleCheck}
+                      style={{
+                        marginLeft: ".25rem",
+                        color: "green",
+                      }}
+                    />
+                  </>
+                ) : (
+                  `${data?.payment_status} `
+                )}
               </span>
             ) : servedStatus() ? (
               <span className={styles.payment_completed_status}>
