@@ -59,6 +59,16 @@ export default function OrderPage() {
     return censorFunc(name) + "@" + domain;
   }
 
+  function stallCancelled() {
+    let str = "";
+    Object.keys(orderDetails?.stall_order).forEach((stall_key) => {
+      if (orderDetails?.stall_order?.[stall_key]?.["status"] === "cancelled") {
+        str = str + `${stall_key}`;
+      }
+    });
+    return str;
+  }
+
   useEffect(() => {
     const { firestore } = getFirebase();
     const MENU_COLLECTION_ID = "orders";
@@ -157,12 +167,15 @@ export default function OrderPage() {
               Payment Status :{" "}
               <span
                 className={
-                  orderDetails?.payment_status === "paid"
+                  orderDetails?.payment_status === "paid" ||
+                  orderDetails?.payment_status === "cancelled"
                     ? styles.payment_success_status
                     : styles.payment_failure_status
                 }
               >
-                {orderDetails.payment_status}
+                {orderDetails?.payment_status === "cancelled"
+                  ? "Paid"
+                  : orderDetails.payment_status}
               </span>
             </p>
           </div>
@@ -176,15 +189,25 @@ export default function OrderPage() {
             <img src={imageUrl} alt="" />
             <p>{`Order id : ${orderDetails?.order_id}`}</p>
           </div>
-          {/* Procced to payement counter */}
+          {/* Procced to payment counter */}
           {orderDetails.payment_status === "unpaid" && (
             <div className={styles.order_body_directing_text_container}>
               <h3>Proceed to the Payment Counter</h3>
             </div>
           )}
+          {/* Procced to refund counter */}
+          {orderDetails.payment_status === "cancelled" && (
+            <div className={styles.order_body_directing_text_container}>
+              <h3>
+                Proceed to the refund counter, to collect your refund for{" "}
+                <span>{stallCancelled()} </span>.
+              </h3>
+            </div>
+          )}
 
           {/* Order Status  */}
-          {orderDetails.payment_status === "paid" && (
+          {(orderDetails.payment_status === "paid" ||
+            orderDetails.payment_status === "cancelled") && (
             <section className={styles.order_body_order_summary_container}>
               <h1>Order Status</h1>
               <div className={styles.order_body_order_summary_list_container}>

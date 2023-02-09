@@ -123,6 +123,13 @@ article {
   text-align: center;
   margin-top: 1rem;
   font-size: 1.25rem;
+  @include centerWithMargin(32px);
+  @media screen and (min-width: 480px) {
+    @include centerWithMargin(64px);
+  }
+  @media screen and (min-width: 1280px) {
+    @include centerWithMargin(200px);
+  }
 }
 
 .order_body_order_summary_container,
