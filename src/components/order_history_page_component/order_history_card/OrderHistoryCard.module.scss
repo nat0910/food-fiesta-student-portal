@@ -15,7 +15,7 @@
   @include flexRowCenter;
   align-items: self-start;
   padding-bottom: 0.5rem;
-
+  gap: 5px;
   @include centerWithMargin(32px);
   @media screen and (min-width: 480px) {
     @include centerWithMargin(64px);
@@ -53,6 +53,10 @@
   font-family: "Satoshi", sans-serif;
   letter-spacing: 1px;
   font-weight: 500;
+
+  &:active {
+    background-color: rgba(var(--accent-color), .75);
+  }
 }
 
 .order_history_cart_container_header_content_status {
@@ -60,11 +64,9 @@
   text-transform: capitalize;
   span {
     display: block;
-    padding: 0.35rem 1rem;
     letter-spacing: 1px;
-    font-weight: 500;
+
     border-radius: 1rem;
-    font-size: 0.85rem;
     text-align: center;
   }
 }
@@ -73,18 +75,54 @@
   color: #721c24;
   background-color: #f8d7da;
   border: 1px solid #f5c6cb;
+
+  padding: 0.35rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+.payment_refunded_status {
+  color: #383d41;
+  background-color: #e2e3e5;
+  border-color: #d6d8db;
+  padding: 0.35rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  @media screen and (max-width: 375px) {
+    padding: 0.35rem 0.65rem;
+    font-size: 0.8rem;
+    width: 135px;
+  }
 }
 
 .payment_inprogress_status {
   color: #856404;
   background-color: #fff3cd;
   border: 1px solid #f9df8e;
+  padding: 0.35rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 500;
 }
 
 .payment_completed_status {
-  color: #004085;
-  background-color: #cce5ff;
-  border: 1px solid #b8daff;
+  // color: #004085;
+  // background-color: #cce5ff;
+  // border: 1px solid #b8daff;
+  // padding: 0.35rem 1rem;
+
+  font-size: 0.95rem;
+  font-weight: 600;
+  @media screen and (max-width: 375px) {
+    font-size: 0.9rem;
+  }
+  @media screen and (max-width: 300px) {
+    font-size: 0.85rem;
+    width: 100px;
+  }
+}
+.payment_refunded_status {
+  color: #383d41;
+  background-color: #e2e3e5;
+  border-color: #d6d8db;
 }
 
 .order_history_cart_containe_footer {

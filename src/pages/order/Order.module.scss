@@ -16,23 +16,29 @@ article {
 }
 
 .order_header_back_button {
+  margin: 0;
+  border: none;
   background-color: rgb(255, 255, 255);
   font-size: 1.5rem;
   width: 50px;
   height: 50px;
   position: absolute;
   left: 12px;
-  padding-block: 0.5rem;
   border-radius: 50%;
   display: block;
   filter: drop-shadow(0 0 15px rgba(188, 188, 188, 0.5));
   cursor: pointer;
   z-index: 10;
+  display: grid;
+  place-items: center;
 
   svg {
     display: inline;
     vertical-align: middle;
-    margin-left: 0.7rem;
+  }
+
+  &:active {
+    background-color: rgb(255, 255, 255, 0.75);
   }
 
   @media screen and (min-width: 480px) {

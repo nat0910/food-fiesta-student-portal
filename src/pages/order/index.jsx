@@ -129,12 +129,12 @@ export default function OrderPage() {
           role={"heading"}
           className={styles.order_header_container}
         >
-          <div
+          <button
             className={styles.order_header_back_button}
             onClick={() => navigate("/your-orders")}
           >
             <FontAwesomeIcon icon={faArrowLeftLong} />
-          </div>
+          </button>
           <div className={styles.order_header_content}>
             <h3>your order</h3>
             <p>{`Order id ${orderDetails?.order_id}`}</p>

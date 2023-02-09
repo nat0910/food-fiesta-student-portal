@@ -32,7 +32,7 @@ export default function LoginNumber() {
             maxLength={10}
             ref={TelRef}
             required
-            autoComplete={false}
+            autoComplete="off"
           />
           <label htmlFor="phoneNo" className={styles.login_number_input_label}>
             phone no.

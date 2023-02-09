@@ -1,3 +1,5 @@
+import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./OrderHistoryCard.module.scss";
@@ -30,13 +32,26 @@ export default function OrderHistoryCard({ data }) {
   }
 
   function servedStatus() {
+    const array = new Array();
+    for (const stall_key in data?.stall_order) {
+      const element = data?.stall_order[stall_key]?.status;
+      array.push(element);
+    }
+
+    const allEqual = (arr) => arr.every((val) => val === "served");
+    return allEqual(array);
+  }
+
+  function refundInitiated() {
     const array = [];
     for (const stall_key in data?.stall_order) {
       const element = data?.stall_order[stall_key]?.status;
       array.push(element);
     }
-    const allEqual = (arr) => arr.every((val) => val === "served");
-    return allEqual(array);
+
+    const bool = array.includes("cancelled");
+
+    return bool;
   }
 
   function shortData() {
@@ -66,6 +81,8 @@ export default function OrderHistoryCard({ data }) {
     return i;
   };
 
+  // console.log(data?.order_id, refundInitiated());
+
   return (
     <section key={data.id} className={styles.order_history_cart_}>
       <div className={styles.order_history_cart_container}>
@@ -88,20 +105,29 @@ export default function OrderHistoryCard({ data }) {
               styles.order_history_cart_container_header_content_status
             }
           >
-            {data?.payment_status === "unpaid" ? (
+            {data?.payment_status === "unpaid" ||
+            data?.payment_status === "cancelled" ? (
               <span
                 className={
-                  (data?.payment_status === "unpaid" ||
-                    data?.payment_status === "cancelled") &&
-                  styles.payment_failure_status
+                  data?.payment_status === "cancelled"
+                    ? styles.payment_refunded_status
+                    : data?.payment_status === "unpaid" &&
+                      styles.payment_failure_status
                 }
               >
-                {data?.payment_status === "cancelled"
-                  ? "Partial Cancelled"
-                  : data?.payment_status}
+                {refundInitiated() ? "refund initiated" : data?.payment_status}
               </span>
             ) : servedStatus() ? (
-              <span className={styles.payment_completed_status}>Served</span>
+              <span className={styles.payment_completed_status}>
+                Completed
+                <FontAwesomeIcon
+                  icon={faCircleCheck}
+                  style={{
+                    marginLeft: ".25rem",
+                    color: "green",
+                  }}
+                />
+              </span>
             ) : (
               <span className={styles.payment_inprogress_status}>
                 Inprogress

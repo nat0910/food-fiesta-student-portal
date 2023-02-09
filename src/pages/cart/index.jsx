@@ -40,6 +40,9 @@ export default function Cart() {
         navigate(`/your-orders/order-details/${segments?.[1]}`);
       });
     }
+    if (!bool) {
+      setLoader(false);
+    }
   }
 
   useEffect(() => {
@@ -188,8 +191,8 @@ export default function Cart() {
               <button
                 className={styles.cart_item_payment_container_button}
                 onClick={() => {
-                  submitOrder();
                   setLoader(true);
+                  submitOrder();
                 }}
               >
                 {loader ? (
