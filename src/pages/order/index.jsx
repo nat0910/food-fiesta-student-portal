@@ -58,6 +58,18 @@ export default function OrderPage() {
     return str;
   }
 
+  function isCancelled() {
+    let array = new Array();
+    Object.keys(orderDetails?.stall_order).forEach((stall_key) => {
+      const element = orderDetails?.stall_order?.[stall_key]?.["status"];
+      array.push(element);
+    });
+    if (array.includes("cancelled")) {
+      return true;
+    }
+    return false;
+  }
+
   useEffect(() => {
     const { firestore } = getFirebase();
     const MENU_COLLECTION_ID = "orders";
@@ -185,7 +197,7 @@ export default function OrderPage() {
             </div>
           )}
           {/* Procced to refund counter */}
-          {orderDetails.payment_status === "cancelled" && (
+          {isCancelled() && (
             <div className={styles.order_body_directing_text_container}>
               <h3>
                 Proceed to the refund counter, to collect your refund for{" "}

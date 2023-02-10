@@ -69,7 +69,7 @@ function AuthProvider({ children }) {
       }
 
       auth.currentUser.getIdTokenResult().then((id_result) => {
-        if (id_result.claims.phoneNumber === undefined) {
+        if (id_result?.claims?.phoneNumber === undefined) {
           navigate("/login/number");
         }
       });

@@ -60,8 +60,6 @@ export default function OrderHistoryCard({ data }) {
     return allEqual(array);
   }
 
-  console.log(data?.order_id, refundedStatus());
-
   function refundInitiated() {
     const array = [];
     for (const stall_key in data?.stall_order) {
@@ -125,36 +123,9 @@ export default function OrderHistoryCard({ data }) {
               styles.order_history_cart_container_header_content_status
             }
           >
-            {data?.payment_status === "unpaid" ||
-            data?.payment_status === "cancelled" ? (
-              <span
-                className={
-                  data?.payment_status === "cancelled"
-                    ? refundedStatus()
-                      ? styles.payment_completed_status
-                      : styles.payment_refunded_status
-                    : data?.payment_status === "unpaid" &&
-                      styles.payment_failure_status
-                }
-              >
-                {refundInitiated() ? (
-                  "refund initiated"
-                ) : refundedStatus() ? (
-                  <>
-                    Completed
-                    <FontAwesomeIcon
-                      icon={faCircleCheck}
-                      style={{
-                        marginLeft: ".25rem",
-                        color: "green",
-                      }}
-                    />
-                  </>
-                ) : (
-                  `${data?.payment_status} `
-                )}
-              </span>
-            ) : servedStatus() ? (
+            {data?.payment_status === "unpaid" ? (
+              <span className={styles.payment_failure_status}>Unpaid</span>
+            ) : servedStatus() || refundedStatus() ? (
               <span className={styles.payment_completed_status}>
                 Completed
                 <FontAwesomeIcon

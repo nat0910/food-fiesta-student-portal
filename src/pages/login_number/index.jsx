@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import styles from "./LoginNumber.module.scss";
 
 import { faArrowRightLong } from "@fortawesome/free-solid-svg-icons";
@@ -39,6 +39,18 @@ export default function LoginNumber() {
       setIserror(true);
     }
   }
+
+  useLayoutEffect(() => {
+    const { auth } = getFirebase();
+
+    auth?.currentUser?.getIdTokenResult().then((id_result) => {
+      console.log(id_result?.claims);
+      if (id_result?.claims?.phoneNumber !== undefined) {
+        navigate("/");
+      }
+    });
+    return () => {};
+  }, []);
 
   return (
     <div className={styles.login_number_grid}>
