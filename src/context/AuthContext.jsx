@@ -28,10 +28,17 @@ function AuthProvider({ children }) {
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
         const user = result.user;
-
+        auth.currentUser.getIdTokenResult().then((id_result) => {
+          console.log(id_result.claims);
+        });
         setUser(user);
       })
       .then(() => {
+        auth.currentUser.getIdTokenResult().then((id_result) => {
+          if (id_result.claims.phoneNumber === undefined) {
+            navigate("/login/number");
+          }
+        });
         navigate("/");
       })
       .catch((error) => {
@@ -41,6 +48,8 @@ function AuthProvider({ children }) {
         const credential = GoogleAuthProvider.credentialFromError(error);
       });
   }
+
+  console.log(user);
 
   function handleSignOut() {
     const { auth } = getFirebase();

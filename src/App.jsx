@@ -10,7 +10,6 @@ function wait(params) {
 }
 
 import Login from "./pages/login";
-import LoginNumber from "./pages/login_number";
 
 const SharedLayout = lazy(() =>
   wait(500).then(() => import("./layout/SharedLayout"))
@@ -21,6 +20,9 @@ const Error = lazy(() => wait(500).then(() => import("./pages/error")));
 const Order = lazy(() => wait(500).then(() => import("./pages/order")));
 const OrderHistory = lazy(() =>
   wait(500).then(() => import("./pages/order_history"))
+);
+const LoginNumber = lazy(() =>
+  wait(500).then(() => import("./pages/login_number"))
 );
 
 function App() {

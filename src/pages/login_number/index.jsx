@@ -1,30 +1,48 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import styles from "./LoginNumber.module.scss";
 
 import { faArrowRightLong } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getFirebase } from "../../utils/firebaseConfig";
+import { httpsCallable } from "firebase/functions";
+import { useNavigate } from "react-router-dom";
+
+const regex = new RegExp("[1-9]{1}[0-9]{9}");
 
 export default function LoginNumber() {
   const TelRef = useRef(null);
 
-  function updatePhone(phone_number) {
-    const { functions } = getFirebase()
+  const [iserror, setIserror] = useState(false);
 
+  const navigate = useNavigate();
+
+  function updatePhone(phoneNumber) {
+    const { functions } = getFirebase();
     const updatePhone = httpsCallable(functions, "updatePhone");
-    updatePhone({ phone_number: phone_number });
+    updatePhone({ phoneNumber: phoneNumber }).then(() => {
+      navigate("/");
+    });
   }
 
   function handlePhoneNumber(e) {
     e.preventDefault();
 
     const val = TelRef?.current?.value;
+
     // "val" is the value from the input element
-    updatePhone(val);
+
+    if (regex?.test(val)) {
+      setIserror(false);
+      updatePhone(val);
+    }
+    if (!regex?.test(val)) {
+      setIserror(true);
+    }
   }
 
   return (
     <div className={styles.login_number_grid}>
+      <div className={styles.patter_design}></div>
       <form method="post">
         <div className={styles.login_number_input_header}>
           <h1>Enter your mobile number</h1>
@@ -45,6 +63,18 @@ export default function LoginNumber() {
             phone no.
           </label>
         </div>
+        {iserror && (
+          <div
+            style={{
+              fontSize: ".85em",
+              marginTop: ".35rem",
+              color: "red",
+              fontWeight: 500,
+            }}
+          >
+            <p className="text-danger">* Please enter your whatsapp number.</p>
+          </div>
+        )}
         <button
           type="submit"
           className={styles.login_number_input_button}
