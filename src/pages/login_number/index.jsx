@@ -42,7 +42,6 @@ export default function LoginNumber() {
 
   return (
     <div className={styles.login_number_grid}>
-      <div className={styles.patter_design}></div>
       <form method="post">
         <div className={styles.login_number_input_header}>
           <h1>Enter your mobile number</h1>
