@@ -2,7 +2,7 @@ import lottie from "lottie-web";
 import { useEffect } from "react";
 import styles from "./Loading.module.scss";
 
-import FrenchFries from "../../utils/data/loading_french_fries.json";
+import FrenchFries from "../../../utils/data/loading_french_fries.json";
 
 export default function LoadingScreenFrenchFries() {
   useEffect(() => {

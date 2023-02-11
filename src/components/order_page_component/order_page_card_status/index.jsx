@@ -1,8 +1,5 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 
 import styles from "./OrderStatus.module.scss";
-import { useRef } from "react";
 
 export default function OrderCardStatus({
   index,

@@ -1,5 +1,3 @@
-import React from "react";
-
 import styles from "./OrderEmptyScreen.module.scss";
 
 export default function OrderEmptyScreen() {

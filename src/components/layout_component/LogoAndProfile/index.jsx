@@ -1,13 +1,13 @@
 import { useState, useRef, useEffect } from "react";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../../../context/AuthContext";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
 import styles from "./LogoAndProfile.module.scss";
 
-import FFlogo from "../../assets/images/FF_logo_.png";
-import DefaultImage from "../../assets/images/default_profile_image.webp";
+import FFlogo from "../../../assets/images/FF_logo_.png";
+import DefaultImage from "../../../assets/images/default_profile_image.webp";
 
 export default function LogoAndProfile() {
   const { user, handleSignOut } = useAuth();

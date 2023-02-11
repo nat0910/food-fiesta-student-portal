@@ -1,8 +1,8 @@
 import { NavLink } from "react-router-dom";
 import styles from "./NavbarMobile.module.scss";
 
-import NavData from "../../utils/data/NavbarData.json";
-import { useMenu } from "../../context/MenuContext";
+import NavData from "../../../utils/data/NavbarData.json";
+import { useMenu } from "../../../context/MenuContext";
 
 export default function Navbar() {
   const { cart } = useMenu();
