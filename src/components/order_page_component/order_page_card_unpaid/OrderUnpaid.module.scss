@@ -23,6 +23,8 @@
   margin-left: 5px;
   font-size: 0.75rem;
   color: #8d8f94;
+  rotate: 0deg;
+  transition: rotate 350ms cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .order_unpaid_container_header_container {
@@ -31,6 +33,7 @@
   justify-content: space-between;
   flex-flow: row nowrap;
   margin-bottom: 0.5rem;
+  cursor: pointer;
 }
 
 .order_unpaid_container_body_container {
@@ -70,18 +73,18 @@
   }
   p {
     font-size: 0.75rem;
-    color: #9fa0a3;
+    color: #707172;
     font-weight: 400;
   }
 }
 
 .order_unpaid_container_body_container_list_items_total {
-  color: #9fa0a3;
-  font-weight: 400 !important;
+  color: #707172;
+  font-weight: 500 !important;
 }
 
 .order_unpaid_container_body_container_list_items_quantity {
-  color: #9fa0a3;
+  color: #707172;
   font-weight: 300 !important;
   span {
     font-weight: 400 !important;

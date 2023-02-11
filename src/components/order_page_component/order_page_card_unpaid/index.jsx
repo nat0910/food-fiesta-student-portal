@@ -22,10 +22,13 @@ export default function OrderCardUnpaid({ index, stallItems, stall }) {
   function showhideList() {
     const cont = orderContRef.current;
     const listHeight = orderListRef?.current?.getBoundingClientRect().height;
+    const toggleButton = document.getElementById(`${stall}-toggle`);
 
     if (cont.style.height === "0px") {
+      toggleButton.style.rotate = "180deg";
       cont.style.height = `${listHeight}px`;
     } else {
+      toggleButton.style.rotate = "0deg";
       cont.style.height = "0px";
     }
   }
@@ -42,6 +45,7 @@ export default function OrderCardUnpaid({ index, stallItems, stall }) {
             fixedWidth
             icon={faAngleDown}
             className={styles.order_unpaid_container_header_icon}
+            id={`${stall}-toggle`}
           />
         </div>
         <p>
