@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./MenuShortcut.module.scss";
 
 export default function MenuShortcut({ data, hideStallMenu }) {
@@ -30,6 +30,26 @@ export default function MenuShortcut({ data, hideStallMenu }) {
     }
     setShortcutShow(!shortcutShow);
   }
+
+  function handleMenuOutside(e) {
+    if (
+      e.srcElement.id === "bodyVeil" ||
+      e.srcElement.id.includes("primary-navigation") ||
+      e.srcElement.className.includes("las") ||
+      e.target.id === "home"
+    ) {
+      MenuShowHide();
+    }
+  }
+
+  useEffect(() => {
+    if (shortcutShow) {
+      document.addEventListener("click", handleMenuOutside, true);
+    }
+    return () => {
+      document.removeEventListener("click", handleMenuOutside, true);
+    };
+  }, [shortcutShow]);
 
   return (
     <div className={styles.menushortcut_container_layout_}>

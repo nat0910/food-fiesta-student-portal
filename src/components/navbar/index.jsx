@@ -18,16 +18,16 @@ export default function Navbar() {
     return i;
   };
 
-
   return (
     <nav id="primary-navigation">
-      <ul className={styles.nav_container_}>
+      <ul className={styles.nav_container_} id="primary-navigation-ul">
         {NavData.map((item, index) => {
           return (
             <li
               key={index}
               className={styles.nav_link_wrapper_}
               name={item.label}
+              id={item.label}
             >
               <NavLink
                 to={item.url}
@@ -46,7 +46,7 @@ export default function Navbar() {
                   className={item.icon}
                   data-cart_total={item.label === "cart" ? total() : null}
                 />
-                <span>{item.label}</span>
+                <span id={item.label}>{item.label}</span>
               </NavLink>
             </li>
           );
