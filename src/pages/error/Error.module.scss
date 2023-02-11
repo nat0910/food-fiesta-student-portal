@@ -1,0 +1,70 @@
+@import "../../utils/sass/mixin";
+
+.error_grid {
+  display: block;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  letter-spacing: 1px;
+  color: rgba(var(--accent-color), 1);
+  overflow-x: hidden;
+  h1 {
+    font-size: 2.5rem;
+  }
+  p {
+    font-size: 1.25rem;
+    font-family: "Cabinet-Grotesk", sans-serif;
+    font-weight: 700;
+  }
+}
+
+.error_contianer {
+  overflow-x: hidden;
+
+  @include centerWithMargin(32px);
+  @media screen and (min-width: 480px) {
+    @include centerWithMargin(64px);
+  }
+  @media screen and (min-width: 1280px) {
+    margin-top: 2rem ;
+    @include centerWithMargin(200px);
+  }
+}
+
+.error_img {
+  width: 400px;
+  object-fit: cover;
+  @include positionCenter;
+  overflow: hidden;
+  @media screen and (min-width: 480px) {
+    width: 500px;
+  }
+  @media screen and (min-width: 1280px) {
+    width: 600px;
+  }
+}
+
+.error_button {
+  display: block;
+  width: 75%;
+  @include positionCenter;
+  font-family: "Cabinet-Grotesk", sans-serif;
+  padding-block: 0.5rem;
+  font-weight: 700;
+  border: 1px solid rgba(var(--accent-color), 1);
+  border-radius: 1.5rem;
+  font-size: 1.1rem;
+  margin-top: 1rem;
+  overflow: hidden;
+
+  @media screen and (min-width: 480px) {
+    width: 450px;
+  }
+  &:active,
+  &:focus {
+    background-color: rgba(245, 246, 251, 0.5);
+    font-weight: 700;
+    font-family: "Cabinet-Grotesk", sans-serif;
+    font-size: 1.1rem;
+  }
+}
