@@ -15,7 +15,16 @@ function MenuProvider({ children }) {
     msg: "",
   });
 
-  const [cart, setCart] = useState({});
+  const getLocalStorage = () => {
+    const cartData = localStorage.getItem("cartData");
+    if (cartData) {
+      return JSON.parse(cartData);
+    } else {
+      return {};
+    }
+  };
+
+  const [cart, setCart] = useState(getLocalStorage());
 
   function hideStallMenu() {
     document?.querySelectorAll("#stall-menu-list").forEach((e) => {
@@ -51,6 +60,15 @@ function MenuProvider({ children }) {
 
     setCart({ ...cart, [stall]: { ...cart[stall], [item_id]: val } });
   }
+
+  useEffect(() => {
+    if (Object.keys(cart).length !== 0) {
+      localStorage.setItem("cartData", JSON.stringify(cart));
+    }
+    if (Object.keys(cart).length === 0) {
+      localStorage.removeItem("cartData");
+    }
+  }, [cart]);
 
   useEffect(() => {
     const { firestore } = getFirebase();

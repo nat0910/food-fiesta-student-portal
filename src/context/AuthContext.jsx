@@ -52,6 +52,7 @@ function AuthProvider({ children }) {
     signOut(auth)
       .then(() => {
         // Sign-out successful.
+        localStorage.removeItem("cartData");
         console.log("You have successful sign out!!");
       })
       .catch((error) => {

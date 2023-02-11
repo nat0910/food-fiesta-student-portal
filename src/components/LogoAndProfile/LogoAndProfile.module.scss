@@ -39,7 +39,7 @@ header {
   position: relative;
   box-shadow: 0px 0px 20px 15px rgba(237, 237, 237, 0.75);
 
-  z-index: 1;
+  z-index: 1.5;
   border-radius: 50%;
   cursor: pointer;
 
@@ -59,6 +59,7 @@ header {
   right: 0;
   filter: drop-shadow(0 0 5px #e1e1e1);
   min-width: 275px;
+  z-index: 3 !important;
 
   @media screen and (max-width: 320px) {
     width: 10%;
