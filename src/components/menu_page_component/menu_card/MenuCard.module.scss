@@ -54,7 +54,9 @@
 .menu_card_container_lsit_toggle_active {
   display: block;
   font-size: 1.25rem;
+  margin-right: 0.35rem;
   // transition: transform 250ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition: rotate 350ms cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .menu_card_container_lsit_toggle_active {

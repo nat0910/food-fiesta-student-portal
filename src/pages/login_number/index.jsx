@@ -65,6 +65,7 @@ export default function LoginNumber() {
             type="tel"
             name="phoneNo"
             id="phoneNo"
+            minLength={8}
             maxLength={10}
             ref={TelRef}
             required
