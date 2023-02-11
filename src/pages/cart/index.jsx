@@ -164,7 +164,7 @@ export default function Cart() {
               Refund Counter. The value for said refund will be calculated
               against the item(s) ordered from the one/more stalls. The user can
               neither initiate an order cancellation nor request a refund once
-              the order has been paid for.
+              the order has been paid for.
             </p>
           </div>
 
