@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CartCard from "../../components/cart_page_component/cart_card";
 import CartEmptyScreen from "../../components/cart_page_component/cart_empty_screen";
@@ -15,16 +15,19 @@ export default function Cart() {
 
   const [loader, setLoader] = useState(false);
 
-  let total = function () {
-    let i = 0;
-    Object.keys(cart).forEach((stall_key) => {
-      const key = cart[stall_key];
-      Object.keys(key).forEach((item_id) => {
-        i = i + menuList[stall_key][item_id]["price"] * key[item_id];
+  const total = useCallback(
+    function () {
+      let i = 0;
+      Object.keys(cart).forEach((stall_key) => {
+        const key = cart[stall_key];
+        Object.keys(key).forEach((item_id) => {
+          i = i + menuList[stall_key][item_id]["price"] * key[item_id];
+        });
       });
-    });
-    return i;
-  };
+      return i;
+    },
+    [cart]
+  );
 
   function submitOrder() {
     let text =

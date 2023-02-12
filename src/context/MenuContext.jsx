@@ -1,6 +1,12 @@
 import { collection, doc, onSnapshot } from "firebase/firestore";
 
-import { useState, createContext, useEffect, useContext } from "react";
+import {
+  useState,
+  createContext,
+  useEffect,
+  useContext,
+  useCallback,
+} from "react";
 import { getFirebase } from "../utils/firebaseConfig";
 import { useAuth } from "./AuthContext";
 
@@ -35,31 +41,34 @@ function MenuProvider({ children }) {
     });
   }
 
-  function handleCart(e, val, stall, item_id) {
-    const bool = e.target.id === "increment-button";
-    val = bool ? val + 1 : val - 1;
+  const handleCart = useCallback(
+    function (e, val, stall, item_id) {
+      const bool = e.target.id === "increment-button";
+      val = bool ? val + 1 : val - 1;
 
-    if (val === 0) {
-      delete cart[stall][item_id];
+      if (val === 0) {
+        delete cart[stall][item_id];
 
-      setCart({
-        ...cart,
-        [stall]: {
-          ...cart[stall],
-        },
-      });
+        setCart({
+          ...cart,
+          [stall]: {
+            ...cart[stall],
+          },
+        });
 
-      const boolDel = Object.keys(cart[stall]).length === 0;
-      if (boolDel) {
-        delete cart[stall];
-        setCart({ ...cart });
+        const boolDel = Object.keys(cart[stall]).length === 0;
+        if (boolDel) {
+          delete cart[stall];
+          setCart({ ...cart });
+        }
+
+        return 0;
       }
 
-      return 0;
-    }
-
-    setCart({ ...cart, [stall]: { ...cart[stall], [item_id]: val } });
-  }
+      setCart({ ...cart, [stall]: { ...cart[stall], [item_id]: val } });
+    },
+    [cart]
+  );
 
   useEffect(() => {
     if (Object.keys(cart).length !== 0) {
