@@ -44,7 +44,6 @@ export default function LoginNumber() {
     const { auth } = getFirebase();
 
     auth?.currentUser?.getIdTokenResult().then((id_result) => {
-      console.log(id_result?.claims);
       if (id_result?.claims?.phoneNumber !== undefined) {
         navigate("/");
       }

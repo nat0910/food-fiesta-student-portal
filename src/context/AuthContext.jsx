@@ -70,11 +70,13 @@ function AuthProvider({ children }) {
         navigate("/login");
       }
 
-      auth.currentUser.getIdTokenResult().then((id_result) => {
-        if (id_result?.claims?.phoneNumber === undefined) {
-          navigate("/login/number");
-        }
-      });
+      if (user) {
+        auth.currentUser.getIdTokenResult().then((id_result) => {
+          if (id_result?.claims?.phoneNumber === undefined) {
+            navigate("/login/number");
+          }
+        });
+      }
 
       // if (location.pathname.toLowerCase() === "/login") {
       //   navigate("/");
