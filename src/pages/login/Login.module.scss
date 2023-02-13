@@ -1,35 +1,84 @@
 @import "../../utils/sass/mixin";
 
-.login_grid_ {
-  height: 100%;
-  width: 100%;
+// .login_grid_ {
+//   height: 100%;
+//   width: 100%;
 
-  @include centerWithMargin(32px);
-  @media screen and (min-width: 480px) {
-    @include centerWithMargin(64px);
-  }
-  @media screen and (min-width: 1280px) {
-    @include centerWithMargin(200px);
-  }
-  @include gridCenter;
+//   @include centerWithMargin(32px);
+//   @media screen and (min-width: 480px) {
+//     @include centerWithMargin(64px);
+//   }
+//   @media screen and (min-width: 1280px) {
+//     @include centerWithMargin(200px);
+//   }
+//   @include gridCenter;
+// }
+
+// .login_heading_wrapper_ {
+//   font-weight: 800;
+//   text-align: center;
+//   font-size: 2.75rem;
+//   span {
+//     color: rgb(var(--accent-color));
+//     // color: white;
+//     letter-spacing: 1px;
+//     font-weight: 900;
+//     white-space: nowrap;
+//   }
+// }
+
+// .login_google_button_ {
+//   position: relative;
+//   left: 50%;
+//   transform: translateX(-50%);
+//   margin-top: 2rem;
+// }
+
+.login_layout {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-color: #6a0001;
+  overflow: hidden;
 }
 
-.login_heading_wrapper_ {
-  font-weight: 800;
-  text-align: center;
-  font-size: 2.75rem;
-  span {
-    color: rgb(var(--accent-color));
-    // color: white;
-    letter-spacing: 1px;
-    font-weight: 900;
-    white-space: nowrap;
+.login_banner_container {
+  aspect-ratio: 1/2;
+  overflow: hidden;
+  object-fit: contain;
+  filter: drop-shadow(0px 10px 15px #0000007d);
+
+  @media screen and (min-width: 320px) {
+    aspect-ratio: 9/16;
   }
+
+  @media screen and (min-width: 380px) {
+    aspect-ratio: 2/3;
+  }
+  @media screen and (min-width: 475px) {
+    aspect-ratio: 1/1;
+  }
+  @media screen and (min-width: 1280px) {
+    aspect-ratio: 16/9;
+    img {
+      width: 100%;
+    }
+  }
+
+  @media screen and (min-width: 380px) and (min-height: 675px) {
+    aspect-ratio: 3/4;
+  }
+}
+
+.login_google_button_wrapper {
+  position: absolute;
+  top: 75%;
+  width: 100%;
 }
 
 .login_google_button_ {
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  margin-top: 2rem;
+  @include positionCenter;
+
+  max-width: 500px !important;
+  width: 75% !important;
 }
