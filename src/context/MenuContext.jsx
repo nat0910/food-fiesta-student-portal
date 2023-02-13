@@ -39,6 +39,12 @@ function MenuProvider({ children }) {
         e.style.height = "0px";
       }
     });
+    document?.querySelectorAll(".menu-list-toggle").forEach((e) => {
+      const open = e.style.rotate != "0deg";
+      if (open) {
+        e.style.rotate = "0deg";
+      }
+    });
   }
 
   const handleCart = useCallback(

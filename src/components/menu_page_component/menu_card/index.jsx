@@ -36,7 +36,7 @@ export default function MenuCard({
     const cont = itemContRef.current;
     const listHeight = itemListRef?.current?.getBoundingClientRect().height;
 
-    const arrowToggle = document.getElementById(`${index}_menu_list_toggle`);
+    const arrowToggle = document.getElementById(`${index}-menu-list-toggle`);
 
     if (cont.style.height === "0px") {
       hideStallMenu();
@@ -47,6 +47,7 @@ export default function MenuCard({
       cont.style.height = "0px";
     }
   }
+
   return (
     <section id={index} className={styles.menu_card_container_} title={stall}>
       <div
@@ -56,8 +57,11 @@ export default function MenuCard({
       >
         <h2>{index}</h2>
         <div
-          id={`${index}_menu_list_toggle`}
-          className={styles.menu_card_container_lsit_toggle_}
+          id={`${index}-menu-list-toggle`}
+          className={`${styles.menu_card_container_lsit_toggle_} menu-list-toggle`}
+          style={{
+            rotate: "0deg",
+          }}
         >
           <FontAwesomeIcon icon={faCaretDown} />
         </div>
