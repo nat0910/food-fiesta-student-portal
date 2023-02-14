@@ -10,7 +10,9 @@ import styles from "./Order.module.scss";
 import OrderCardUnpaid from "../../components/order_page_component/order_page_card_unpaid";
 import OrderCardStatus from "../../components/order_page_component/order_page_card_status";
 
+import { Link } from "react-router-dom";
 import QRCode from "qrcode";
+import { toast } from "react-toastify";
 
 export default function OrderPage() {
   const navigate = useNavigate();
@@ -78,6 +80,23 @@ export default function OrderPage() {
     const menuDoc = doc(menuCol, MENU_DOC_ID);
 
     const unsubscribe = onSnapshot(menuDoc, (document) => {
+      if (orderDetails.stall_order === {}) {
+        toast(<Link to={`/your-orders/order-details/${document.id}`}>
+          #{document.data().order_id} Order Status Updated!!
+        </Link>, {
+          position: "top-left",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        })
+        console.log("UPDATED", document.data())
+
+
+      }
       // console.log("Current data: ", document.data());
       if (!document.exists()) {
         navigate("/error");
@@ -169,7 +188,7 @@ export default function OrderPage() {
               <span
                 className={
                   orderDetails?.payment_status === "paid" ||
-                  orderDetails?.payment_status === "cancelled"
+                    orderDetails?.payment_status === "cancelled"
                     ? styles.payment_success_status
                     : styles.payment_failure_status
                 }
@@ -209,33 +228,33 @@ export default function OrderPage() {
           {/* Order Status  */}
           {(orderDetails.payment_status === "paid" ||
             orderDetails.payment_status === "cancelled") && (
-            <section className={styles.order_body_order_summary_container}>
-              <h1>Order Status</h1>
-              <div className={styles.order_body_order_summary_list_container}>
-                <ul>
-                  {Object?.keys(orderDetails?.stall_order)
-                    ?.sort(orderDetails?.stall_order.sortStable)
-                    ?.map((stall_key, index) => {
-                      return (
-                        <OrderCardStatus
-                          index={index}
-                          key={stall_key}
-                          stall={stall_key}
-                          stallStatus={
-                            orderDetails?.stall_order[stall_key]["status"]
-                          }
-                          stallItems={
-                            orderDetails?.stall_order[stall_key][
+              <section className={styles.order_body_order_summary_container}>
+                <h1>Order Status</h1>
+                <div className={styles.order_body_order_summary_list_container}>
+                  <ul>
+                    {Object?.keys(orderDetails?.stall_order)
+                      ?.sort(orderDetails?.stall_order.sortStable)
+                      ?.map((stall_key, index) => {
+                        return (
+                          <OrderCardStatus
+                            index={index}
+                            key={stall_key}
+                            stall={stall_key}
+                            stallStatus={
+                              orderDetails?.stall_order[stall_key]["status"]
+                            }
+                            stallItems={
+                              orderDetails?.stall_order[stall_key][
                               "items_ordered"
-                            ]
-                          }
-                        />
-                      );
-                    })}
-                </ul>
-              </div>
-            </section>
-          )}
+                              ]
+                            }
+                          />
+                        );
+                      })}
+                  </ul>
+                </div>
+              </section>
+            )}
           {/* Order Summary */}
           <section className={styles.order_body_order_summary_container}>
             <h1>Order Summary</h1>
@@ -251,7 +270,7 @@ export default function OrderPage() {
                         stall={stall_key}
                         stallItems={
                           orderDetails?.stall_order?.[stall_key]?.[
-                            "items_ordered"
+                          "items_ordered"
                           ]
                         }
                       />
