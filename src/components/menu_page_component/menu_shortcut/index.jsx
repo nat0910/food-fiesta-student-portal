@@ -10,7 +10,7 @@ export default function MenuShortcut({ data, hideStallMenu }) {
       ?.getElementById(`${e}-list`)
       .getBoundingClientRect().height;
     document.getElementById(e).childNodes[1].style.height = `${listheight}px`;
-    
+
     document.getElementById(`${e}-menu-list-toggle`).style.rotate = "180deg";
 
     if (val > 5) {
@@ -27,8 +27,10 @@ export default function MenuShortcut({ data, hideStallMenu }) {
 
     if (element.style.display === "none") {
       element.style.display = "block";
+      document.body.style.overflowY = "hidden";
     } else {
       element.style.display = "none";
+      document.body.style.overflowY = "auto";
     }
     setShortcutShow(!shortcutShow);
   }
