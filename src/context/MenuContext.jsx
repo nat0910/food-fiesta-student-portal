@@ -51,7 +51,6 @@ function MenuProvider({ children }) {
     function (e, val, stall, item_id) {
       const bool = e.target.id === "increment-button";
       val = bool ? val + 1 : val - 1;
-
       if (val === 0) {
         delete cart[stall][item_id];
 
@@ -71,7 +70,9 @@ function MenuProvider({ children }) {
         return 0;
       }
 
-      setCart({ ...cart, [stall]: { ...cart[stall], [item_id]: val } });
+      if (val <= 15) {
+        setCart({ ...cart, [stall]: { ...cart[stall], [item_id]: val } });
+      }
     },
     [cart]
   );

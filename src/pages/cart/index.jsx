@@ -31,17 +31,22 @@ export default function Cart() {
 
   function submitOrder() {
     let text =
-      "Order once placed cannot be edited . Are you sure don't change in any item in your cart ";
+      "Order once placed cannot be edited . Are you sure don't want to change in any item in your cart ";
 
     let bool = confirm(text);
 
     if (bool) {
-      newOrder(cart).then(async (data) => {
-        const { segments } = await data.data._path;
-        setCart({});
-        setLoader(false);
-        navigate(`/your-orders/order-details/${segments?.[1]}`);
-      });
+      newOrder(cart)
+        .then(async (data) => {
+          const { segments } = await data.data._path;
+          setCart({});
+          setLoader(false);
+          navigate(`/your-orders/order-details/${segments?.[1]}`);
+        })
+        .catch((err) => {
+          setLoader(false);
+          throw err;
+        });
     }
     if (!bool) {
       setLoader(false);
