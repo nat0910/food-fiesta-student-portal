@@ -7,6 +7,7 @@ import Banner450w from "../../assets/images/login/Frame-450w.png";
 import Banner900w from "../../assets/images/login/Frame-900w.png";
 import Banner1280w from "../../assets/images/login/Frame-1280w.png";
 import Banner1450w from "../../assets/images/login/Frame-1450w.png";
+import { useEffect, useState } from "react";
 
 // export default function Login() {
 //   const { handleGoogleLogin } = useAuth();
@@ -32,6 +33,24 @@ import Banner1450w from "../../assets/images/login/Frame-1450w.png";
 // }
 
 export default function Login() {
+  const [dimensions, setDimensions] = useState({
+    height: window.innerHeight,
+    width: window.innerWidth
+  })
+  useEffect(() => {
+    function handleResize() {
+      setDimensions({
+        height: window.innerHeight,
+        width: window.innerWidth
+      })
+
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    return () => window.removeEventListener('resize', handleResize)
+  }, [window.innerHeight, window.innerWidth])
+
   const { handleGoogleLogin } = useAuth();
   return (
     <>
@@ -39,12 +58,12 @@ export default function Login() {
         <div className={styles.login_banner_container}>
           <img
             src={
-              (window.innerWidth > 1280 && Banner1450w) ||
-              (window.innerWidth < 1280 &&
-                window.innerWidth > 825 &&
+              (dimensions.width > 1280 && Banner1450w) ||
+              (dimensions.width < 1280 &&
+                dimensions.width > 825 &&
                 Banner1280w) ||
-              (window.innerWidth > 475 && Banner900w) ||
-              (window.innerWidth < 475 && Banner450w)
+              (dimensions.width > 475 && Banner900w) ||
+              (dimensions.width < 475 && Banner450w)
             }
             alt=""
           />
