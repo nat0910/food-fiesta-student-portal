@@ -12,10 +12,10 @@ import OrderCardStatus from "../../components/order_page_component/order_page_ca
 
 import { Link } from "react-router-dom";
 
-import { QRCode } from 'react-qrcode-logo';
+import { QRCode } from "react-qrcode-logo";
 
 import { toast } from "react-toastify";
-import FFLOGO from "../../assets/images/FF_logo_.png"
+import FFLOGO from "../../assets/images/FF_logo_white_back.png";
 export default function OrderPage() {
   const navigate = useNavigate();
 
@@ -82,22 +82,23 @@ export default function OrderPage() {
     const menuDoc = doc(menuCol, MENU_DOC_ID);
 
     const unsubscribe = onSnapshot(menuDoc, (document) => {
-      if (orderDetails.stall_order === {}) {
-        toast(<Link to={`/your-orders/order-details/${document.id}`}>
-          #{document.data().order_id} Order Status Updated!!
-        </Link>, {
-          position: "top-left",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        })
-        console.log("UPDATED", document.data())
-
-
+      if (orderDetails.stall_order?.payment_status === {}) {
+        toast(
+          <Link to={`/your-orders/order-details/${document.id}`}>
+            #{document.data().order_id} Order Status Updated!!
+          </Link>,
+          {
+            position: "top-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          }
+        );
+        console.log("UPDATED", document.data());
       }
       // console.log("Current data: ", document.data());
       if (!document.exists()) {
@@ -111,26 +112,6 @@ export default function OrderPage() {
     };
   }, []);
   const [imageUrl, setImageUrl] = useState("");
-
-  // useEffect(() => {
-  //   const generateQrCode = async () => {
-  //     if (!orderDetails.order_id) {
-  //       return;
-  //     } else {
-  //       try {
-  //         const response = await QRCode.toDataURL(
-  //           orderDetails?.order_id?.toString(),
-  //           { width: 232, margin: 0 }
-  //         );
-  //         setImageUrl(response);
-  //       } catch (error) {
-  //         console.log(error);
-  //       }
-  //     }
-  //   };
-
-  //   generateQrCode();
-  // }, [orderDetails]);
 
   useLayoutEffect(() => {
     function layoutSetter() {
@@ -190,7 +171,7 @@ export default function OrderPage() {
               <span
                 className={
                   orderDetails?.payment_status === "paid" ||
-                    orderDetails?.payment_status === "cancelled"
+                  orderDetails?.payment_status === "cancelled"
                     ? styles.payment_success_status
                     : styles.payment_failure_status
                 }
@@ -208,7 +189,13 @@ export default function OrderPage() {
             role={""}
             className={styles.order_body_qr_code_container}
           >
-            <QRCode size="232" fgColor="#7E1F1F" value={orderDetails?.order_id?.toString()} logoImage={FFLOGO} removeQrCodeBehindLogo />
+            <QRCode
+              size="232"
+              fgColor="#7E1F1F"
+              value={orderDetails?.order_id?.toString()}
+              logoImage={FFLOGO}
+              logoWidth={55}
+            />
             {/* <img src={imageUrl} alt="" /> */}
             <p>{`Order id : ${orderDetails?.order_id}`}</p>
           </div>
@@ -231,33 +218,33 @@ export default function OrderPage() {
           {/* Order Status  */}
           {(orderDetails.payment_status === "paid" ||
             orderDetails.payment_status === "cancelled") && (
-              <section className={styles.order_body_order_summary_container}>
-                <h1>Order Status</h1>
-                <div className={styles.order_body_order_summary_list_container}>
-                  <ul>
-                    {Object?.keys(orderDetails?.stall_order)
-                      ?.sort(orderDetails?.stall_order.sortStable)
-                      ?.map((stall_key, index) => {
-                        return (
-                          <OrderCardStatus
-                            index={index}
-                            key={stall_key}
-                            stall={stall_key}
-                            stallStatus={
-                              orderDetails?.stall_order[stall_key]["status"]
-                            }
-                            stallItems={
-                              orderDetails?.stall_order[stall_key][
+            <section className={styles.order_body_order_summary_container}>
+              <h1>Order Status</h1>
+              <div className={styles.order_body_order_summary_list_container}>
+                <ul>
+                  {Object?.keys(orderDetails?.stall_order)
+                    ?.sort(orderDetails?.stall_order.sortStable)
+                    ?.map((stall_key, index) => {
+                      return (
+                        <OrderCardStatus
+                          index={index}
+                          key={stall_key}
+                          stall={stall_key}
+                          stallStatus={
+                            orderDetails?.stall_order[stall_key]["status"]
+                          }
+                          stallItems={
+                            orderDetails?.stall_order[stall_key][
                               "items_ordered"
-                              ]
-                            }
-                          />
-                        );
-                      })}
-                  </ul>
-                </div>
-              </section>
-            )}
+                            ]
+                          }
+                        />
+                      );
+                    })}
+                </ul>
+              </div>
+            </section>
+          )}
           {/* Order Summary */}
           <section className={styles.order_body_order_summary_container}>
             <h1>Order Summary</h1>
@@ -273,7 +260,7 @@ export default function OrderPage() {
                         stall={stall_key}
                         stallItems={
                           orderDetails?.stall_order?.[stall_key]?.[
-                          "items_ordered"
+                            "items_ordered"
                           ]
                         }
                       />
