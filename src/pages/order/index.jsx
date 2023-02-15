@@ -11,9 +11,11 @@ import OrderCardUnpaid from "../../components/order_page_component/order_page_ca
 import OrderCardStatus from "../../components/order_page_component/order_page_card_status";
 
 import { Link } from "react-router-dom";
-import QRCode from "qrcode";
-import { toast } from "react-toastify";
 
+import { QRCode } from 'react-qrcode-logo';
+
+import { toast } from "react-toastify";
+import FFLOGO from "../../assets/images/FF_logo_.png"
 export default function OrderPage() {
   const navigate = useNavigate();
 
@@ -110,25 +112,25 @@ export default function OrderPage() {
   }, []);
   const [imageUrl, setImageUrl] = useState("");
 
-  useEffect(() => {
-    const generateQrCode = async () => {
-      if (!orderDetails.order_id) {
-        return;
-      } else {
-        try {
-          const response = await QRCode.toDataURL(
-            orderDetails?.order_id?.toString(),
-            { width: 232, margin: 0 }
-          );
-          setImageUrl(response);
-        } catch (error) {
-          console.log(error);
-        }
-      }
-    };
+  // useEffect(() => {
+  //   const generateQrCode = async () => {
+  //     if (!orderDetails.order_id) {
+  //       return;
+  //     } else {
+  //       try {
+  //         const response = await QRCode.toDataURL(
+  //           orderDetails?.order_id?.toString(),
+  //           { width: 232, margin: 0 }
+  //         );
+  //         setImageUrl(response);
+  //       } catch (error) {
+  //         console.log(error);
+  //       }
+  //     }
+  //   };
 
-    generateQrCode();
-  }, [orderDetails]);
+  //   generateQrCode();
+  // }, [orderDetails]);
 
   useLayoutEffect(() => {
     function layoutSetter() {
@@ -206,7 +208,8 @@ export default function OrderPage() {
             role={""}
             className={styles.order_body_qr_code_container}
           >
-            <img src={imageUrl} alt="" />
+            <QRCode size="232" fgColor="#7E1F1F" value={orderDetails?.order_id?.toString()} logoImage={FFLOGO} removeQrCodeBehindLogo />
+            {/* <img src={imageUrl} alt="" /> */}
             <p>{`Order id : ${orderDetails?.order_id}`}</p>
           </div>
           {/* Procced to payment counter */}
