@@ -38,8 +38,15 @@
   width: 100%;
   height: 100%;
   position: relative;
-  background-color: #6a0001;
   overflow: hidden;
+  background-color: #6a0001;
+  background-image: url("../../assets/images/login/red-background-mobile.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  @media screen and (min-width: 475px) {
+    background-image: url("../../assets/images/login/red-background-desktop.png");
+    background-repeat: repeat-y;
+  }
 }
 
 .login_banner_container {

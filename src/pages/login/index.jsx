@@ -8,6 +8,7 @@ import Banner900w from "../../assets/images/login/Frame-900w.png";
 import Banner1280w from "../../assets/images/login/Frame-1280w.png";
 import Banner1450w from "../../assets/images/login/Frame-1450w.png";
 import { useEffect, useState } from "react";
+import LoadingScreen from "../../components/loading_screen_component/loading_screen";
 
 // export default function Login() {
 //   const { handleGoogleLogin } = useAuth();
@@ -35,46 +36,49 @@ import { useEffect, useState } from "react";
 export default function Login() {
   const [dimensions, setDimensions] = useState({
     height: window.innerHeight,
-    width: window.innerWidth
-  })
+    width: window.innerWidth,
+  });
   useEffect(() => {
     function handleResize() {
       setDimensions({
         height: window.innerHeight,
-        width: window.innerWidth
-      })
-
+        width: window.innerWidth,
+      });
     }
 
-    window.addEventListener('resize', handleResize)
+    window.addEventListener("resize", handleResize);
 
-    return () => window.removeEventListener('resize', handleResize)
-  }, [window.innerHeight, window.innerWidth])
+    return () => window.removeEventListener("resize", handleResize);
+  }, [window.innerHeight, window.innerWidth]);
 
-  const { handleGoogleLogin } = useAuth();
+  const { handleGoogleLogin, loginLoading } = useAuth();
   return (
     <>
-      <div className={styles.login_layout}>
-        <div className={styles.login_banner_container}>
-          <img
-            src={
-              (dimensions.width > 1280 && Banner1450w) ||
-              (dimensions.width < 1280 &&
-                dimensions.width > 825 &&
-                Banner1280w) ||
-              (dimensions.width > 475 && Banner900w) ||
-              (dimensions.width < 475 && Banner450w)
-            }
-            alt=""
-          />
+      {loginLoading ? (
+        <LoadingScreen />
+      ) : (
+        <div className={styles.login_layout}>
+          <div className={styles.login_banner_container}>
+            <img
+              src={
+                (dimensions.width > 1280 && Banner1450w) ||
+                (dimensions.width < 1280 &&
+                  dimensions.width > 825 &&
+                  Banner1280w) ||
+                (dimensions.width > 475 && Banner900w) ||
+                (dimensions.width < 475 && Banner450w)
+              }
+              alt=""
+            />
+          </div>
+          <div className={styles.login_google_button_wrapper}>
+            <GoogleButton
+              onClick={() => handleGoogleLogin()}
+              className={styles.login_google_button_}
+            />
+          </div>
         </div>
-        <div className={styles.login_google_button_wrapper}>
-          <GoogleButton
-            onClick={() => handleGoogleLogin()}
-            className={styles.login_google_button_}
-          />
-        </div>
-      </div>
+      )}
     </>
   );
 }

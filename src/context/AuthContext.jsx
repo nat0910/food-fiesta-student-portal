@@ -17,6 +17,7 @@ const AuthContext = createContext();
 
 function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
+  const [loginLoading, setLoginLoading] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -28,7 +29,7 @@ function AuthProvider({ children }) {
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
         const user = result.user;
-
+        setLoginLoading(true);
         setUser(user);
       })
       .then(() => {
@@ -38,6 +39,7 @@ function AuthProvider({ children }) {
           }
         });
         navigate("/");
+        setLoginLoading(false);
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -54,7 +56,7 @@ function AuthProvider({ children }) {
         // Sign-out successful.
         localStorage.removeItem("cartData");
         console.log("You have successful sign out!!");
-        window.location.reload()
+        window.location.reload();
       })
       .catch((error) => {
         // An error happened.
@@ -87,7 +89,14 @@ function AuthProvider({ children }) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, handleGoogleLogin, handleSignOut }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        handleGoogleLogin,
+        handleSignOut,
+        loginLoading,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
