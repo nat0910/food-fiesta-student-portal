@@ -16,15 +16,12 @@ export default function Menu() {
         {Object.keys(menuList)
           .sort(menuList.sortStable)
           .map((stall_key, index) => {
-            // console.log("stalls", menuList[stall_key], index);
-            // console.log(stall_key);
-
             return (
               <MenuCard
                 key={index}
                 stallItems={menuList[stall_key]}
                 index={stall_key}
-                stall={`stall${index + 1}`}
+                stall={stall_key}
                 hideStallMenu={hideStallMenu}
                 cart={cart}
                 setCart={setCart}
