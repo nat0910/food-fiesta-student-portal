@@ -1,12 +1,15 @@
 import MenuCard from "../../components/menu_page_component/menu_card";
 import MenuShortcut from "../../components/menu_page_component/menu_shortcut";
+import LoadingScreenFrenchFries from "../../components/loading_screen_component/loading_screen_french_fries";
 
 import { useMenu } from "../../context/MenuContext";
 
 export default function Menu() {
   const { menuList, hideStallMenu, cart, setCart, handleCart } = useMenu();
 
-  return (
+  return Object.keys(menuList).length === 0 ? (
+    <LoadingScreenFrenchFries />
+  ) : (
     <>
       <div
         style={{
