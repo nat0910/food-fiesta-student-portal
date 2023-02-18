@@ -3,7 +3,8 @@
 import { initializeApp, getApps } from "firebase/app";
 import {
   getFirestore,
-  connectFirestoreEmulator} from "firebase/firestore";
+  connectFirestoreEmulator
+} from "firebase/firestore";
 
 import {
   connectFunctionsEmulator,
@@ -13,7 +14,8 @@ import {
 
 import {
   getAuth,
-  connectAuthEmulator} from "firebase/auth";
+  connectAuthEmulator
+} from "firebase/auth";
 
 
 
@@ -39,12 +41,14 @@ import { initializeAppCheck, ReCaptchaV3Provider } from "firebase/app-check";
 function initializeServices() {
   const isConfigured = getApps().length > 0;
   const firebaseApp = initializeApp(firebaseConfig);
-  const appCheck = initializeAppCheck(firebaseApp, {
-    provider: new ReCaptchaV3Provider('6Le65I0kAAAAANibM2WZrCQdBJWIVzn7AKz_H6j4'),
-    // Optional argument. If true, the SDK automatically refreshes App Check
-    // tokens as needed.
-    isTokenAutoRefreshEnabled: true
-  })
+  if (location.hostname !== "localhost") {
+    const appCheck = initializeAppCheck(firebaseApp, {
+      provider: new ReCaptchaV3Provider('6Le65I0kAAAAANibM2WZrCQdBJWIVzn7AKz_H6j4'),
+      // Optional argument. If true, the SDK automatically refreshes App Check
+      // tokens as needed.
+      isTokenAutoRefreshEnabled: true
+    })
+  }
   const firestore = getFirestore(firebaseApp);
   const auth = getAuth(firebaseApp);
   const functions = getFunctions(firebaseApp)
