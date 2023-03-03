@@ -103,16 +103,20 @@ export default function OrderPage() {
         } else {
           if (Notification.permission === "granted") {
             var options = {
-              body: "#" + change.doc.data().order_id + ' Order Status Updated!!',
-              dir: 'ltr',
+              body:
+                "#" + change.doc.data().order_id + " Order Status Updated!!",
+              dir: "ltr",
             };
 
-            const notification = new Notification('Order Status Updated!!', options)
-            notification.onclick = function () {
-              navigate(`/your-orders/order-details/${document.id}`)
+            const notification = new Notification(
+              "Order Status Updated!!",
+              options
+            );
+            notification.onclick = function (e) {
+              e.preventDefault();
+              window.open("http://www.mozilla.org", "_blank");
             };
           }
-
         }
         console.log("UPDATED", document.data());
       }
@@ -187,7 +191,7 @@ export default function OrderPage() {
               <span
                 className={
                   orderDetails?.payment_status === "paid" ||
-                    orderDetails?.payment_status === "cancelled"
+                  orderDetails?.payment_status === "cancelled"
                     ? styles.payment_success_status
                     : styles.payment_failure_status
                 }
@@ -234,33 +238,33 @@ export default function OrderPage() {
           {/* Order Status  */}
           {(orderDetails.payment_status === "paid" ||
             orderDetails.payment_status === "cancelled") && (
-              <section className={styles.order_body_order_summary_container}>
-                <h1>Order Status</h1>
-                <div className={styles.order_body_order_summary_list_container}>
-                  <ul>
-                    {Object?.keys(orderDetails?.stall_order)
-                      ?.sort(orderDetails?.stall_order.sortStable)
-                      ?.map((stall_key, index) => {
-                        return (
-                          <OrderCardStatus
-                            index={index}
-                            key={stall_key}
-                            stall={stall_key}
-                            stallStatus={
-                              orderDetails?.stall_order[stall_key]["status"]
-                            }
-                            stallItems={
-                              orderDetails?.stall_order[stall_key][
+            <section className={styles.order_body_order_summary_container}>
+              <h1>Order Status</h1>
+              <div className={styles.order_body_order_summary_list_container}>
+                <ul>
+                  {Object?.keys(orderDetails?.stall_order)
+                    ?.sort(orderDetails?.stall_order.sortStable)
+                    ?.map((stall_key, index) => {
+                      return (
+                        <OrderCardStatus
+                          index={index}
+                          key={stall_key}
+                          stall={stall_key}
+                          stallStatus={
+                            orderDetails?.stall_order[stall_key]["status"]
+                          }
+                          stallItems={
+                            orderDetails?.stall_order[stall_key][
                               "items_ordered"
-                              ]
-                            }
-                          />
-                        );
-                      })}
-                  </ul>
-                </div>
-              </section>
-            )}
+                            ]
+                          }
+                        />
+                      );
+                    })}
+                </ul>
+              </div>
+            </section>
+          )}
           {/* Order Summary */}
           <section className={styles.order_body_order_summary_container}>
             <h1>Order Summary</h1>
@@ -276,7 +280,7 @@ export default function OrderPage() {
                         stall={stall_key}
                         stallItems={
                           orderDetails?.stall_order?.[stall_key]?.[
-                          "items_ordered"
+                            "items_ordered"
                           ]
                         }
                       />

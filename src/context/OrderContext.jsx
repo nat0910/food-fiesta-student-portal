@@ -10,7 +10,8 @@ import { getFirebase } from "../utils/firebaseConfig";
 import { useAuth } from "./AuthContext";
 
 import { Link } from "react-router-dom";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
+
 const OrderHistoryContext = createContext();
 
 function OrderProvider({ children }) {
@@ -28,38 +29,55 @@ function OrderProvider({ children }) {
       orderBy("order_placed_timestamp", "desc")
     );
 
+    async function getSericeRegister() {
+      const e = await navigator.serviceWorker.getRegistration();
+      return e;
+    }
+
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       querySnapshot.docChanges().forEach((change) => {
-
         if (change.type === "modified") {
-          toast(<Link to={`/your-orders/order-details/${change.doc.id}`}>
-            #{change.doc.data().order_id} Order Status Updated!!
-          </Link>, {
-            position: "top-left",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          })
+          toast(
+            <Link to={`/your-orders/order-details/${change.doc.id}`}>
+              #{change.doc.data().order_id} Order Status Updated!!
+            </Link>,
+            {
+              position: "top-left",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            }
+          );
           if (!("Notification" in window)) {
             console.log("Browser does not support desktop notification");
           } else {
             if (Notification.permission === "granted") {
               var options = {
-                body: "#" + change.doc.data().order_id + ' Order Status Updated!!',
-                dir: 'ltr',
+                body:
+                  "#" + change.doc.data().order_id + " Order Status Updated!!",
+                dir: "ltr",
               };
-  
-              const notification = new Notification('Order Status Updated!!', options)
-              notification.onclick = function () {
-                navigate(`/your-orders/order-details/${document.id}`)
+
+              const notification = new Notification(
+                "Order Status Updated!!",
+                options
+              );
+
+              getSericeRegister().then((service) => {
+                service.showNotification("Order Status Updated!!", options);
+              });
+
+              notification.onclick = function (e) {
+                e.preventDefault();
+                window.open("http://www.mozilla.org", "_blank");
               };
             }
           }
-          console.log("UPDATED", change.doc.data())
+          console.log("UPDATED", change.doc.data());
         }
       });
       setOrderHistoryData(

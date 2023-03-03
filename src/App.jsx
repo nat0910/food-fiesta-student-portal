@@ -26,16 +26,30 @@ const LoginNumber = lazy(() =>
 );
 
 function App() {
+  async function setServiceRegister() {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker
+        .register("/notification.js")
+        .then((registration) => {
+          console.log("Service worker registration succeeded:", registration);
+        })
+        .catch((err) => {
+          console.log("Serice worker registration failed : ", err);
+        });
+    } else {
+      console.error("Service workers are not supported.");
+    }
+  }
+
   useEffect(() => {
     if (!("Notification" in window)) {
       console.log("Browser does not support desktop notification");
     } else {
-      console.log("Notifications are supported");
       Notification.requestPermission();
+      setServiceRegister();
     }
-  }, [])
+  }, []);
 
-  
   return (
     <Routes>
       <Route element={<SharedLayout />} path="/">
