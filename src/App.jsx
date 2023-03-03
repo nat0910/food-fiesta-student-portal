@@ -1,4 +1,4 @@
-import { lazy } from "react";
+import { lazy, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 
 // import pages
@@ -26,6 +26,16 @@ const LoginNumber = lazy(() =>
 );
 
 function App() {
+  useEffect(() => {
+    if (!("Notification" in window)) {
+      console.log("Browser does not support desktop notification");
+    } else {
+      console.log("Notifications are supported");
+      Notification.requestPermission();
+    }
+  }, [])
+
+  
   return (
     <Routes>
       <Route element={<SharedLayout />} path="/">

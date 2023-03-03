@@ -44,6 +44,21 @@ function OrderProvider({ children }) {
             progress: undefined,
             theme: "light",
           })
+          if (!("Notification" in window)) {
+            console.log("Browser does not support desktop notification");
+          } else {
+            if (Notification.permission === "granted") {
+              var options = {
+                body: "#" + change.doc.data().order_id + ' Order Status Updated!!',
+                dir: 'ltr',
+              };
+  
+              const notification = new Notification('Order Status Updated!!', options)
+              notification.onclick = function () {
+                navigate(`/your-orders/order-details/${document.id}`)
+              };
+            }
+          }
           console.log("UPDATED", change.doc.data())
         }
       });
