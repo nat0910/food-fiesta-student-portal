@@ -18,8 +18,8 @@ export default function MenuShortcut({ data, hideStallMenu }) {
       MenuShowHide();
       return 0;
     }
-    MenuShowHide();
     document.getElementById(`${e}-header`).scrollIntoView(true);
+    MenuShowHide();
   }
 
   function MenuShowHide() {
