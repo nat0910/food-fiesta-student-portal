@@ -31,13 +31,13 @@ function App() {
       navigator.serviceWorker
         .register("/notification.js")
         .then((registration) => {
-          console.log("Service worker registration succeeded:", registration);
+//           console.log("Service worker registration succeeded:", registration);
         })
         .catch((err) => {
-          console.log("Serice worker registration failed : ", err);
+//           console.log("Serice worker registration failed : ", err);
         });
     } else {
-      console.error("Service workers are not supported.");
+//       console.error("Service workers are not supported.");
     }
   }
 
