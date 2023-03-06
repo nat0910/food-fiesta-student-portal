@@ -39,6 +39,15 @@
     font-size: 1.35rem;
     letter-spacing: 1px;
     // font-family: "Satoshi", sans-serif;
+
+    @media screen and (max-width: 300px) {
+      max-width: 175px;
+      display: block;
+      overflow: hidden;
+      -webkit-line-clamp: 1;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   }
 
   @include centerWithMargin(32px);
@@ -116,6 +125,21 @@
     font-size: 1.1rem;
     font-weight: 600;
     color: black;
+
+    @media screen and (max-width: 380px) {
+      max-width: 160px;
+      display: block;
+      overflow: hidden;
+      -webkit-line-clamp: 2;
+      text-overflow: ellipsis;
+      word-wrap: break-word;
+      // white-space: nowrap;
+    }
+
+    @media screen and (max-width: 300px) {
+      -webkit-line-clamp: 0;
+      max-width: 90px;
+    }
   }
 }
 

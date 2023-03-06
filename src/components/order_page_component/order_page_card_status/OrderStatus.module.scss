@@ -17,6 +17,15 @@
     font-family: "Satoshi", sans-serif;
     display: inline-block;
     vertical-align: middle;
+
+    @media screen and (max-width: 300px) {
+      max-width: 110px;
+      display: block;
+      overflow: hidden;
+      -webkit-line-clamp: 1;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   }
 }
 
