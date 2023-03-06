@@ -14,6 +14,8 @@ import { Link } from "react-router-dom";
 
 import { QRCode } from "react-qrcode-logo";
 
+import StallNames from "../../utils/data/stallNames.json";
+
 import { toast } from "react-toastify";
 import FFLOGO from "../../assets/images/FF_logo_white_back.png";
 export default function OrderPage() {
@@ -56,7 +58,7 @@ export default function OrderPage() {
     let str = "";
     Object.keys(orderDetails?.stall_order).forEach((stall_key) => {
       if (orderDetails?.stall_order?.[stall_key]?.["status"] === "cancelled") {
-        str = str + `${stall_key}`;
+        str = str + `${StallNames?.[stall_key]?.["name"] || stall_key}, `;
       }
     });
     return str;
@@ -230,7 +232,7 @@ export default function OrderPage() {
             <div className={styles.order_body_directing_text_container}>
               <h3>
                 Proceed to the refund counter, to collect your refund for{" "}
-                <span>{stallCancelled()} </span>.
+                <span>{stallCancelled()} </span>
               </h3>
             </div>
           )}
