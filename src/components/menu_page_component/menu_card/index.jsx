@@ -57,7 +57,7 @@ export default function MenuCard({
         className={styles.menu_card_container_header_}
         onClick={() => showhideList()}
       >
-        <h2>{StallNames[index]["name"]}</h2>
+        <h2>{StallNames[index]["name"] || index}</h2>
         <div
           id={`${index}-menu-list-toggle`}
           className={`${styles.menu_card_container_lsit_toggle_} menu-list-toggle`}

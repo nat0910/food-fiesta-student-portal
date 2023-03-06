@@ -158,7 +158,8 @@ export default function OrderHistoryCard({ data }) {
                         styles.order_history_cart_containe_body_stall_key
                       }
                     >
-                      {StallNames[shortData()?.[item_key]?.stall_key]["name"]}
+                      {StallNames[shortData()?.[item_key]?.stall_key]["name"] ||
+                        shortData()?.[item_key]?.stall_key}
                     </p>
                     <div
                       className={
