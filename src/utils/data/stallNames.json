@@ -1,18 +1,18 @@
 {
   "stall-01": {
-    "name": "Veg Fast Food Corner"
+    "name": "Shakes & More"
   },
   "stall-02": {
-    "name": "Blended Magic"
+    "name": "Veg Fast Food Corner"
   },
   "stall-03": {
-    "name": "DP's Kitchen"
+    "name": "Blended Magic"
   },
   "stall-04": {
-    "name": "David Beggar"
+    "name": "DP's Kitchen"
   },
   "stall-05": {
-    "name": "Martin Girish"
+    "name": "Cocoland"
   },
   "stall-06": {
     "name": "David Beggar"
@@ -21,15 +21,18 @@
     "name": "Martin Girish"
   },
   "stall-08": {
-    "name": "David Beggar"
+    "name": "Mousse & CakePop"
   },
   "stall-09": {
-    "name": "Martin Girish"
+    "name": "Chat Corner"
+  },
+  "stall-10": {
+    "name": "Canapes"
   },
   "stall-11": {
-    "name": "David Beggar"
+    "name": "Soda Corner"
   },
   "stall-12": {
-    "name": "David Beggar"
+    "name": "Chinese Bhel"
   }
 }
