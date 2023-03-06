@@ -42,7 +42,7 @@ export default function OrderCardUnpaid({ index, stallItems, stall }) {
         onClick={() => showhideList()}
       >
         <div className={styles.order_unpaid_container_header}>
-          <h3>{StallNames[stall]["name"] || stall}</h3>
+          <h3>{StallNames?.[stall]?.["name"] || stall}</h3>
           <FontAwesomeIcon
             fixedWidth
             icon={faAngleDown}

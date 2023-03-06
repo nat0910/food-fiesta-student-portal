@@ -12,7 +12,7 @@ export default function OrderCardStatus({
     <li key={stall} className={styles.order_status_container}>
       <div className={styles.order_status_container_header_container}>
         <div className={styles.order_status_container_header}>
-          <h3>{StallNames[stall]["name"] || stall}</h3>
+          <h3>{StallNames?.[stall]?.["name"] || stall}</h3>
         </div>
         <div className={styles.order_status_container_body}>
           <span

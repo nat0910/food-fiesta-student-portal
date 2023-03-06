@@ -104,7 +104,7 @@ export default function MenuShortcut({ data, hideStallMenu }) {
                     onClick={() => handleMenuShortcut(item, totalItems())}
                     id={`${item}-shortcut`}
                   >
-                    <p>{StallNames[item]["name"] || item}</p>
+                    <p>{StallNames?.[item]?.["name"] || item}</p>
                     <p>{totalItems()}</p>
                   </li>
                 );
