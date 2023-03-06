@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import styles from "./OrderHistoryCard.module.scss";
 
+import StallNames from "../../../utils/data/stallNames.json";
+
 export default function OrderHistoryCard({ data }) {
   function getOrderDate(val) {
     const date = new Date(val);
@@ -156,7 +158,7 @@ export default function OrderHistoryCard({ data }) {
                         styles.order_history_cart_containe_body_stall_key
                       }
                     >
-                      {shortData()?.[item_key]?.stall_key}
+                      {StallNames[shortData()?.[item_key]?.stall_key]["name"]}
                     </p>
                     <div
                       className={

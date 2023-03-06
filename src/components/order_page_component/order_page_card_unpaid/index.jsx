@@ -4,6 +4,8 @@ import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import styles from "./OrderUnpaid.module.scss";
 import { useRef } from "react";
 
+import StallNames from "../../../utils/data/stallNames.json";
+
 export default function OrderCardUnpaid({ index, stallItems, stall }) {
   const orderContRef = useRef(null);
   const orderListRef = useRef(null);
@@ -40,7 +42,7 @@ export default function OrderCardUnpaid({ index, stallItems, stall }) {
         onClick={() => showhideList()}
       >
         <div className={styles.order_unpaid_container_header}>
-          <h3>{stall}</h3>
+          <h3>{StallNames[stall]["name"]}</h3>
           <FontAwesomeIcon
             fixedWidth
             icon={faAngleDown}

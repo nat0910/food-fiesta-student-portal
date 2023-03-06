@@ -4,6 +4,8 @@ import styles from "./MenuCard.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
+import StallNames from "../../../utils/data/stallNames.json";
+
 export default function MenuCard({
   stallItems,
   index,
@@ -55,7 +57,7 @@ export default function MenuCard({
         className={styles.menu_card_container_header_}
         onClick={() => showhideList()}
       >
-        <h2>{index}</h2>
+        <h2>{StallNames[index]["name"]}</h2>
         <div
           id={`${index}-menu-list-toggle`}
           className={`${styles.menu_card_container_lsit_toggle_} menu-list-toggle`}

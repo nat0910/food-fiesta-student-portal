@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import styles from "./MenuShortcut.module.scss";
 
+import StallNames from "../../../utils/data/stallNames.json";
+
 export default function MenuShortcut({ data, hideStallMenu }) {
   const [shortcutShow, setShortcutShow] = useState(false);
 
@@ -102,7 +104,7 @@ export default function MenuShortcut({ data, hideStallMenu }) {
                     onClick={() => handleMenuShortcut(item, totalItems())}
                     id={`${item}-shortcut`}
                   >
-                    <p>{item}</p>
+                    <p>{StallNames[item]["name"]}</p>
                     <p>{totalItems()}</p>
                   </li>
                 );
