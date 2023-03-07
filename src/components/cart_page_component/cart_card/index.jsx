@@ -13,12 +13,12 @@ export default function CartCard({
         return (
           <li key={index} className={styles.cart_item_details_container_}>
             <div className={styles.cart_item_details_container_header}>
-              <p role={"heading"}>{menuList[item_id]["name"]}</p>
+              <p role={"heading"}>{menuList?.[item_id]?.["name"]}</p>
               <p>
                 {new Intl.NumberFormat("en-IN", {
                   currency: "INR",
                   style: "currency",
-                }).format(menuList[item_id]["price"])}
+                }).format(menuList?.[item_id]?.["price"])}
               </p>
             </div>
 
@@ -29,16 +29,16 @@ export default function CartCard({
                 <button
                   id="decrement-button"
                   onClick={(e) => {
-                    handleCart(e, stallItems[item_id], stall, item_id);
+                    handleCart(e, stallItems?.[item_id], stall, item_id);
                   }}
                 >
                   &#8722;
                 </button>
-                <p>{stallItems[item_id]}</p>
+                <p>{stallItems?.[item_id]}</p>
                 <button
                   id="increment-button"
                   onClick={(e) => {
-                    handleCart(e, stallItems[item_id], stall, item_id);
+                    handleCart(e, stallItems?.[item_id], stall, item_id);
                   }}
                 >
                   &#43;
@@ -52,7 +52,7 @@ export default function CartCard({
                 {new Intl.NumberFormat("en-IN", {
                   currency: "INR",
                   style: "currency",
-                }).format(menuList[item_id]["price"] * stallItems[item_id])}
+                }).format(menuList?.[item_id]?.["price"] * stallItems?.[item_id])}
               </p>
             </div>
           </li>
