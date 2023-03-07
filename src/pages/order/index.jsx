@@ -224,7 +224,13 @@ export default function OrderPage() {
           {/* Procced to payment counter */}
           {orderDetails.payment_status === "unpaid" && (
             <div className={styles.order_body_directing_text_container}>
-              <h3>Proceed to the Payment Counter</h3>
+              <h3
+                style={{
+                  textTransform: "capitalize",
+                }}
+              >
+                Proceed to the Payment Counter, to pay for your order
+              </h3>
             </div>
           )}
           {/* Procced to refund counter */}
