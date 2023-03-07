@@ -82,12 +82,12 @@ export default function OrderCardUnpaid({ index, stallItems, stall }) {
                       styles.order_unpaid_container_body_container_list_items_header
                     }
                   >
-                    <p role={"heading"}>{stallItems[item_key]["name"]}</p>
+                    <p role={"heading"}>{stallItems?.[item_key]?.["name"]}</p>
                     <p>
                       {new Intl.NumberFormat("en-IN", {
                         currency: "INR",
                         style: "currency",
-                      }).format(stallItems[item_key]["price"])}
+                      }).format(stallItems?.[item_key]?.["price"])}
                     </p>
                   </div>
                   {/* Item Quantity */}
@@ -97,7 +97,7 @@ export default function OrderCardUnpaid({ index, stallItems, stall }) {
                     }
                   >
                     <p>
-                      x <span>{stallItems[item_key]["qty"]}</span>
+                      x <span>{stallItems?.[item_key]?.["qty"]}</span>
                     </p>
                   </div>
                   {/* Item Quantity X  Item Price */}
@@ -110,8 +110,8 @@ export default function OrderCardUnpaid({ index, stallItems, stall }) {
                       currency: "INR",
                       style: "currency",
                     }).format(
-                      stallItems[item_key]["price"] *
-                        stallItems[item_key]["qty"]
+                      stallItems?.[item_key]?.["price"] *
+                        stallItems?.[item_key]?.["qty"]
                     )}
                   </p>
                 </div>

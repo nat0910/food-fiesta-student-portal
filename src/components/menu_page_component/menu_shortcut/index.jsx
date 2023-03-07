@@ -88,8 +88,8 @@ export default function MenuShortcut({ data, hideStallMenu }) {
                 const totalItems = () => {
                   let i = 0;
                   for (const key in data[item]) {
-                    if (Object.hasOwnProperty.call(data[item], key)) {
-                      const element = [data[item][key]].length;
+                    if (Object.hasOwnProperty.call(data?.[item], key)) {
+                      const element = [data?.[item]?.[key]].length;
                       i = i + element;
                     }
                   }

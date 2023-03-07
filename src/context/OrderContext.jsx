@@ -71,13 +71,13 @@ function OrderProvider({ children }) {
                 service.showNotification("Order Status Updated!!", options);
               });
 
-              notification.onclick = function (e) {
-                e.preventDefault();
-                window.open("http://www.mozilla.org", "_blank");
-              };
+              // notification.onclick = function (e) {
+              //   e.preventDefault();
+              //   window.open("http://www.mozilla.org", "_blank");
+              // };
             }
           }
-          console.log("UPDATED", change.doc.data());
+          // console.log("UPDATED", change.doc.data());
         }
       });
       setOrderHistoryData(

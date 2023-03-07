@@ -83,16 +83,16 @@ export default function MenuCard({
                 key={index}
                 className={styles.menu_item_details_container_}
                 style={{
-                  backgroundColor: stallItems[item_id]["availability"]
+                  backgroundColor: stallItems?.[item_id]?.["availability"]
                     ? "transparent"
                     : "rgb(196, 196, 196,.25)",
                   textTransform: "capitalize",
                 }}
-                title={stallItems[item_id]["name"]}
+                title={stallItems?.[item_id]?.["name"]}
               >
                 <div className={styles.menu_item_details_content_}>
                   <div className={styles.menu_item_details_content_header_}>
-                    <p role={"heading"}>{stallItems[item_id]["name"]}</p>
+                    <p role={"heading"}>{stallItems?.[item_id]?.["name"]}</p>
                     <p
                       style={{
                         marginTop: ".5rem",
@@ -102,11 +102,11 @@ export default function MenuCard({
                       {new Intl.NumberFormat("en-IN", {
                         currency: "INR",
                         style: "currency",
-                      }).format(stallItems[item_id]["price"])}
+                      }).format(stallItems?.[item_id]?.["price"])}
                     </p>
                   </div>
 
-                  {!stallItems[item_id]["availability"] ? (
+                  {!stallItems?.[item_id]?.["availability"] ? (
                     <button
                       className={
                         styles.menu_item_details_content_button_add_disable_
@@ -127,7 +127,7 @@ export default function MenuCard({
                           item_id: item_id,
                         })
                       }
-                      disabled={!stallItems[item_id]["availability"]}
+                      disabled={!stallItems?.[item_id]?.["availability"]}
                     >
                       add
                     </button>

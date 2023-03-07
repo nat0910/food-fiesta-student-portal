@@ -22,7 +22,7 @@ export default function Menu() {
             return (
               <MenuCard
                 key={index}
-                stallItems={menuList[stall_key]}
+                stallItems={menuList?.[stall_key]}
                 index={stall_key}
                 stall={stall_key}
                 hideStallMenu={hideStallMenu}

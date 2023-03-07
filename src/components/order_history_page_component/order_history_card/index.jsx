@@ -101,7 +101,6 @@ export default function OrderHistoryCard({ data }) {
     return i;
   };
 
-  // console.log(data?.order_id, refundInitiated());
 
   return (
     <section key={data.id} className={styles.order_history_cart_}>

@@ -114,13 +114,13 @@ export default function OrderPage() {
               "Order Status Updated!!",
               options
             );
-            notification.onclick = function (e) {
-              e.preventDefault();
-              window.open("http://www.mozilla.org", "_blank");
-            };
+            // notification.onclick = function (e) {
+            //   e.preventDefault();
+            //   window.open("http://www.mozilla.org", "_blank");
+            // };
           }
         }
-        console.log("UPDATED", document.data());
+        // console.log("UPDATED", document.data());
       }
       // console.log("Current data: ", document.data());
       if (!document.exists()) {
@@ -253,10 +253,10 @@ export default function OrderPage() {
                           key={stall_key}
                           stall={stall_key}
                           stallStatus={
-                            orderDetails?.stall_order[stall_key]["status"]
+                            orderDetails?.stall_order?.[stall_key]?.["status"]
                           }
                           stallItems={
-                            orderDetails?.stall_order[stall_key][
+                            orderDetails?.stall_order?.[stall_key]?.[
                               "items_ordered"
                             ]
                           }
