@@ -8,12 +8,18 @@ import { newOrder } from "../../utils/firebaseConfig";
 import styles from "./Cart.module.scss";
 
 export default function Cart() {
-  const { cart, setCart, menuList, handleCart, modalOpen, setModalOpen } =
-    useMenu();
+  const {
+    cart,
+    setCart,
+    menuList,
+    handleCart,
+    modalOpen,
+    setModalOpen,
+    paymentloader,
+    setLoader,
+  } = useMenu();
 
   const navigate = useNavigate();
-
-  const [loader, setLoader] = useState(false);
 
   const total = useCallback(
     function () {
@@ -203,7 +209,7 @@ export default function Cart() {
                   submitOrder();
                 }}
               >
-                {loader ? (
+                {paymentloader ? (
                   <div className={styles.loader}></div>
                 ) : (
                   <>

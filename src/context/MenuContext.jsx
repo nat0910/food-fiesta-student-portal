@@ -16,6 +16,8 @@ function MenuProvider({ children }) {
   const { user, handleSignOut } = useAuth();
   const [menuList, setMenuList] = useState({});
 
+  const [paymentloader, setLoader] = useState(false);
+
   const [modalOpen, setModalOpen] = useState({
     open: false,
     msg: "",
@@ -112,6 +114,8 @@ function MenuProvider({ children }) {
         handleCart,
         modalOpen,
         setModalOpen,
+        paymentloader,
+        setLoader,
       }}
     >
       {children}

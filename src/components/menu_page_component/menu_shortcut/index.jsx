@@ -16,7 +16,7 @@ export default function MenuShortcut({ data, hideStallMenu }) {
     document.getElementById(`${e}-menu-list-toggle`).style.rotate = "180deg";
 
     if (val > 5) {
-      document.getElementById(`${e}-header`).scrollIntoView(false);
+      document.getElementById(`${e}-header`).scrollIntoView(true);
       MenuShowHide();
       return 0;
     }
