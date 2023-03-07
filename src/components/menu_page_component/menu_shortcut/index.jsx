@@ -15,13 +15,15 @@ export default function MenuShortcut({ data, hideStallMenu }) {
 
     document.getElementById(`${e}-menu-list-toggle`).style.rotate = "180deg";
 
-    if (val > 5) {
+    setTimeout(() => {
+      if (val > 5) {
+        document.getElementById(`${e}-header`).scrollIntoView(true);
+        MenuShowHide();
+        return 0;
+      }
       document.getElementById(`${e}-header`).scrollIntoView(true);
       MenuShowHide();
-      return 0;
-    }
-    document.getElementById(`${e}-header`).scrollIntoView(true);
-    MenuShowHide();
+    }, 175);
   }
 
   function MenuShowHide() {
