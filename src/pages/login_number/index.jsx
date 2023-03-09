@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./LoginNumber.module.scss";
 
 import { faArrowRightLong } from "@fortawesome/free-solid-svg-icons";
@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getFirebase } from "../../utils/firebaseConfig";
 import { httpsCallable } from "firebase/functions";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 const regex = new RegExp("[1-9]{1}[0-9]{9}");
 
@@ -14,13 +15,16 @@ export default function LoginNumber() {
 
   const [iserror, setIserror] = useState(false);
 
+  const { handleSignOut } = useAuth();
+
   const navigate = useNavigate();
 
   function updatePhone(phoneNumber) {
     const { functions } = getFirebase();
     const updatePhone = httpsCallable(functions, "updatePhone");
     updatePhone({ phoneNumber: phoneNumber }).then(() => {
-      navigate("/");
+      alert("Your Account has been created.Please sign in again");
+      handleSignOut();
     });
   }
 
@@ -40,7 +44,7 @@ export default function LoginNumber() {
     }
   }
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const { auth } = getFirebase();
 
     auth?.currentUser?.getIdTokenResult().then((id_result) => {
