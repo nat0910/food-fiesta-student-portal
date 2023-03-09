@@ -1,32 +1,26 @@
 {
   "stall-01": {
-    "name": "Shakes & More"
+    "name": "Maa Annapurna"
   },
   "stall-02": {
-    "name": "Veg Fast Food Corner"
-  },
-  "stall-03": {
-    "name": "Blended Magic"
-  },
-  "stall-04": {
     "name": "DP's Kitchen"
   },
+  "stall-03": {
+    "name": "Shakes & Shakes"
+  },
+  "stall-04": {
+    "name": "Veg fast food corner"
+  },
   "stall-05": {
-    "name": "Cocoland"
+    "name": "Refreshing Engineering"
   },
   "stall-08": {
-    "name": "Mousse & CakePop"
+    "name": "Sweet'A' Doodle Do"
   },
   "stall-09": {
-    "name": "Chat Corner"
+    "name": "BE Dabeli"
   },
   "stall-10": {
-    "name": "Canapes"
-  },
-  "stall-11": {
-    "name": "Soda Corner"
-  },
-  "stall-12": {
-    "name": "Chinese Bhel"
+    "name": "Pizza's Square"
   }
 }
