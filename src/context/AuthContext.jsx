@@ -34,14 +34,14 @@ function AuthProvider({ children }) {
       })
       .then(() => {
         auth.currentUser.getIdTokenResult().then((id_result) => {
-          if (id_result.claims.phoneNumber === undefined) {
+          if (id_result?.claims?.phoneNumber === undefined) {
             navigate("/login/number");
           }
         });
         navigate("/");
         setLoginLoading(false);
       })
-      .catch((error) => {
+      ?.catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         const email = error.customData;
