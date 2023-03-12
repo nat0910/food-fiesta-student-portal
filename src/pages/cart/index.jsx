@@ -206,8 +206,8 @@ export default function Cart() {
                 className={styles.cart_item_payment_container_button}
                 onClick={() => {
                   setLoader(true);
-                  submitOrder();
                 }}
+                disabled
               >
                 {paymentloader ? (
                   <div className={styles.loader}></div>
